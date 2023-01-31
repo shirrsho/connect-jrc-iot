@@ -2,22 +2,22 @@
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-​​import {
-    ​​  GoogleAuthProvider,
-    ​​  getAuth,
-    ​​  signInWithPopup,
-    ​​  signInWithEmailAndPassword,
-    ​​  createUserWithEmailAndPassword,
-    ​​  sendPasswordResetEmail,
-    ​​  signOut,
-​} from "firebase/auth";
-​​import {
-    ​​  getFirestore,
-    ​​  query,
-    ​​  getDocs,
-    ​​  collection,
-    ​​  where,
-    ​​  addDoc,
+import {
+    GoogleAuthProvider,
+    getAuth,
+    signInWithPopup,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    sendPasswordResetEmail,
+    signOut
+} from "firebase/auth";
+import {
+    getFirestore,
+    query,
+    getDocs,
+    collection,
+    where,
+    addDoc
 } from "firebase/firestore";
 
 // Your web app's Firebase configuration
@@ -32,8 +32,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-​​const auth = getAuth(app);
-​​const db = getFirestore(app);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 const logInWithEmailAndPassword = async (email, password) => {
     try {
@@ -41,7 +41,9 @@ const logInWithEmailAndPassword = async (email, password) => {
     } catch (err) {
       console.error(err);
       alert(err.message);
+      return false;
     }
+    return true;
 };
 
 const registerWithEmailAndPassword = async (name, email, password) => {
@@ -54,10 +56,13 @@ const registerWithEmailAndPassword = async (name, email, password) => {
         authProvider: "local",
         email,
       });
+      console.log("registered");
     } catch (err) {
       console.error(err);
       alert(err.message);
+      return false;
     }
+    return true;
   };
 
   const sendPasswordReset = async (email) => {
@@ -77,7 +82,6 @@ const registerWithEmailAndPassword = async (name, email, password) => {
   export {
     auth,
     db,
-    signInWithGoogle,
     logInWithEmailAndPassword,
     registerWithEmailAndPassword,
     sendPasswordReset,
