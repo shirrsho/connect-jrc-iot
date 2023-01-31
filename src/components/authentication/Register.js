@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import  { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom"
+
 import {
   auth,
   registerWithEmailAndPassword,
@@ -12,16 +14,18 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
     const [user, loading, error] = useAuthState(auth);
-    // const history = useHistory();
+    const navigate = useNavigate();
+
     function register(event){
         if (!name) alert("Please enter name");
-        registerWithEmailAndPassword(name, email, password);
-        event.preventDefaults();
+        if(registerWithEmailAndPassword(name, email, password)) navigate('/dashboard');
     };
+    
     useEffect(() => {
       if (loading) return;
       if (user) console.log("already in");
     }, [user, loading]);
+
 return (
     <div className="flex items-center justify-center h-screen bg-gray-200 ">
     <div className="w-2/3 lg:w-[25%] m-4 p-6 bg-white rounded-xl shadow-2xl relative">

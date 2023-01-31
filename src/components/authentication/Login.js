@@ -3,15 +3,17 @@ import { Link } from 'react-router-dom';
 import  { useEffect, useState } from "react";
 import { auth, logInWithEmailAndPassword } from "./firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom"
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [user, loading, error] = useAuthState(auth);
-    
+    const navigate = useNavigate();
+
     function login(event){
+        if(logInWithEmailAndPassword(email, password)) navigate('/dashboard')
         event.preventDefaults();
-        if(logInWithEmailAndPassword(email, password)) console.log("logged in");
     }
 
     useEffect(() => {
