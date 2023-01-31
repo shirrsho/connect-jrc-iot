@@ -1,10 +1,11 @@
     import React from 'react';
+import { Link } from 'react-router-dom';
 
     const Login = () => {
         const icon="logo192.png"
     return (
         <div className="flex items-center justify-center h-screen bg-gray-200 ">
-        <div className="w-[25%] m-4 p-6 bg-white rounded-xl shadow-2xl relative ">
+        <div className="w-2/3 lg:w-[25%] m-4 p-6 bg-white rounded-xl shadow-2xl relative ">
             <div className="flex flex-col items-center">
             <img
                 src="/Images/icon/sign.png"
@@ -35,8 +36,9 @@
             >
                 Login
             </button>
+            <Link className='text-xl absolute bottom-0 translate-y-[80px] hover:shadow-sm hover:cursor-pointer hover:text-2xl ' to="/register">REGISTER</Link>
             </form>
-            <button className='text-xl absolute bottom-0 translate-y-[70px] '>REGISTER</button>
+         
         </div>
         </div>
     );
