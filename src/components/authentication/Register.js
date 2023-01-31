@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 import {
   auth,
+  logInWithEmailAndPassword,
   registerWithEmailAndPassword,
 } from "./firebase";
 
@@ -16,9 +17,12 @@ const Register = () => {
 
     function register(event){
         if (!name) alert("Please enter name");
-        if(registerWithEmailAndPassword(name, email, password)) navigate('/dashboard');
+        if(registerWithEmailAndPassword(name, email, password)){
+            logInWithEmailAndPassword(email,password)
+            navigate('/dashboard');
+        }
     };
-    
+
     useEffect(() => {
       if (loading) return;
       if (user) console.log("already in");
