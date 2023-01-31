@@ -21,22 +21,22 @@ const Login = () => {
     }, [user, loading]);
 
     return (
-        <div className="flex items-center justify-center h-screen bg-gray-200">
-        <div className="w-1/3 p-6 bg-white rounded-lg shadow-xl ">
+        <div className="flex items-center justify-center h-screen bg-gray-200 ">
+        <div className="w-[25%] m-4 p-6 bg-white rounded-xl shadow-2xl relative ">
             <div className="flex flex-col items-center">
             <img
-                src="/Images/icon.png"
+                src="/Images/icon/sign.png"
                 alt="icon"
-                className="w-16 h-12 object-cover  mt-10"
+                className="w-16 h-16 object-cover  mt-10"
             />
          
             </div>
-            <form className="flex flex-col mt-8">
-            {/* <input
+            <form className="flex flex-col mt-4 mb-12 items-center">
+           {/*  <input
                 type="text"
                 placeholder="Enter your username"
-                className="p-2 border border-gray-400 rounded-lg mt-4"
-            /> */}
+                className="p-2 border-b border-gray-400 rounded-lg mt-4 text-center"
+            />*/}
             <input
                 type="email"
                 placeholder="Enter your email"
@@ -51,11 +51,15 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
-            <button className="bg-indigo-500 text-white p-2 rounded-lg mt-6 hover:bg-indigo-600" type="submit"
-                    onClick={()=>login()}>
+            <button
+                className="bg-black text-white py-2 px-6 text-xl  rounded-3xl mt-10 hover:bg-indigo-600 absolute bottom-0 translate-y-1/2 "
+                type="submit"
+                onClick={()=>login()}
+            >
                 Login
             </button>
             </form>
+            <button className='text-xl absolute bottom-0 translate-y-[70px] '>REGISTER</button>
         </div>
         </div>
     );
