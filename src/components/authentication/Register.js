@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 
 import {
   auth,
+  logInWithEmailAndPassword,
   registerWithEmailAndPassword,
 } from "./firebase";
 
@@ -18,9 +19,12 @@ const Register = () => {
 
     function register(event){
         if (!name) alert("Please enter name");
-        if(registerWithEmailAndPassword(name, email, password)) navigate('/dashboard');
+        if(registerWithEmailAndPassword(name, email, password)){
+            logInWithEmailAndPassword(email,password)
+            navigate('/dashboard');
+        }
     };
-    
+
     useEffect(() => {
       if (loading) return;
       if (user) console.log("already in");
@@ -33,7 +37,7 @@ return (
         <img
             src="/Images/icon/reg.png"
             alt="icon"
-            className="w-16 h-12 object-cover  mt-10"
+            className="w-16 h-16 object-cover  mt-10"
         />
      
         </div>
@@ -51,7 +55,7 @@ return (
         <input
             type="email"
             placeholder="Enter your email"
-            className="p-2 border-b border-gray-400 rounded-lg mt-8 text-center"
+            className="p-2 border-b border-gray-400 rounded-lg mt-4 text-center"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
         />
