@@ -1,14 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom"
 
-import {
-  auth,
-  logInWithEmailAndPassword,
-  registerWithEmailAndPassword,
-} from "./firebase";
+import { auth } from '../database/auth_database_firebase'
+import { registerWithEmailAndPassword, logInWithEmailAndPassword } from '../database/auth_database_firebase';
 
 const Register = () => {
     const [email, setEmail] = useState("");

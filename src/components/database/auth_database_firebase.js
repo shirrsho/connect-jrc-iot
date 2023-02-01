@@ -1,37 +1,17 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { app } from "./database_firebase";
 import {
-    GoogleAuthProvider,
-    getAuth,
-    signInWithPopup,
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword,
-    sendPasswordResetEmail,
-    signOut
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut
 } from "firebase/auth";
 import {
-    getFirestore,
-    query,
-    getDocs,
-    collection,
-    where,
-    addDoc
+  getFirestore,
+  collection,
+  addDoc
 } from "firebase/firestore";
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyBKK46Pt3QXzfecY-g10NlxYOTAZ_zXE5k",
-  authDomain: "connect-jrc-iot.firebaseapp.com",
-  projectId: "connect-jrc-iot",
-  storageBucket: "connect-jrc-iot.appspot.com",
-  messagingSenderId: "858821645070",
-  appId: "1:858821645070:web:cab2a6f28f77bfe4d83d5f"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
@@ -82,7 +62,6 @@ const registerWithEmailAndPassword = async (name, email, password) => {
 
   export {
     auth,
-    db,
     logInWithEmailAndPassword,
     registerWithEmailAndPassword,
     sendPasswordReset,

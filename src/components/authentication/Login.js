@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import  { useEffect, useState } from "react";
-import { auth, logInWithEmailAndPassword } from "./firebase";
+import { useEffect, useState } from "react";
+import { auth } from '../database/auth_database_firebase'
+import { logInWithEmailAndPassword } from '../database/auth_database_firebase';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom"
 
@@ -23,11 +24,14 @@ const Login = () => {
 
     useEffect(() => {
         if (loading) {
-        // maybe trigger a loading screen
-        return;
+            load()
         }
         if (user) console.log("dashboard");
     }, [user, loading]);
+
+    const load = () => {
+        return <div><h1>MARAKHAO Dashboard</h1></div>;
+    }
 
     return (
         <div className="flex items-center justify-center h-screen bg-gray-200 ">
