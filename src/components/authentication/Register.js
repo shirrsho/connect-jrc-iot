@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import  { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom"
 
@@ -30,12 +32,12 @@ const Register = () => {
 
 return (
     <div className="flex items-center justify-center h-screen bg-gray-200 ">
-    <div className="w-[25%] m-4 p-6 bg-white rounded-xl shadow-2xl relative ">
+    <div className="w-2/3 lg:w-[25%] m-4 p-6 bg-white rounded-xl shadow-2xl relative">
         <div className="flex flex-col items-center">
         <img
             src="/Images/icon/reg.png"
             alt="icon"
-            className="w-16 h-12 object-cover  mt-10"
+            className="w-16 h-16 object-cover  mt-10"
         />
      
         </div>
@@ -53,7 +55,7 @@ return (
         <input
             type="email"
             placeholder="Enter your email"
-            className="p-2 border-b border-gray-400 rounded-lg mt-8 text-center"
+            className="p-2 border-b border-gray-400 rounded-lg mt-4 text-center"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
         />
@@ -71,6 +73,7 @@ return (
         >
             Register
         </button>
+        <Link className='text-xl absolute bottom-0 translate-y-[80px] hover:shadow-sm hover:cursor-pointer hover:text-2xl ' to="/login">LOGIN</Link>
         </form>
         
     </div>
