@@ -7,6 +7,10 @@ import { useNavigate } from "react-router-dom"
 function Dashboard() {
   const navigate = useNavigate();
   const [user, loading, error] = useAuthState(auth);
+  console.log(user);
+  console.log(loading);
+  console.log(error);
+  
 
   function logsout(){
     logout()
@@ -24,7 +28,7 @@ function Dashboard() {
     <div>
       {user &&
         <div>
-          <button className='bg-black px-6 py-2 rounded-3xl' onClick={logsout}>Log Out</button>
+          <button className='bg-black px-6 text-white text-xl hover:bg-amber-500 py-2 rounded-3xl' onClick={logsout}>Log Out</button>
         </div>
       }
     </div>
