@@ -18,8 +18,11 @@
 
     useEffect(() => {
         if (loading) {
-        // maybe trigger a loading screen
-        return;
+            return(
+                <div>
+                    <h1>MARAKHAO</h1>
+                </div>
+            );
         }
         if (user) navigate('/dashboard')
     }, [user, loading]);
