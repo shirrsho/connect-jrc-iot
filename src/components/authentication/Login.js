@@ -11,18 +11,18 @@
         const [user, loading, error] = useAuthState(auth);
         const navigate = useNavigate();
 
-        function login(event){
-            if(logInWithEmailAndPassword(email, password)) navigate('/dashboard')
-            event.preventDefaults();
-        }
+    function login(event){
+        if(logInWithEmailAndPassword(email, password)) navigate('/dashboard')
+        event.preventDefault();
+    }
 
-        useEffect(() => {
-            if (loading) {
-            // maybe trigger a loading screen
-            return;
-            }
-            if (user) console.log("dashboard");
-        }, [user, loading]);
+    useEffect(() => {
+        if (loading) {
+        // maybe trigger a loading screen
+        return;
+        }
+        if (user) navigate('/dashboard')
+    }, [user, loading]);
 
         return (
             <div className="flex items-center justify-center h-screen bg-gray-200 ">
