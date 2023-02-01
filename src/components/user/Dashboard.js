@@ -14,15 +14,18 @@ function Dashboard() {
 
   function logsout(){
     logout()
-    navigate('/login');
+    // navigate('/login');
   }
   useEffect(() => {
         if (loading) {
-        // maybe trigger a loading screen
-        return;
+          load()
         }
-        if (!user) navigate('/login')
-    }, [loading]);
+        else if (!user) navigate('/login')
+    }, [user,loading]);
+
+  const load = () => {
+      return <div><h1>MARAKHAO Dashboard</h1></div>;
+  }
 
   return (
     <div>
