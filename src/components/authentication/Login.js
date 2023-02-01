@@ -11,7 +11,7 @@ const Login = () => {
 
     function login(event){
         if(logInWithEmailAndPassword(email, password)) navigate('/dashboard')
-        event.preventDefaults();
+        event.preventDefault();
     }
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const Login = () => {
         // maybe trigger a loading screen
         return;
         }
-        if (user) console.log("dashboard");
+        if (user) navigate('/dashboard')
     }, [user, loading]);
 
     return (
