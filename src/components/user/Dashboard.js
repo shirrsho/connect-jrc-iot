@@ -4,27 +4,40 @@ import { auth } from '../database/auth_database_firebase';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
+import Device from '../device_management/Device'
+import { addNewDevice, getAllDevices } from '../device_management/functionalities';
+
 function Dashboard() {
   const navigate = useNavigate();
   const [searchInput, setsearchInput] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const [userstate,setUserstate] = useState(true)
+  const [devices,setDevices] = useState(null)
   
-  function add_device(){
-    // logout()
-    // navigate('/login');
+  async function add_device(){
+    let device = new Device("device1","esp32",user);
+    try{
+      await addNewDevice(device)
+    } catch(err){
+      alert(err.message)
+      return false
+    }
+    return true
   }
-
+  async function get_devices(){
+    setDevices(getAllDevices(user.uid))
+  }
   function logsout(){
     if(logout()) setUserstate(!userstate)
     // navigate('/login');
   }
   useEffect(() => {
+    // get_devices()
         if (loading) {
           load()
         }
         else if (!user) navigate('/login')
-    }, [user,loading,userstate]);
+    }, [user,loading,userstate,devices]);
 
   const load = () => {
     return (
@@ -84,6 +97,9 @@ function Dashboard() {
                 </svg>
 
                 <button className="pl-3 text-lg" onClick={add_device}> Add Device</button>
+                {/* {devices.map((device)=>{
+                  return <h1>Hello</h1>
+                })} */}
               </div>
             </div>
           </div>
