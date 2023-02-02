@@ -26,7 +26,7 @@ const Login = () => {
         if (loading) {
             load()
         }
-        if (user) navigate('/dashboard')
+        if (user) navigate('/')
     }, [user, loading]);
 
     const load = () => {

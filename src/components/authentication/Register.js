@@ -32,7 +32,7 @@ const Register = () => {
 
     useEffect(() => {
       if (loading) return;
-      else if (user) navigate('/dashboard')
+      else if (user) navigate('/')
     }, [user, loading]);
 
 return (
