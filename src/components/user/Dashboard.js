@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { logout } from "../authentication/firebase";
-import { auth } from "../authentication/firebase";
+import React, { useEffect, useState } from 'react'
+import { logout } from '../database/auth_database_firebase';
+import { auth } from '../database/auth_database_firebase';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
@@ -8,19 +8,23 @@ function Dashboard() {
   const navigate = useNavigate();
   const [searchInput, setsearchInput] = useState("");
   const [user, loading, error] = useAuthState(auth);
-  console.log(user);
-  console.log(loading);
-  console.log(error);
+  const [userstate,setUserstate] = useState(true)
+  
+  function add_device(){
+    // logout()
+    // navigate('/login');
+  }
 
-  function logsout() {
-    logout();
+  function logsout(){
+    if(logout()) setUserstate(!userstate)
     // navigate('/login');
   }
   useEffect(() => {
-    if (loading) {
-      load();
-    } else if (!user) navigate("/login");
-  }, [user, loading]);
+        if (loading) {
+          load()
+        }
+        else if (!user) navigate('/login')
+    }, [user,loading,userstate]);
 
   const load = () => {
     return (
@@ -79,14 +83,17 @@ function Dashboard() {
                   />
                 </svg>
 
-                <button className="pl-3 text-lg"> Add Device</button>
+                <button className="pl-3 text-lg" onClick={add_device}> Add Device</button>
               </div>
             </div>
           </div>
           {/*second segement */}
         </div>
       </div>
-    </>
+      <div>
+      <button className='bg-black px-6 text-white text-xl hover:bg-amber-500 py-2 rounded-3xl' onClick={logsout}>Log Out</button>
+      </div>
+      </>
   );
 }
 
