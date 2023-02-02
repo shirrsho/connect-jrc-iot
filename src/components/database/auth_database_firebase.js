@@ -57,7 +57,8 @@ const registerWithEmailAndPassword = async (name, email, password) => {
   };
 
   const logout = () => {
-    signOut(auth);
+    if(signOut(auth)) return true;
+    else return false;
   };
 
   export {

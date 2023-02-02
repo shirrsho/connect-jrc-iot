@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { logout } from '../database/auth_database_firebase';
 import { auth } from '../database/auth_database_firebase';
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom"
 function Dashboard() {
   const navigate = useNavigate();
   const [user, loading, error] = useAuthState(auth);
+  const [userstate,setUserstate] = useState(true)
   
   function add_device(){
     // logout()
@@ -14,7 +15,7 @@ function Dashboard() {
   }
 
   function logsout(){
-    logout()
+    if(logout()) setUserstate(!userstate)
     // navigate('/login');
   }
   useEffect(() => {
@@ -22,7 +23,7 @@ function Dashboard() {
           load()
         }
         else if (!user) navigate('/login')
-    }, [user,loading]);
+    }, [user,loading,userstate]);
 
   const load = () => {
       return <div><h1>MARAKHAO Dashboard</h1></div>;

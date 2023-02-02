@@ -14,17 +14,25 @@ const Register = () => {
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
 
-    function register(event){
+    async function register(event){
         if (!name) alert("Please enter name");
-        if(registerWithEmailAndPassword(name, email, password)){
-            logInWithEmailAndPassword(email,password)
-            navigate('/dashboard');
+        try{
+            await registerWithEmailAndPassword(name, email, password)
+            // .then((userCredential) => {
+            //     // Signed in
+            //     console.log(user);
+            //     navigate("/")
+            //     // ...
+            // })
+        } catch (error){
+            alert(error.message);
         }
+        event.preventDefault()
     };
 
     useEffect(() => {
       if (loading) return;
-      if (user) console.log("already in");
+      else if (user) navigate('/dashboard')
     }, [user, loading]);
 
 return (
@@ -38,7 +46,7 @@ return (
         />
      
         </div>
-        <form className="flex flex-col mt-4 mb-12 items-center">
+        <div className="flex flex-col mt-4 mb-12 items-center">
         
     
         <input
@@ -65,13 +73,12 @@ return (
         />
         <button
             className="bg-black text-white py-2 px-6 text-xl rounded-3xl mt-10 hover:bg-indigo-600 absolute bottom-0 translate-y-1/2"
-            type="submit"
-            onClick={()=>register()}
+            onClick={(event)=>register(event)}
         >
             Register
         </button>
         <Link className='text-xl absolute bottom-0 translate-y-[80px] hover:shadow-sm hover:cursor-pointer hover:text-2xl ' to="/login">LOGIN</Link>
-        </form>
+        </div>
         
     </div>
     
