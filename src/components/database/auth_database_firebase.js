@@ -6,14 +6,10 @@ import {
   sendPasswordResetEmail,
   signOut
 } from "firebase/auth";
-import {
-  getFirestore,
-  collection,
-  addDoc
-} from "firebase/firestore";
+
+import { createNewUser } from "./regular_database_firebase";
 
 const auth = getAuth(app);
-const db = getFirestore(app);
 
 const logInWithEmailAndPassword = async (email, password) => {
     try {
@@ -31,20 +27,14 @@ const registerWithEmailAndPassword = async (name, email, password) => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const user = res.user;
-      await addDoc(collection(db, "users"), {
-        uid: user.uid,
-        name,
-        authProvider: "local",
-        email,
-      });
-      console.log("registered");
+      await createNewUser(user.uid,name,email)
     } catch (err) {
       console.error(err);
       alert(err.message);
       return false;
     }
     return true;
-  };
+};
 
   const sendPasswordReset = async (email) => {
     try {
@@ -68,3 +58,23 @@ const registerWithEmailAndPassword = async (name, email, password) => {
     sendPasswordReset,
     logout,
   };
+
+//   const registerWithEmailAndPassword = async (name, email, password) => {
+//     console.log(email,password);
+//     try {
+//       const res = await createUserWithEmailAndPassword(auth, email, password);
+//       const user = res.user;
+//       await addDoc(collection(db, "users"), {
+//         uid: user.uid,
+//         name,
+//         authProvider: "local",
+//         email,
+//       });
+//       console.log("registered");
+//     } catch (err) {
+//       console.error(err);
+//       alert(err.message);
+//       return false;
+//     }
+//     return true;
+// };
