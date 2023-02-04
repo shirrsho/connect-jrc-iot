@@ -4,7 +4,10 @@ import {
     where,
     getFirestore,
     collection,
+    doc,
     addDoc,
+    setDoc,
+    getDoc,
     getDocs
 } from "firebase/firestore";
 
@@ -29,27 +32,28 @@ const createNewUser = async (uid, name, email) => {
 
 const createNewDevice = async (device) => {
     try {
-        await addDoc(collection(db, "devices"), {
-          user_id: device.user.uid,
-          name:device.name,
-          authProvider: "local",
-          chip:device.chip
-        });
-        console.log("registered");
-      } catch (err) {
-        console.error(err);
-        alert(err.message);
-        return false;
-      }
-      return true;
+      // path: must be collection, document, collection, document ...
+      await addDoc(collection(db, "devices",device.user.uid,"owns"), {
+        name:device.name,
+        authProvider: "local",
+        chip:device.chip,
+      });
+      console.log("device added");
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+      return false;
+    }
+    return true;
 }
 
-async function getDevices(uid){
-    let q = query(collection(db, "devices"), where("user_id", "==", uid));
+async function getDevices(user_id){
+    let q = query(collection(db, "devices"), where("user_id", "==", user_id));
     let devices = null;
     try{
         console.log("get: "+devices);
-        devices = await getDocs(q);
+        devices = await getDoc(doc(db,"devices",user_id));
+        console.log("get: "+devices);
     } catch(err){
         alert(err.message)
     }
