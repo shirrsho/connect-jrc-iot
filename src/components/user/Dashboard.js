@@ -96,7 +96,7 @@ function Dashboard() {
                   />
                 </svg>
 
-                <button className="pl-3 text-lg" onClick={add_device}> Add Device</button>
+                <button className="pl-3 text-lg" onClick={get_devices}> Add Device</button>
                 {/* {devices.map((device)=>{
                   return <h1>Hello</h1>
                 })} */}

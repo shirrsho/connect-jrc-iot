@@ -13,7 +13,9 @@ async function addNewDevice(device){
 }
 
 async function getAllDevices(uid){
-    return await getDevices(uid)
+    let devices = await getDevices(uid)
+    console.log(devices);
+    
 }
 
 export {addNewDevice, getAllDevices}
