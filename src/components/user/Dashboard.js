@@ -4,7 +4,7 @@ import { auth } from "../database/auth_database_firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
-import Devices from "../device_management/DeviceList";
+import DeviceLinks from "../device_management/DeviceList";
 import Device from "../device_management/Device";
 import {
   addNewDevice,
@@ -12,9 +12,10 @@ import {
 } from "../device_management/functionalities";
 
 function Dashboard() {
+  // UI functionalities
   const [isOpen, setIsOpen] = useState(false);
-  const [input1, setInput1] = useState("");
-  const [input2, setInput2] = useState("");
+  const [device_name, setDevice_name] = useState("");
+  const [chip_name, setChip_name] = useState("");
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -27,12 +28,12 @@ function Dashboard() {
   const [searchInput, setsearchInput] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const [userstate, setUserstate] = useState(true);
-  const [devices, setDevices] = useState(null);
+  const [devices, setDevices] = useState([]);
 
   async function add_device() {
-    let device = new Device("device1", "esp32", user);
+    // let device = new Device("device1", "esp32", user);
     try {
-      await addNewDevice(device);
+      await addNewDevice(user.uid,device_name,chip_name);
     } catch (err) {
       alert(err.message);
       return false;
@@ -40,17 +41,18 @@ function Dashboard() {
     return true;
   }
   async function get_devices() {
-    setDevices(getAllDevices(user.uid));
+    setDevices(await getAllDevices(user.uid));
+    // console.log(devices);
   }
   function logsout() {
     if (logout()) setUserstate(!userstate);
     // navigate('/login');
   }
   useEffect(() => {
-    // get_devices()
     if (loading) {
       load();
     } else if (!user) navigate("/login");
+    // else get_devices()
   }, [user, loading, userstate, devices]);
 
   const load = () => {
@@ -60,35 +62,36 @@ function Dashboard() {
       </div>
     );
   };
-  const devicelist = [
-    {
-      sl: 1,
-      device_name: "switch",
-      microcontroller: "JRC",
-      microprocessor: "ESP 32",
-      controller: "jrc",
-      status: "Online",
-      date: "date",
-    },
-    {
-      sl: 2,
-      device_name: "switch",
-      microcontroller: "JRC",
-      microprocessor: "ESP 32",
-      controller: "jrc",
-      status: "Online",
-      date: "date",
-    },
-    {
-      sl: 3,
-      device_name: "switch",
-      microcontroller: "JRC",
-      microprocessor: "ESP 32",
-      controller: "jrc",
-      status: "Online",
-      date: "date",
-    },
-  ];
+  // const devicelist = [
+  //   {
+  //     sl: 1,
+  //     device_name: "switch",
+  //     microcontroller: "JRC",
+  //     microprocessor: "ESP 32",
+  //     controller: "jrc",
+  //     status: "Online",
+  //     date: "date",
+  //   },
+  //   {
+  //     sl: 2,
+  //     device_name: "switch",
+  //     microcontroller: "JRC",
+  //     microprocessor: "ESP 32",
+  //     controller: "jrc",
+  //     status: "Online",
+  //     date: "date",
+  //   },
+  //   {
+  //     sl: 3,
+  //     device_name: "switch",
+  //     microcontroller: "JRC",
+  //     microprocessor: "ESP 32",
+  //     controller: "jrc",
+  //     status: "Online",
+  //     date: "date",
+  //   },
+  // ];
+  
   function handleSearch() {}
   return (
     <>
@@ -143,6 +146,10 @@ function Dashboard() {
                   {" "}
                   Add Device
                 </button>
+                <button className="pl-3 text-lg" onClick={get_devices} >
+                  {" "}
+                  Get Device
+                </button>
                 <div>
         
                 {isOpen && (
@@ -150,12 +157,16 @@ function Dashboard() {
                     <div className="bg-white p-8 rounded-lg">
                       <h1 className="text-xl font-medium text-black py-5">Device Info</h1>
                       <div className="mt-4 p-16">
-                        <input className=" mr-9 p-2 border-b placeholder-gray-600 border-gray-600 rounded-lg mt-4 text-center" type="text" placeholder="Device Name" value={input1} onChange={e => setInput1(e.target.value)} />
-                        <input className=" mr-9 p-2 border-b placeholder-gray-600 border-gray-600 rounded-lg mt-4 text-center" type="text" placeholder="Chip" value={input2} onChange={e => setInput2(e.target.value)} />
+                        <input className=" mr-9 p-2 border-b placeholder-gray-600 border-gray-600 rounded-lg mt-4 text-center"
+                        type="text" placeholder="Device Name"
+                        value={device_name} onChange={e => setDevice_name(e.target.value)} />
+                        <input className=" mr-9 p-2 border-b placeholder-gray-600 border-gray-600 rounded-lg mt-4 text-center"
+                        type="text" placeholder="Chip"
+                        value={chip_name} onChange={e => setChip_name(e.target.value)} />
                       </div>
                       <div className="flex justify-end mt-8 py-5">
                         <button className="bg-red-600 text-white p-3 rounded-lg mr-2" onClick={handleClose}>Cancel</button>
-                        <button className="bg-green-700 text-white p-3 rounded-lg">Save</button>
+                        <button className="bg-green-700 text-white p-3 rounded-lg" onClick={add_device}>Save</button>
                       </div>
                     </div>
                   </div>
@@ -178,9 +189,9 @@ function Dashboard() {
                 <li className="w-[12%]">Date Added</li>
               </ul>
             </div>
-            <div>
-              <Devices devicelist={devicelist} />
-            </div>
+            {devices && <div>
+              <DeviceLinks devicelist={devices} />
+            </div>}
           </div>
         </div>
       </div>

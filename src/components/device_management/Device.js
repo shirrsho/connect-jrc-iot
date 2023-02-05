@@ -1,5 +1,5 @@
 class Device{
-    constructor(device_id, user_id, name="Give a Name", chip="ESP32"){
+    constructor(device_id="", user_id, name="Give a Name", chip="ESP32"){
         this.id = device_id;
         this.user_id = user_id
         this.name = name;

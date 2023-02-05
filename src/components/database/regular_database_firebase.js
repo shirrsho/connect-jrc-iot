@@ -33,9 +33,9 @@ const createNewUser = async (uid, name, email) => {
 const createNewDevice = async (device) => {
     try {
       // path: must be collection, document, collection, document ...
-      await addDoc(collection(db, "devices",device.user.uid,"owns"), {
+      await addDoc(collection(db, "devices",device.user_id,"owns"), {
+        user_id:device.user_id,
         name:device.name,
-        authProvider: "local",
         chip:device.chip,
       });
       console.log("device added");
