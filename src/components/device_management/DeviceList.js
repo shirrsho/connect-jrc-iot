@@ -4,7 +4,7 @@
     return (
         <>
         {
-        devicelist.map((deviceinfo) => {
+        devicelist.map((deviceinfo,i) => {
             // const {
             // name,
             // chip,
@@ -14,9 +14,9 @@
             // date,
             // } = deviceinfo;
             return (
-            <div className="w-[100%] bg-gray-100 my-3 hover:cursor-pointer hover:shadow-lg  ">
+            <div className="w-[100%] bg-gray-100 my-3 hover:cursor-pointer hover:shadow-lg  " key={i}>
                 <ul className="flex text-xl mx-3 p-5 text-center hover:text-2xl">
-                <li className="w-[8%]">1</li>
+                <li className="w-[8%]">{i}</li>
                 <li className="w-[16%]">{deviceinfo.name}</li>
                 <li className="w-[16%]">JRC Board</li>
                 <li className="w-[16%]">{deviceinfo.chip}</li>

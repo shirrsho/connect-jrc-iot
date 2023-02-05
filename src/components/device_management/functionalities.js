@@ -9,9 +9,9 @@ async function addNewDevice(user_id,device_name,chip_name){
         await createNewDevice(device)
     } catch(err){
         alert(err.message)
-        return false;
+        return null;
     }
-    return true;
+    return device;
 }
 
 async function getAllDevices(uid){
