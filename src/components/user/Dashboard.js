@@ -12,7 +12,7 @@ import {
 } from "../device_management/functionalities";
 
 function Dashboard() {
-  // UI functionalities
+  // * UI functionalities
   const [isOpen, setIsOpen] = useState(false);
   const [device_name, setDevice_name] = useState("");
   const [chip_name, setChip_name] = useState("");
@@ -28,7 +28,6 @@ function Dashboard() {
   const [searchInput, setsearchInput] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const [userstate, setUserstate] = useState(true);
-  const [newdevicestate, setNewdevicestate] = useState(true);
   const [devices, setDevices] = useState([]);
 
   async function add_device() {
@@ -48,12 +47,13 @@ function Dashboard() {
   }
   async function get_devices() {
     setDevices(await getAllDevices(user.uid));
-    setNewdevicestate(!newdevicestate)
   }
+
   function logsout() {
     if (logout()) setUserstate(!userstate);
     // navigate('/login');
   }
+
   useEffect(() => {
     if (loading) {
       load();
@@ -68,37 +68,20 @@ function Dashboard() {
       </div>
     );
   };
-  // const devicelist = [
-  //   {
-  //     sl: 1,
-  //     device_name: "switch",
-  //     microcontroller: "JRC",
-  //     microprocessor: "ESP 32",
-  //     controller: "jrc",
-  //     status: "Online",
-  //     date: "date",
-  //   },
-  //   {
-  //     sl: 2,
-  //     device_name: "switch",
-  //     microcontroller: "JRC",
-  //     microprocessor: "ESP 32",
-  //     controller: "jrc",
-  //     status: "Online",
-  //     date: "date",
-  //   },
-  //   {
-  //     sl: 3,
-  //     device_name: "switch",
-  //     microcontroller: "JRC",
-  //     microprocessor: "ESP 32",
-  //     controller: "jrc",
-  //     status: "Online",
-  //     date: "date",
-  //   },
-  // ];
+
+
+  function handleSearch() {
+    let devscopy = devices;
+    console.log(devscopy);
+    let newdevs = []
+    devscopy.forEach(dev => {
+      if(dev.device_name.includes(searchInput)){
+        newdevs.push(dev)
+      }
+    });
+    setDevices(newdevs)
+  }
   
-  function handleSearch() {}
   return (
     <>
       {/*
@@ -125,12 +108,12 @@ function Dashboard() {
                 placeholder="Search"
                 className="px-4 py-2 border-b border-gray-400 bg-gray-200 text-black rounded-lg mt-4  w-[40%] text-2xl "
                 value={searchInput}
-                onChange={(e) => setsearchInput(e.target.value)}
-                onKeyPress={(e) => {
-                  if (e.key === "Enter") {
-                    handleSearch(searchInput);
-                  }
-                }}
+                onChange={(e) => {setsearchInput(e.target.value); handleSearch()}}
+                // onKeyPress={(e) => {
+                //   if (e.key === "Enter") {
+                //     handleSearch(searchInput);
+                //   }
+                // }}
               />
             </div>
             <div className=" w-[50%] relative flex-col items-center">
