@@ -136,7 +136,7 @@ function Dashboard() {
           <div>
           <div className='w-[100%] bg-gray-600 my-3'>
 
-                <ul className='flex  text-white text-center text-xl mx-3 p-5'>
+                <ul className='flex  text-white text-center text-sm sm:text-md md:text-xl mx-3 p-5'>
                 <li className='w-[8%]'>SL</li>
                 <li className='w-[16%]'>Device Name</li>
                 <li className='w-[16%]'>Microcontroller</li>
