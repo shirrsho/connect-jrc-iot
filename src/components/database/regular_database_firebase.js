@@ -48,12 +48,15 @@ const createNewDevice = async (device) => {
 }
 
 async function getDevices(user_id){
-    let q = query(collection(db, "devices"), where("user_id", "==", user_id));
+    // let q = query(collection(db, "devices"), where("user_id", "==", user_id));
     let devices = null;
     try{
-        console.log("get: "+devices);
-        devices = await getDoc(doc(db,"devices",user_id));
-        console.log("get: "+devices);
+        // console.log(user_id);
+        devices = await getDocs(collection(db,"devices",user_id,"owns"));
+        // console.log("get: "+devices);
+        devices.forEach(doc => {
+          console.log(doc.data());
+      })
     } catch(err){
         alert(err.message)
     }
