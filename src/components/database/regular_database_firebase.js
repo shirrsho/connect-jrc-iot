@@ -51,7 +51,7 @@ async function getDevices(user_id){
     // let q = query(collection(db, "devices"), where("user_id", "==", user_id));
     let devices = null;
     try{
-        console.log(user_id);
+        // console.log(user_id);
         devices = await getDocs(collection(db,"devices",user_id,"owns"));
         // console.log("get: "+devices);
         devices.forEach(doc => {
