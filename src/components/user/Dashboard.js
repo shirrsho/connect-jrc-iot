@@ -4,6 +4,7 @@ import { auth } from '../database/auth_database_firebase';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
+import Device from './Device';
 function Dashboard() {
   const navigate = useNavigate();
   const [searchInput, setsearchInput] = useState("");
@@ -33,6 +34,34 @@ function Dashboard() {
       </div>
     );
   };
+  const devicelist =[
+    {
+      sl:1,
+      device_name:"switch",
+      microcontroller:"JRC",
+      microprocessor:"ESP 32",
+      controller:"jrc",
+      status:"Online",
+      date:"date"
+    },
+    {
+      sl:2,
+      device_name:"switch",
+      microcontroller:"JRC",
+      microprocessor:"ESP 32",
+      controller:"jrc",
+      status:"Online",
+      date:"date"
+    }, {
+      sl:3,
+      device_name:"switch",
+      microcontroller:"JRC",
+      microprocessor:"ESP 32",
+      controller:"jrc",
+      status:"Online",
+      date:"date"
+    }
+  ]
   function handleSearch() {}
   return (
     <>
@@ -88,6 +117,23 @@ function Dashboard() {
             </div>
           </div>
           {/*second segement */}
+          <div>
+          <div className='w-[100%] bg-gray-600 my-3'>
+
+                <ul className='flex  text-white text-center text-xl mx-3 p-5'>
+                <li className='w-[8%]'>SL</li>
+                <li className='w-[16%]'>Device Name</li>
+                <li className='w-[16%]'>Microcontroller</li>
+                <li className='w-[16%]'>Microprocessor</li>
+                <li className='w-[16%]'>Controller</li>
+                <li className='w-[16%]'>Status</li>
+                <li className='w-[12%]'>Date Added</li>
+                </ul>
+          </div>
+          <div >
+                <Device devicelist={devicelist}/>
+          </div>
+          </div>
         </div>
       </div>
       <div>
