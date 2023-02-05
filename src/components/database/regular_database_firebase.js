@@ -47,16 +47,20 @@ const createNewDevice = async (device) => {
     return true;
 }
 
+// returns an array of device objects
 async function getDevices(user_id){
     // let q = query(collection(db, "devices"), where("user_id", "==", user_id));
-    let devices = null;
+    let devices = [];
     try{
         // console.log(user_id);
-        devices = await getDocs(collection(db,"devices",user_id,"owns"));
-        // console.log("get: "+devices);
-        devices.forEach(doc => {
-          console.log(doc.data());
-      })
+        let docSnaps = await getDocs(collection(db,"devices",user_id,"owns"));
+        console.log("get: "+devices);
+        docSnaps.forEach(doc => {
+          // Object obj = new Object(doc.id,doc.data())
+          devices.push([doc.id,doc.data()])
+          console.log(doc.id)
+        })
+        // console.log(devices);
     } catch(err){
         alert(err.message)
     }

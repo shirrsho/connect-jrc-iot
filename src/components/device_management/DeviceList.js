@@ -1,6 +1,6 @@
     import React from "react";
 
-    function Device({ devicelist }) {
+    function DeviceLinks({ devicelist }) {
     return (
         <>
         {devicelist.map((deviceinfo) => {
@@ -31,4 +31,4 @@
     );
     }
 
-    export default Device;
+    export default DeviceLinks;

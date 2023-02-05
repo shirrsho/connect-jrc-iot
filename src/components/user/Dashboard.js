@@ -1,44 +1,57 @@
-import React, { useEffect, useState } from 'react'
-import { logout } from '../database/auth_database_firebase';
-import { auth } from '../database/auth_database_firebase';
+import React, { useEffect, useState } from "react";
+import { logout } from "../database/auth_database_firebase";
+import { auth } from "../database/auth_database_firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
-import Devices from '../device_management/DeviceList';
-import Device from '../device_management/Device'
-import { addNewDevice, getAllDevices } from '../device_management/functionalities';
+import Devices from "../device_management/DeviceList";
+import Device from "../device_management/Device";
+import {
+  addNewDevice,
+  getAllDevices,
+} from "../device_management/functionalities";
 
 function Dashboard() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [input1, setInput1] = useState("");
+  const [input2, setInput2] = useState("");
+
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
   const navigate = useNavigate();
   const [searchInput, setsearchInput] = useState("");
   const [user, loading, error] = useAuthState(auth);
-  const [userstate,setUserstate] = useState(true)
-  const [devices,setDevices] = useState(null)
-  
-  async function add_device(){
-    let device = new Device("device1","esp32",user);
-    try{
-      await addNewDevice(device)
-    } catch(err){
-      alert(err.message)
-      return false
+  const [userstate, setUserstate] = useState(true);
+  const [devices, setDevices] = useState(null);
+
+  async function add_device() {
+    let device = new Device("device1", "esp32", user);
+    try {
+      await addNewDevice(device);
+    } catch (err) {
+      alert(err.message);
+      return false;
     }
-    return true
+    return true;
   }
-  async function get_devices(){
-    setDevices(getAllDevices(user.uid))
+  async function get_devices() {
+    setDevices(getAllDevices(user.uid));
   }
-  function logsout(){
-    if(logout()) setUserstate(!userstate)
+  function logsout() {
+    if (logout()) setUserstate(!userstate);
     // navigate('/login');
   }
   useEffect(() => {
     // get_devices()
-        if (loading) {
-          load()
-        }
-        else if (!user) navigate('/login')
-    }, [user,loading,userstate,devices]);
+    if (loading) {
+      load();
+    } else if (!user) navigate("/login");
+  }, [user, loading, userstate, devices]);
 
   const load = () => {
     return (
@@ -47,34 +60,35 @@ function Dashboard() {
       </div>
     );
   };
-  const devicelist =[
+  const devicelist = [
     {
-      sl:1,
-      device_name:"switch",
-      microcontroller:"JRC",
-      microprocessor:"ESP 32",
-      controller:"jrc",
-      status:"Online",
-      date:"date"
+      sl: 1,
+      device_name: "switch",
+      microcontroller: "JRC",
+      microprocessor: "ESP 32",
+      controller: "jrc",
+      status: "Online",
+      date: "date",
     },
     {
-      sl:2,
-      device_name:"switch",
-      microcontroller:"JRC",
-      microprocessor:"ESP 32",
-      controller:"jrc",
-      status:"Online",
-      date:"date"
-    }, {
-      sl:3,
-      device_name:"switch",
-      microcontroller:"JRC",
-      microprocessor:"ESP 32",
-      controller:"jrc",
-      status:"Online",
-      date:"date"
-    }
-  ]
+      sl: 2,
+      device_name: "switch",
+      microcontroller: "JRC",
+      microprocessor: "ESP 32",
+      controller: "jrc",
+      status: "Online",
+      date: "date",
+    },
+    {
+      sl: 3,
+      device_name: "switch",
+      microcontroller: "JRC",
+      microprocessor: "ESP 32",
+      controller: "jrc",
+      status: "Online",
+      date: "date",
+    },
+  ];
   function handleSearch() {}
   return (
     <>
@@ -125,37 +139,60 @@ function Dashboard() {
                   />
                 </svg>
 
-                <button className="pl-3 text-lg" onClick={add_device}> Add Device</button>
-                {/* {devices.map((device)=>{
-                  return <h1>Hello</h1>
-                })} */}
+                <button className="pl-3 text-lg" onClick={handleOpen} >
+                  {" "}
+                  Add Device
+                </button>
+                <div>
+        
+                {isOpen && (
+                  <div className="fixed top-0 left-0 h-screen w-screen flex items-center  justify-center bg-gray-900 bg-opacity-75">
+                    <div className="bg-white p-8 rounded-lg">
+                      <h1 className="text-xl font-medium text-black py-5">Device Info</h1>
+                      <div className="mt-4 p-16">
+                        <input className=" mr-9 p-2 border-b placeholder-gray-600 border-gray-600 rounded-lg mt-4 text-center" type="text" placeholder="Device Name" value={input1} onChange={e => setInput1(e.target.value)} />
+                        <input className=" mr-9 p-2 border-b placeholder-gray-600 border-gray-600 rounded-lg mt-4 text-center" type="text" placeholder="Chip" value={input2} onChange={e => setInput2(e.target.value)} />
+                      </div>
+                      <div className="flex justify-end mt-8 py-5">
+                        <button className="bg-red-600 text-white p-3 rounded-lg mr-2" onClick={handleClose}>Cancel</button>
+                        <button className="bg-green-700 text-white p-3 rounded-lg">Save</button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+               
               </div>
             </div>
           </div>
           {/*second segement */}
           <div>
-          <div className='w-[100%] bg-gray-600 my-3'>
-
-                <ul className='flex  text-white text-center text-sm sm:text-md md:text-xl mx-3 p-5'>
-                <li className='w-[8%]'>SL</li>
-                <li className='w-[16%]'>Device Name</li>
-                <li className='w-[16%]'>Microcontroller</li>
-                <li className='w-[16%]'>Microprocessor</li>
-                <li className='w-[16%]'>Controller</li>
-                <li className='w-[16%]'>Status</li>
-                <li className='w-[12%]'>Date Added</li>
-                </ul>
-          </div>
-          <div >
-                <Devices devicelist={devicelist}/>
-          </div>
+            <div className="w-[100%] bg-gray-600 my-3">
+              <ul className="flex  text-white text-center text-sm sm:text-md md:text-xl mx-3 p-5">
+                <li className="w-[8%]">SL</li>
+                <li className="w-[16%]">Device Name</li>
+                <li className="w-[16%]">Microcontroller</li>
+                <li className="w-[16%]">Microprocessor</li>
+                <li className="w-[16%]">Controller</li>
+                <li className="w-[16%]">Status</li>
+                <li className="w-[12%]">Date Added</li>
+              </ul>
+            </div>
+            <div>
+              <Devices devicelist={devicelist} />
+            </div>
           </div>
         </div>
       </div>
       <div>
-      <button className='bg-black px-6 text-white text-xl hover:bg-amber-500 py-2 rounded-3xl' onClick={logsout}>Log Out</button>
+        <button
+          className="bg-black px-6 text-white text-xl hover:bg-amber-500 py-2 rounded-3xl"
+          onClick={logsout}
+        >
+          Log Out
+        </button>
       </div>
-      </>
+    </>
   );
 }
 
