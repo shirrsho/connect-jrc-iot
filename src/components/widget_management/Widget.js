@@ -1,7 +1,10 @@
+import React from "react";
+
 export default class Widget {
-    constructor(name,datastream) {
+    constructor(name,device_id,datastream) {
         this.name = name
         this.datastream = datastream
+        this.device_id = device_id
         this.createWidget = function (type) {
             let widget;
 
@@ -11,6 +14,8 @@ export default class Widget {
                 widget = new Regulator();
             } else if (type === "display") {
                 widget = new Display();
+            } else if (type === "message") {
+                widget = new Messagebox();
             }
 
             widget.type = type;
@@ -23,23 +28,62 @@ export default class Widget {
     // }
 }
 
-class Switch {
+class Switch extends React.Component {
     constructor() {
-        this.hourly = "$12";
+        this.state = "OFF";
     }
-    say() {
-        console.log("widget type: ");
+    setState(state){
+        this.state = state
+    }
+    getState(){
+        return this.state
+    }
+    render() {
+        return <div>Hi, I am a Switch!</div>;
     }
 }
 
-class Regulator {
+class Regulator extends React.Component {
     constructor() {
-        this.hourly = "$11";
+        this.value = 0.00;
+    }
+    setValue(value){
+        this.value = value
+    }
+    getValue(){
+        return this.value
+    }
+    render() {
+        return <div>Hi, I am a Regulator!</div>;
     }
 }
 
-class Display {
+class Display extends React.Component {
     constructor() {
-        this.hourly = "$10";
+        this.value = 0.00;
+    }
+    setValue(value){
+        this.value = value
+    }
+    getValue(){
+        return this.value
+    }
+    render() {
+        return <div>Hi, I am a Display!</div>;
+    }
+}
+
+class Messagebox extends React.Component {
+    constructor() {
+        this.value = "Hello World!";
+    }
+    setValue(value){
+        this.value = value
+    }
+    getValue(){
+        return this.value
+    }
+    render() {
+        return <div>Hi, I am a MessageBox!</div>;
     }
 }

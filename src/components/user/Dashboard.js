@@ -76,9 +76,9 @@ function Dashboard() {
       if(device.name.toLowerCase().includes(searchInput.toLowerCase())) newdevs.push(device)
     });
     setDevices(newdevs)
-    let wid = new Widget().createWidget("switch");
-    let wiid = new Widget().createWidget("regulator");
-    wid.say();
+    // let wid = new Widget().createWidget("switch");
+    // let wiid = new Widget().createWidget("regulator");
+    // wid.say();
   }
   function resetSearch() {
     setsearchInput("")
