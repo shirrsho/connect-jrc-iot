@@ -54,11 +54,11 @@ async function getDevices(user_id){
     try{
         // console.log(user_id);
         let docSnaps = await getDocs(collection(db,"devices",user_id,"owns"));
-        console.log("get: "+devices);
+        // console.log("get: "+devices);
         docSnaps.forEach(doc => {
           // Object obj = new Object(doc.id,doc.data())
           devices.push([doc.id,doc.data()])
-          console.log(doc.id)
+          // console.log(doc.id)
         })
         // console.log(devices);
     } catch(err){

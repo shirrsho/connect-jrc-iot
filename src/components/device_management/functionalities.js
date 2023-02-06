@@ -16,7 +16,7 @@ async function addNewDevice(user_id,device_name,chip_name){
 
 async function getAllDevices(uid){
     let devices = await getDevices(uid)
-    console.log(devices);
+    // console.log(devices);
     let deviceobjs = []
     devices.forEach(device=>{
         let dev = new Device(device[0],device[1].user_id,device[1].name,device[1].chip);

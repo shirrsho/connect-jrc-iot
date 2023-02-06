@@ -45,6 +45,7 @@ function Dashboard() {
     setDevices(devscopy)
     return true;
   }
+
   async function get_devices() {
     setDevices(await getAllDevices(user.uid));
   }
@@ -69,17 +70,16 @@ function Dashboard() {
     );
   };
 
-
   function handleSearch() {
-    let devscopy = devices;
-    console.log(devscopy);
     let newdevs = []
-    devscopy.forEach(dev => {
-      if(dev.device_name.includes(searchInput)){
-        newdevs.push(dev)
-      }
+    devices.forEach(device=>{
+      if(device.name.toLowerCase().includes(searchInput.toLowerCase())) newdevs.push(device)
     });
     setDevices(newdevs)
+  }
+  function resetSearch() {
+    setsearchInput("")
+    get_devices()
   }
   
   return (
@@ -108,13 +108,21 @@ function Dashboard() {
                 placeholder="Search"
                 className="px-4 py-2 border-b border-gray-400 bg-gray-200 text-black rounded-lg mt-4  w-[40%] text-2xl "
                 value={searchInput}
-                onChange={(e) => {setsearchInput(e.target.value); handleSearch()}}
+                onChange={e => {setsearchInput(e.target.value);}}
                 // onKeyPress={(e) => {
                 //   if (e.key === "Enter") {
                 //     handleSearch(searchInput);
                 //   }
                 // }}
               />
+              <button className="pl-3 text-lg" onClick={handleSearch} >
+                  {" "}
+                  Search
+                </button>
+                <button className="pl-3 text-lg" onClick={resetSearch} >
+                  {" "}
+                  Reset
+                </button>
             </div>
             <div className=" w-[50%] relative flex-col items-center">
               <div className="flex absolute right-0 text-white text-lg bg-black p-4 rounded-sm hover:cursor-pointer hover:text-black hover:bg-white hover:text-xl">
