@@ -5,7 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
 import DeviceLinks from "../device_management/DeviceList";
-import Device from "../device_management/Device";
+import Widget from "../widget_management/Widget";
 import {
   addNewDevice,
   getAllDevices,
@@ -76,6 +76,9 @@ function Dashboard() {
       if(device.name.toLowerCase().includes(searchInput.toLowerCase())) newdevs.push(device)
     });
     setDevices(newdevs)
+    let wid = new Widget().createWidget("switch");
+    let wiid = new Widget().createWidget("regulator");
+    wid.say();
   }
   function resetSearch() {
     setsearchInput("")
