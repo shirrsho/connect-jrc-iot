@@ -1,6 +1,7 @@
-    import { UsersIcon } from "@heroicons/react/24/solid";
+import { UsersIcon } from "@heroicons/react/24/solid";
 import Widget from "../widget/Widget";
-    const DeviceView = (uid) => {
+
+const DeviceView = (uid) => {
     return (
         <div className="flex">
         <div className="w-[5%] h-screen flex justify-center relative  ">

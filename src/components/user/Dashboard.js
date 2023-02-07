@@ -5,55 +5,17 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
 import DeviceLinks from "../device_management/DeviceList";
-import Widget from "../widget_management/Widget";
+
 import {
   addNewDevice,
   getAllDevices,
 } from "../device_management/functionalities";
 
 function Dashboard() {
-  // * UI functionalities
-  const [isOpen, setIsOpen] = useState(false);
-  const [device_name, setDevice_name] = useState("");
-  const [chip_name, setChip_name] = useState("");
 
-  const handleOpen = () => {
-    setIsOpen(true);
-  };
-
-  const handleClose = () => {
-    setIsOpen(false);
-  };
+  // <-- UI functionalities ...
   const navigate = useNavigate();
-  const [searchInput, setsearchInput] = useState("");
-  const [user, loading, error] = useAuthState(auth);
   const [userstate, setUserstate] = useState(true);
-  const [devices, setDevices] = useState([]);
-
-  async function add_device() {
-    // let device = new Device("device1", "esp32", user);
-    let device = null
-    try {
-      device = await addNewDevice(user.uid,device_name,chip_name);
-    } catch (err) {
-      alert(err.message);
-      return false;
-    }
-    setIsOpen(false);
-    let devscopy = devices
-    devscopy.push(device)
-    setDevices(devscopy)
-    return true;
-  }
-
-  async function get_devices() {
-    setDevices(await getAllDevices(user.uid));
-  }
-
-  function logsout() {
-    if (logout()) setUserstate(!userstate);
-    // navigate('/login');
-  }
 
   useEffect(() => {
     if (loading) {
@@ -65,10 +27,49 @@ function Dashboard() {
   const load = () => {
     return (
       <div>
-        <h1>MARAKHAO Dashboard</h1>
+        <h1>Loading</h1>
       </div>
     );
   };
+
+  const [isSaveWindowOpen, setIsSaveWindowOpen] = useState(false);
+
+  const handleOpen = () => {
+    setIsSaveWindowOpen(true);
+  };
+  const handleClose = () => {
+    setIsSaveWindowOpen(false);
+  };
+  // ... UI funcionalities -->
+
+
+  // <-- Device Management ...
+  const [devices, setDevices] = useState([]);
+  const [device_name, setDevice_name] = useState("");
+  const [chip_name, setChip_name] = useState("");
+
+  async function add_device() {
+    let device = null
+    try {
+      device = await addNewDevice(user.uid,device_name,chip_name);
+    } catch (err) {
+      alert(err.message);
+      return false;
+    }
+    setIsSaveWindowOpen(false);
+    let devscopy = devices
+    devscopy.push(device)
+    setDevices(devscopy)
+    return true;
+  }
+  async function get_devices() {
+    setDevices(await getAllDevices(user.uid));
+  }
+  // ... Device Management -->
+
+
+  // <-- Search Management ...
+  const [searchInput, setsearchInput] = useState("");
 
   function handleSearch() {
     let newdevs = []
@@ -76,26 +77,24 @@ function Dashboard() {
       if(device.name.toLowerCase().includes(searchInput.toLowerCase())) newdevs.push(device)
     });
     setDevices(newdevs)
-    // let wid = new Widget().createWidget("switch");
-    // let wiid = new Widget().createWidget("regulator");
-    // wid.say();
   }
   function resetSearch() {
     setsearchInput("")
     get_devices()
   }
+  // ... Search management -->
+  
+
+  // <-- User Management ...
+  const [user, loading, error] = useAuthState(auth);
+  function logsout() {
+    if (logout()) setUserstate(!userstate);
+  }
+  // ... User Management -->
+
   
   return (
     <>
-      {/*
-    <div>
-    {user &&
-      <div>
-      <button className='bg-black px-6 text-white text-xl hover:bg-amber-500 py-2 rounded-3xl' onClick={logsout}>Log Out</button>
-      </div>
-    }
-    </div>
-  */}
       <div className="flex">
         <div className="w-[5%] h-screen flex justify-center relative  ">
           <div className=" absolute bottom-0">
@@ -112,11 +111,6 @@ function Dashboard() {
                 className="px-4 py-2 border-b border-gray-400 bg-gray-200 text-black rounded-lg mt-4  w-[40%] text-2xl "
                 value={searchInput}
                 onChange={e => {setsearchInput(e.target.value);}}
-                // onKeyPress={(e) => {
-                //   if (e.key === "Enter") {
-                //     handleSearch(searchInput);
-                //   }
-                // }}
               />
               <button className="pl-3 text-lg" onClick={handleSearch} >
                   {" "}
@@ -148,7 +142,7 @@ function Dashboard() {
                 </button>
                 <div>
         
-                {isOpen && (
+                {isSaveWindowOpen && (
                   <div className="fixed top-0 left-0 h-screen w-screen flex items-center  justify-center bg-gray-900 bg-opacity-75">
                     <div className="bg-white p-8 rounded-lg">
                       <h1 className="text-xl font-medium text-black py-5">Device Info</h1>
