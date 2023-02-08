@@ -14,7 +14,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register/>} />
           <Route path="/dashboard" element={<Dashboard/>}/>
-          <Route path="/deviceview" element={<DeviceView/>}/>
+          <Route path="/deviceview/:id" element={<DeviceView/>}/>
         </Routes>
       </BrowserRouter>
     </>

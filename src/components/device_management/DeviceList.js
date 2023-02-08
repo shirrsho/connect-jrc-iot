@@ -3,8 +3,9 @@
 
     function DeviceLinks({ devicelist }) {
     const navigate = useNavigate();
-    function forwardTo() {
-        navigate("/deviceview");
+    function forwardTo(device) {
+        navigate("/deviceview/${"+device.id+"}",
+                { state: { device } });
     }
     return (
         <>
@@ -21,7 +22,7 @@
             <div
                 className="w-[100%] bg-gray-100 my-3 hover:cursor-pointer hover:shadow-lg  "
                 key={i}
-                onClick={forwardTo}
+                onClick={()=>forwardTo(deviceinfo)}
             >
                 <ul className="flex text-xl mx-3 p-5 text-center hover:text-2xl">
                 <li className="w-[8%]">{i + 1}</li>

@@ -47,7 +47,7 @@ const createNewDevice = async (device) => {
     return true;
 }
 
-// returns an array of device objects
+// returns a 2d array of devices' id and information
 async function getDevices(user_id){
     // let q = query(collection(db, "devices"), where("user_id", "==", user_id));
     let devices = [];

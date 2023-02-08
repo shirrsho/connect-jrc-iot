@@ -1,6 +1,24 @@
-    import { UsersIcon } from "@heroicons/react/24/solid";
+import React, { useEffect, useState } from "react";
+import { auth } from "../database/auth_database_firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
+import { UsersIcon } from "@heroicons/react/24/solid";
+import { useLocation } from "react-router-dom";
 import Widget from "../widget/Widget";
-    const DeviceView = (uid) => {
+
+const DeviceView = () => {
+    const location = useLocation()
+    const device = location.state?.device
+    const [user, loading, error] = useAuthState(auth);
+    const navigate = useNavigate()
+    console.log("device name "+device.name);
+
+    useEffect(() => {
+        if (loading) {
+          return
+        } else if (!user) navigate("/");
+      }, [user, loading]);
+
     return (
         <div className="flex">
         <div className="w-[5%] h-screen flex justify-center relative  ">
