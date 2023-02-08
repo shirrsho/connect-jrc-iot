@@ -13,6 +13,13 @@ import {
 
 function Dashboard() {
 
+    // <-- User Management ...
+    const [user, loading, error] = useAuthState(auth);
+    function logsout() {
+      if (logout()) setUserstate(!userstate);
+    }
+    // ... User Management -->
+
   // <-- UI functionalities ...
   const navigate = useNavigate();
   const [userstate, setUserstate] = useState(true);
@@ -83,14 +90,6 @@ function Dashboard() {
     get_devices()
   }
   // ... Search management -->
-  
-
-  // <-- User Management ...
-  const [user, loading, error] = useAuthState(auth);
-  function logsout() {
-    if (logout()) setUserstate(!userstate);
-  }
-  // ... User Management -->
 
   
   return (
