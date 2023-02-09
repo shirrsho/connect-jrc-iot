@@ -4,7 +4,7 @@ import Regulator from "./controllers/Regulator";
 import Display from "./controllers/Display";
 import MessageBox from "./controllers/MessageBox";
 
-export default function Widget({ type, datastream = null }) {
+export default function Widget({ type }) {
   if (type === "switch") {
     return <Switch />
   } else if (type === "regulator") {

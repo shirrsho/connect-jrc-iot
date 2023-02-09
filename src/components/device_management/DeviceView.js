@@ -11,21 +11,30 @@ const DeviceView = () => {
     const device = location.state?.device;
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
-    console.log("device name " + device.name);
-    let widgetselectors = [];
+    // console.log("device name " + device.name);
+    const [widgetselectors,setWidgetselectors] = useState([{}]);
+    // widgetselectors.push({type:"switch",datastream:null});
+    //     widgetselectors.push({type:"regulator",datastream:null});
+    //     widgetselectors.push({type:"display",datastream:null});
+    // function setWidgetselectors() {
+        
+    //     console.log(widgetselectors);
+    // }
 
-    function setWidgetselectors() {
-        widgetselectors.push(Widget("switch"));
-        widgetselectors.push(Widget("regulator"));
-        widgetselectors.push(Widget("display"));
-        // console.log(wid);
+    function addWidget(type){
+        let widgetshere = [];
+        if(widgetselectors) widgetshere = widgetselectors
+        widgetshere.push(type)
+        setWidgetselectors(widgetshere)
+        console.log(widgetshere);
+        console.log(widgetselectors);
     }
 
     useEffect(() => {
+        setWidgetselectors();
         if (loading) {
             return;
         } else if (!user) navigate("/");
-        setWidgetselectors();
     }, [user, loading]);
 
     return (
@@ -47,10 +56,14 @@ const DeviceView = () => {
                     <div className="bg-gray-200 flex h-screen opacity-85 ">
                         <div className="w-[70%]"></div>
                         <div className="w-[30%] bg-gray-500 flex-col items-center py-10 flex justify-center">
-                            <Widget type="switch" />
-                            <Widget type="regulator" />
-                            <Widget type="display" />
-                            <Widget type="message" />
+                        <Widget type="switch"/>
+                            <div onClick={()=>addWidget("switch")}>Add a Switch</div>
+                            <div onClick={()=>addWidget("regulator")}><Widget type="regulator"/></div>
+                            <div onClick={()=>addWidget("display")}><Widget type="display"/></div>
+                            <div onClick={()=>addWidget("messagebox")}><Widget type="messagebox"/></div>
+                            {/* {widgetselectors?.map(widget => (
+                                <h1 key={widget.type}>LOL{widget.type}</h1>
+                            ))} */}
                         </div>
                     </div>
                 </div>
