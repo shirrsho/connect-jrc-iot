@@ -1,0 +1,75 @@
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .toggle-switch-input {
+    display: none;
+  }
+  
+  .toggle-switch-label {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 34px;
+    background-color: #ccc;
+  }
+  
+  .toggle-switch-inner {
+    display: block;
+    width: 200%;
+    margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+  }
+  
+  .toggle-switch-inner:before,
+  .toggle-switch-inner:after {
+    display: block;
+    float: left;
+    width: 50%;
+    height: 26px;
+    padding: 3px;
+    background-color: white;
+    color: black;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  
+  .toggle-switch-inner:before {
+    content: "ON";
+    padding-left: 5px;
+  }
+  
+  .toggle-switch-inner:after {
+    content: "OFF";
+    padding-right: 5px;
+    text-align: right;
+  }
+  
+  .toggle-switch-switch {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 30px;
+    transition: all 0.3s ease-in 0s;
+  }
+  
+  .toggle-switch-input:checked + .toggle-switch-label .toggle-switch-inner {
+    margin-left: 0;
+  }
+  
+  .toggle-switch-input:checked + .toggle-switch-label .toggle-switch-switch {
+    left: 28px;
+  }
+  
+  /* .on {
+    display: none;
+  } */
+  
