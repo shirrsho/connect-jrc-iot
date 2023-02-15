@@ -1,7 +1,6 @@
 
 const RegulatorData = {
     widget_type:"regulator",
-    widget_id:"",
     pin:-1,
     pinMode:"output",
     signal:"analog",
