@@ -1,5 +1,5 @@
 const SwitchData = {
-  widget_id:"",
+  widget_type:"switch",
   pin:-1,
   pinMode:"output",
   signal:"digital",

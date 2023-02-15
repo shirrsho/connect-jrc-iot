@@ -1,5 +1,5 @@
 const DisplayData = {
-  widget_id:"",
+  widget_type:"display",
   pin:-1,
   pinMode:"output",
   signal:"digital",
