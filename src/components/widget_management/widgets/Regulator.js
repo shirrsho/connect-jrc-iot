@@ -1,5 +1,5 @@
-import Reacr, { useState } from 'react'
-import '../styles/Regulator.css'
+import React, { useState } from 'react'
+import '../widget-styles/Regulator.css'
 
 const Regulator = () => {
     const [value, setValue] = useState(50);
