@@ -3,15 +3,16 @@ import Switch from "./controllers/Switch";
 import Regulator from "./controllers/Regulator";
 import Display from "./controllers/Display";
 import MessageBox from "./controllers/MessageBox";
+import './styles/default.css'
 
 export default function Widget({ type }) {
   if (type === "switch") {
-    return <Switch />
+    return <div className="default_widget"><Switch /></div>
   } else if (type === "regulator") {
-    return <Regulator />
+    return <div className="default_widget"><Regulator /></div>
   } else if (type === "display") {
-    return <Display />
+    return <div className="default_widget"><Display /></div>
   } else if (type === "message") {
-    return <MessageBox />
+    return <div className="default_widget"><MessageBox /></div>
   }
 }

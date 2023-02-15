@@ -12,22 +12,22 @@ const DeviceView = () => {
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
     // console.log("device name " + device.name);
-    const [widgetselectors,setWidgetselectors] = useState([{}]);
+    const [widgetselectors, setWidgetselectors] = useState([{}]);
     // widgetselectors.push({type:"switch",datastream:null});
     //     widgetselectors.push({type:"regulator",datastream:null});
     //     widgetselectors.push({type:"display",datastream:null});
     // function setWidgetselectors() {
-        
+
     //     console.log(widgetselectors);
     // }
 
-    function addWidget(type){
-        let widgetshere = [];
-        if(widgetselectors) widgetshere = widgetselectors
-        widgetshere.push(type)
-        setWidgetselectors(widgetshere)
-        console.log(widgetshere);
-        console.log(widgetselectors);
+    function addWidget(type) {
+        // let widgetshere = [];
+        // if(widgetselectors) widgetshere = widgetselectors
+        // widgetshere.push(type)
+        // setWidgetselectors(widgetshere)
+        // console.log(widgetshere);
+        // console.log(widgetselectors);
     }
 
     useEffect(() => {
@@ -56,11 +56,29 @@ const DeviceView = () => {
                     <div className="bg-gray-200 flex h-screen opacity-85 ">
                         <div className="w-[70%]"></div>
                         <div className="w-[30%] bg-gray-500 flex-col items-center py-10 flex justify-center">
-                        <Widget type="switch"/>
-                            <div onClick={()=>addWidget("switch")}>Add a Switch</div>
-                            <div onClick={()=>addWidget("regulator")}><Widget type="regulator"/></div>
-                            <div onClick={()=>addWidget("display")}><Widget type="display"/></div>
-                            <div onClick={()=>addWidget("messagebox")}><Widget type="messagebox"/></div>
+                            {/* <Widget type="switch" />
+                            <div onClick={() => addWidget("switch")}>Add a Switch</div>
+                            <div onClick={() => addWidget("regulator")}><Widget type="regulator" /></div>
+                            <div onClick={() => addWidget("display")}><Widget type="display" /></div>
+                            <div onClick={() => addWidget("messagebox")}><Widget type="messagebox" /></div> */}
+                            
+                            {/* <button className="pl-3 text-lg bg-white " onClick={() => addWidget("switch")} >
+                                {" "}
+                                Add Switch
+                            </button>
+                            <button className="pl-3 text-lg bg-white" onClick={() => addWidget("regulator")} >
+                                {" "}
+                                Add Regulator
+                            </button>
+                            <button className="pl-3 text-lg bg-white" onClick={() => addWidget("display")} >
+                                {" "}
+                                Add Display
+                            </button>
+                            <button className="pl-3 text-lg bg-white" onClick={() => addWidget("messagebox")} >
+                                {" "}
+                                Add Message Box
+                            </button> */}
+                            
                             {/* {widgetselectors?.map(widget => (
                                 <h1 key={widget.type}>LOL{widget.type}</h1>
                             ))} */}
