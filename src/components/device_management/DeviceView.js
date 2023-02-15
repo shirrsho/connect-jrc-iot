@@ -12,7 +12,7 @@ const DeviceView = () => {
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
     // console.log("device name " + device.name);
-    const [widgetselectors, setWidgetselectors] = useState([{}]);
+    const [widgetselectors, setWidgetselectors] = useState([]);
     // widgetselectors.push({type:"switch",datastream:null});
     //     widgetselectors.push({type:"regulator",datastream:null});
     //     widgetselectors.push({type:"display",datastream:null});
@@ -20,18 +20,21 @@ const DeviceView = () => {
 
     //     console.log(widgetselectors);
     // }
-
+    // console.log(typeof widgetselectors);
     function addWidget(type) {
         // let widgetshere = [];
         // if(widgetselectors) widgetshere = widgetselectors
         // widgetshere.push(type)
         // setWidgetselectors(widgetshere)
         // console.log(widgetshere);
-        // console.log(widgetselectors);
+        // console.log("main"+widgetselectors);
+        // console.log(typeof widgetselectors);
+        setWidgetselectors([...widgetselectors,type])
+        console.log("main"+widgetselectors);
     }
 
     useEffect(() => {
-        setWidgetselectors();
+        // setWidgetselectors();
         if (loading) {
             return;
         } else if (!user) navigate("/");
@@ -54,7 +57,12 @@ const DeviceView = () => {
                         </button>
                     </div>
                     <div className="bg-gray-200 flex h-screen opacity-85 ">
-                        <div className="w-[70%]"></div>
+                        <div className="w-[70%]">
+                            {widgetselectors && widgetselectors.map(widgetselector => {
+                                // console.log(widgetselector);
+                                return <Widget type={widgetselector}/>
+                            })}
+                        </div>
                         <div className="w-[30%] bg-gray-500 flex-col items-center py-10 flex justify-center">
                             {/* <Widget type="switch" />
                             <div onClick={() => addWidget("switch")}>Add a Switch</div>
@@ -78,7 +86,7 @@ const DeviceView = () => {
                                 {" "}
                                 Add Message Box
                             </button> */}
-                            
+
                             {/* {widgetselectors?.map(widget => (
                                 <h1 key={widget.type}>LOL{widget.type}</h1>
                             ))} */}
