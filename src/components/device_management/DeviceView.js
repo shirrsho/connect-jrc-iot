@@ -57,7 +57,7 @@
                 </button>
             </div>
             <div className="bg-gray-200 flex  overflow-y-auto  opacity-85 ">
-                <div className="w-[75%] flex justify-start py-8 mx-[5%] flex-wrap">
+                <div className="w-[75%] flex  py-8 mx-[5%] flex-wrap">
                 {widgetselectors?.map((widgetselector,key) => {
                     // console.log(widgetselector);
                     return <Widget type={widgetselector} key={key}/>
