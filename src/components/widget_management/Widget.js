@@ -12,7 +12,7 @@ export default function Widget({ type }) {
     return <div className="default_widget"><Regulator /></div>
   } else if (type === "display") {
     return <div className="default_widget"><Display /></div>
-  } else if (type === "message") {
+  } else if (type === "messagebox") {
     return <div className="default_widget"><MessageBox /></div>
   }
 }

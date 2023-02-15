@@ -57,7 +57,12 @@
                 </button>
             </div>
             <div className="bg-gray-200 flex  overflow-y-auto  opacity-85 ">
-                <div className="w-[75%]"></div>
+                <div className="w-[75%]">
+                {widgetselectors?.map((widgetselector,key) => {
+                    // console.log(widgetselector);
+                    return <Widget type={widgetselector} key={key}/>
+                })}
+                </div>
                 <div className="w-[25%] bg-gray-400 flex-col items-center py-10 flex justify-center">
                 <div onClick={() => addWidget("switch")}>
                     <img
