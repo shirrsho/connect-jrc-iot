@@ -22,12 +22,12 @@
     // }
 
     function addWidget(type) {
-        let widgetshere = [];
-        if (widgetselectors) widgetshere = widgetselectors;
-        widgetshere.push(type);
-        setWidgetselectors(widgetshere);
-        console.log(widgetshere);
-        console.log(widgetselectors);
+        // let widgetshere = [];
+        // if(widgetselectors) widgetshere = widgetselectors
+        // widgetshere.push(type)
+        // setWidgetselectors(widgetshere)
+        // console.log(widgetshere);
+        // console.log(widgetselectors);
     }
 
     useEffect(() => {
