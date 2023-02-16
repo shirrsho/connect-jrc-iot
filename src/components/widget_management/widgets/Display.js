@@ -1,4 +1,4 @@
-const Display = () => {
+const Display = ({ datastream }) => {
     return (
       <div>Hi, I am a Display!</div>
     );

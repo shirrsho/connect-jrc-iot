@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../widget-styles/Regulator.css'
 
-const Regulator = () => {
+const Regulator = ({ datastream }) => {
     const [value, setValue] = useState(50);
 
     const handleChange = (e) => {

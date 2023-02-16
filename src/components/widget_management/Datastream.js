@@ -1,4 +1,3 @@
-import React from "react";
 import SwitchData from "./datastreams/SwitchData";
 import RegulatorData from "./datastreams/RegulatorData";
 import DisplayData from "./datastreams/DisplayData";

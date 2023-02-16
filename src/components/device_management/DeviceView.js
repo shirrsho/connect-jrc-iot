@@ -5,36 +5,22 @@ import { useNavigate } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
 import { useLocation } from "react-router-dom";
 import Widget from "../widget_management/Widget";
+import Datastream from "../widget_management/Datastream";
 
 const DeviceView = () => {
     const location = useLocation();
     const device = location.state?.device;
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
-    // console.log("device name " + device.name);
     const [widgetselectors, setWidgetselectors] = useState([]);
-    // widgetselectors.push({type:"switch",datastream:null});
-    //     widgetselectors.push({type:"regulator",datastream:null});
-    //     widgetselectors.push({type:"display",datastream:null});
-    // function setWidgetselectors() {
-
-    //     console.log(widgetselectors);
-    // }
-    // console.log(typeof widgetselectors);
+    
     function addWidget(type) {
-        // let widgetshere = [];
-        // if(widgetselectors) widgetshere = widgetselectors
-        // widgetshere.push(type)
-        // setWidgetselectors(widgetshere)
-        // console.log(widgetshere);
-        // console.log("main"+widgetselectors);
-        // console.log(typeof widgetselectors);
-        setWidgetselectors([...widgetselectors, type])
-        console.log("main" + widgetselectors);
+        let datastream = Datastream(type);
+        setWidgetselectors([...widgetselectors, datastream])
+        // console.log(datastream);
     }
 
     useEffect(() => {
-        // setWidgetselectors();
         if (loading) {
             return;
         } else if (!user) navigate("/");
@@ -60,7 +46,7 @@ const DeviceView = () => {
                         <div className="w-[75%] flex justify-start py-8 mx-[5%] flex-wrap">
                             {widgetselectors?.map((widgetselector, key) => {
                                 // console.log(widgetselector);
-                                return <Widget type={widgetselector} key={key} />
+                                return <Widget datastream={widgetselector} key={key} />
                             })}
                         </div>
                         <div className="w-[25%] bg-gray-400 flex-col items-center py-10 flex justify-center">
