@@ -7,11 +7,11 @@ const Switch = ({ datastream }) => {
     setIsOn(event.target.checked)
     // console.log(isOn);
   };
-  useEffect(()=>{
+  useEffect(() => {
     if (isOn) datastream.state = 1
     else datastream.state = 0
     console.log(datastream);
-  },[isOn])
+  }, [isOn])
 
   return (
     <label className="relative inline-flex items-center cursor-pointer">

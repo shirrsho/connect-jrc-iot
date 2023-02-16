@@ -8,10 +8,10 @@ const Regulator = ({ datastream }) => {
         setValue(e.target.value);
     };
 
-    useEffect(()=>{
-        datastream.state=value
+    useEffect(() => {
+        datastream.state = value
         console.log(datastream);
-    },[value])
+    }, [value])
 
     return (
         <div className="regulator">
