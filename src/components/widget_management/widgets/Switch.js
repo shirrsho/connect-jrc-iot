@@ -8,8 +8,8 @@ const Switch = ({ datastream }) => {
     // console.log(isOn);
   };
   useEffect(()=>{
-    if (isOn) datastream.setState(1)
-    else datastream.setState(0)
+    if (isOn) datastream.state = 1
+    else datastream.state = 0
     console.log(datastream);
   },[isOn])
 

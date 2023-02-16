@@ -5,12 +5,12 @@ import MessageBoxData from "./datastreams/MessageBoxData";
 
 export default function Datastream(type) {
     if (type === "switch") {
-        return new SwitchData();
+        return SwitchData;
     } else if (type === "regulator") {
-        return new RegulatorData();
+        return RegulatorData;
     } else if (type === "display") {
-        return new DisplayData();
+        return DisplayData;
     } else if (type === "messagebox") {
-        return new MessageBoxData();
+        return MessageBoxData;
     }
 }

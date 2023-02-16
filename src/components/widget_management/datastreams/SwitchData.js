@@ -1,12 +1,9 @@
-class SwitchData {
-  constructor(){
-    this.widget_type="switch"
-    this.pin=-1
-    this.pinMode="output"
-    this.signal="digital"
-    this.state=0
-  }
-  setState (state) { this.state = state }
+const SwitchData = {
+  widget_type:"switch",
+  pin:-1,
+  pinMode:"output",
+  signal:"digital",
+  state:0
 }
 
 export default SwitchData;
