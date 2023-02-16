@@ -1,9 +1,9 @@
 import React from "react";
-import Switch from "./controllers/Switch";
-import Regulator from "./controllers/Regulator";
-import Display from "./controllers/Display";
-import MessageBox from "./controllers/MessageBox";
-import './styles/default.css'
+import Switch from "./widgets/Switch";
+import Regulator from "./widgets/Regulator";
+import Display from "./widgets/Display";
+import MessageBox from "./widgets/MessageBox";
+import './widget-styles/default.css'
 
 export default function Widget({ type }) {
   if (type === "switch") {
