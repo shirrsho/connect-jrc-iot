@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Form({ onAddWidget, onCloseModal }) {
+function Form({ onAddWidget, onCloseModal,type }) {
   const [inputValues, setInputValues] = useState({
     input1: "",
     input2: "",
