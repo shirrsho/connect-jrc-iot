@@ -25,7 +25,7 @@ export default function SetSwitchData({ isOpen, onClose, datastream }) {
     // signal:"digital",
     // state:0
     return (
-      <div className="modal">
+      <div className="modal z-10 bg-red-500">
         <div className="modal-content">
           <div>
             <input placeholder="PIN" type="text" name="pin" onChange={handleChange} />

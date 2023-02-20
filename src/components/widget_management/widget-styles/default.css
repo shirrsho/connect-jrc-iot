@@ -1,6 +1,6 @@
 .default_widget{
     width: 200px;
-    height: 50px;
+    height: 70px;
     border: 1px solid black;
     display: flex;
     justify-content: center;
