@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Datastream from "../Datastream";
 
-export default function SetSwitchData({ isOpen, onClose, datastream }) {
+export default function SetSwitchData({  onClose, datastream }) {
     const [formData, setFormData] = useState(Datastream("switch"));
   
     const handleChange = (e) => {
@@ -15,24 +15,21 @@ export default function SetSwitchData({ isOpen, onClose, datastream }) {
       onClose(datastream);
     };
   
-    // Conditional rendering to show/hide the modal form
-    if (!isOpen) {
-      return null;
-    }
+   
     // widget_type:"switch",
     // pin:-1,
     // pinMode:"output",
     // signal:"digital",
     // state:0
     return (
-      <div className="modal">
-        <div className="modal-content">
-          <div>
-            <input placeholder="PIN" type="text" name="pin" onChange={handleChange} />
-            <input placeholder="Default State" type="text" name="state" onChange={handleChange} />
-            <button type="submit" onClick={handleSubmit}>Submit</button>
+      <div className="modal z-10 bg-white">
+       
+          <div className="h-[400px] w-[600px] rounded-2xl flex justify-center flex-col items-center py-10" >
+            <input placeholder="PIN" type="text" className="py-3 w-[70%] text-center border-b border-gray-400" name="pin" onChange={handleChange} />
+            <input placeholder="Default State" className="py-3 w-[70%] my-2 text-center border-b border-gray-400" type="text" name="state" onChange={handleChange} />
+            <button type="submit" className="py-3 w-[35%] rounded-lg text-white hover:scale-105 bg-blue-500 hover:text-lg hover:text-blue-500 hover:bg-white my-2 text-center border-2 border-gray-400" onClick={handleSubmit}>Submit</button>
           </div>
-        </div>
+       
       </div>
     );
   }

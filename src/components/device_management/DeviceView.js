@@ -44,11 +44,12 @@ const DeviceView = () => {
                         </button>
                     </div>
                     <div className="bg-gray-200 flex  overflow-y-auto  opacity-85 ">
-                        <div className="w-[75%] flex justify-start py-8 mx-[5%] flex-wrap">
+                        <div className="w-[75%]  flex justify-start py-8 mx-[5%] flex-wrap">
                             {widgetselectors?.map((widgetselector, key) => {
                                 // console.log(widgetselector);
                                 return <Widget type={widgetselector} datastream={null} key={key} />;
                             })}
+                           
                         </div>
 
                         <div className="w-[25%] bg-gray-400 flex-col items-center py-10 flex justify-center">
