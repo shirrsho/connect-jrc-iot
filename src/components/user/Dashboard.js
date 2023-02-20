@@ -197,7 +197,7 @@ function Dashboard() {
             </div>
             {devices && (
               <div>
-                <DeviceLinks devicelist={devices} user_id={user?.uid} />
+                <DeviceLinks devicelist={devices} setDevicelist={setDevices} user_id={user?.uid} />
               </div>
             )}
           </div>

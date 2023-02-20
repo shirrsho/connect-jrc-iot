@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { deleteDevice, editDevice } from "./functionalities";
 
-function DeviceLinks({ devicelist, user_id }) {
+function DeviceLinks({ devicelist, setDevicelist, user_id }) {
     const navigate = useNavigate();
     const [showPopup, setShowPopup] = useState(-1);
-    const [showingdevices, setShowingDevices] = useState(devicelist)
+    // const [showingdevices, setShowingDevices] = useState(devicelist)
 
     const handleMouseEnter = (key) => {
         // console.log(showPopup, key);
@@ -20,9 +20,10 @@ function DeviceLinks({ devicelist, user_id }) {
         editDevice(device_id, user_id)
     }
     
-    function delete_device(device_id){
-        if(deleteDevice(device_id, user_id))
-            setShowingDevices(showingdevices.filter(item => item.id !== device_id))
+    async function delete_device(device_id){
+        if(await deleteDevice(device_id, user_id))
+            setDevicelist(devicelist.filter(item => item.id !== device_id))
+            // setShowingDevices(showingdevices.filter(item => item.id !== device_id))
     }
 
 
@@ -32,7 +33,7 @@ function DeviceLinks({ devicelist, user_id }) {
     }
     return (
         <>
-            {showingdevices.map((deviceinfo, i) => {
+            {devicelist.map((deviceinfo, i) => {
                 return (
                     <div
                         className="w-[100%] bg-gray-100 my-3 hover:cursor-pointer hover:shadow-lg  "
