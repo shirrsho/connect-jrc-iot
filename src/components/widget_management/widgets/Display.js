@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SetDisplayData from "../widget-forms/SetDisplayData";
 
-const Display = ({ datastream }) => {
+const Display = ({ datastream, setDatastream }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   const handleOpen = () => {
@@ -15,7 +15,7 @@ const Display = ({ datastream }) => {
 
     return (
       <div>
-        {!datastream && <SetDisplayData isOpen={isOpen} onClose={handleFormClose} datastream={datastream} />}
+        {!datastream && <SetDisplayData isOpen={isOpen} onClose={handleFormClose} datastream={datastream} setDatastream={setDatastream} />}
         <div>Hi, I am a Display!</div>
         </div>
     );

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SetMessageBoxData from "../widget-forms/setMessageBoxData";
 
-const MessageBox = ({ datastream }) => {
+const MessageBox = ({ datastream, setDatastream }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   const handleOpen = () => {
@@ -15,7 +15,7 @@ const MessageBox = ({ datastream }) => {
 
     return (
       <div>
-        {!datastream && <SetMessageBoxData isOpen={isOpen} onClose={handleFormClose} datastream={datastream} />}
+        {!datastream && <SetMessageBoxData isOpen={isOpen} onClose={handleFormClose} datastream={datastream} setDatastream={setDatastream} />}
         <div>Hi, I am a MessageBox!</div>
         </div>
     );

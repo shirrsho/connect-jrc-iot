@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
 import { useLocation } from "react-router-dom";
 import Widget from "../widget_management/Widget";
-import Datastream from "../widget_management/Datastream";
 
 const DeviceView = () => {
 
@@ -14,9 +13,9 @@ const DeviceView = () => {
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
     const [widgetselectors, setWidgetselectors] = useState([]);
+    const [datastream, setDatastream] = useState(null);
 
     function addWidget(type) {
-        let datastream = null;
         setWidgetselectors([...widgetselectors, type]);
         // console.log(datastream);
     }
@@ -47,7 +46,7 @@ const DeviceView = () => {
                         <div className="w-[75%]  flex justify-start py-8 mx-[5%] flex-wrap">
                             {widgetselectors?.map((widgetselector, key) => {
                                 // console.log(widgetselector);
-                                return <Widget type={widgetselector} datastream={null} key={key} />;
+                                return <Widget type={widgetselector} datastream={datastream} setDatastream={setDatastream} />;
                             })}
                            
                         </div>

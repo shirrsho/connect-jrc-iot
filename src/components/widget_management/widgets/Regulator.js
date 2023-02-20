@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import SetRegulatorData from '../widget-forms/SetRegulatorData';
 import '../widget-styles/Regulator.css'
 
-const Regulator = ({ datastream }) => {
+const Regulator = ({ datastream, setDatastreaam }) => {
     const [value, setValue] = useState(50);
     const [isOpen, setIsOpen] = useState(true);
 
@@ -27,7 +27,7 @@ const Regulator = ({ datastream }) => {
 
     return (
         <div className=''>
-        {!datastream && <SetRegulatorData isOpen={isOpen} onClose={handleFormClose} datastream={datastream} />}
+        {!datastream && <SetRegulatorData isOpen={isOpen} onClose={handleFormClose} datastream={datastream} setDatastream={setDatastream} />}
         <div className="regulator">
             <input
                 type="range"

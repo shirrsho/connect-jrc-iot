@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Datastream from "../Datastream";
 
-export default function SetDisplayData({ isOpen, onClose, datastream }) {
+export default function SetDisplayData({ isOpen, onClose, datastream, setDatastream }) {
     const [formData, setFormData] = useState(Datastream("display"));
   
     const handleChange = (e) => {
@@ -11,7 +11,7 @@ export default function SetDisplayData({ isOpen, onClose, datastream }) {
     const handleSubmit = (e) => {
       e.preventDefault();
       console.log(formData);
-      datastream = formData
+      setDatastream(formData)
       onClose(datastream);
     };
   

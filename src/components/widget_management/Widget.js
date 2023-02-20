@@ -5,29 +5,29 @@ import Display from "./widgets/Display";
 import MessageBox from "./widgets/MessageBox";
 import "./widget-styles/default.css";
 
-export default function Widget({ type, datastream }) {
+export default function Widget({ type, datastream, setDatastream }) {
   if (type === "switch") {
     return (
       <div className="w-[300px] bg-white h-[150px] px-8 mx-3">
-        <Switch datastream={datastream} show="true"/>
+        <Switch datastream={datastream} setDatastream={setDatastream}/>
       </div>
     );
   } else if (type === "regulator") {
     return (
       <div className="w-[300px] bg-white h-[150px]  px-8 mx-3">
-        <Regulator datastream={datastream} />
+        <Regulator datastream={datastream} setDatastream={setDatastream} />
       </div>
     );
   } else if (type === "display") {
     return (
       <div className="w-[300px] bg-white h-[150px]  px-8 mx-3">
-        <Display datastream={datastream} />
+        <Display datastream={datastream} setDatastream={setDatastream}/>
       </div>
     );
   } else if (type === "messagebox") {
     return (
       <div className="w-[300px] bg-white h-[150px]  px-8 mx-3">
-        <MessageBox datastream={datastream} />
+        <MessageBox datastream={datastream} setDatastream={setDatastream}/>
       </div>
     );
   }
