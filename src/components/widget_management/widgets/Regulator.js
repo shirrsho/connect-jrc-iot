@@ -26,7 +26,7 @@ const Regulator = ({ datastream }) => {
     }, [value])
 
     return (
-        <div>
+        <div className=''>
         {!datastream && <SetRegulatorData isOpen={isOpen} onClose={handleFormClose} datastream={datastream} />}
         <div className="regulator">
             <input
