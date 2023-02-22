@@ -33,6 +33,7 @@ class Device {
     addWidget(widget){
         console.log(this.widgets);
         this.widgets = [...this.getWidgets(), widget];
+        console.log(this.widgets)
     }
 
     getCodeforHardware() {

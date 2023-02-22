@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import SetDisplayData from "../widget-forms/SetDisplayData";
 
-const Display = ({ datastream, show }) => {
-  const [isOn, setIsOn] = useState(false);
+const Display = ({ datastream, show, setDatastream}) => {
+  // const [isOn, setIsOn] = useState(false);
 
   const [modal, setModal] = useState(show);
   const Modal = () => {
@@ -76,9 +76,10 @@ const Display = ({ datastream, show }) => {
       {modal && (
         <div className="fixed top-0 left-0 h-screen w-screen flex items-center z-20 justify-center bg-gray-900 bg-opacity-75">
         <SetDisplayData
-          isOpen={isOpen}
+          // isOpen={isOpen}
           onClose={Modal}
           datastream={datastream}
+          setDatastream={setDatastream}
         />
         </div>
       )}

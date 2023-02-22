@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SetMessageBoxData from "../widget-forms/setMessageBoxData";
 
-const MessageBox = ({ datastream, show }) => {
+const MessageBox = ({ datastream, show, setDatastream }) => {
   const [modal, setModal] = useState(show);
   const Modal = () => {
     if (modal) setModal(false);
@@ -111,7 +111,7 @@ const MessageBox = ({ datastream, show }) => {
       {/*on condition */}
       {modal && (
         <div className="fixed top-0 left-0 h-screen w-screen flex items-center z-20 justify-center bg-gray-900 bg-opacity-75">
-          <SetMessageBoxData onClose={Modal} datastream={datastream} />
+          <SetMessageBoxData onClose={Modal} datastream={datastream} setDatastream={setDatastream} />
         </div>
       )}
     </div>

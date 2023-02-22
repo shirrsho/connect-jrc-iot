@@ -19,8 +19,8 @@ const DeviceView = () => {
     const [datastream, setDatastream] = useState(null);
 
     function addWidget(type) {
+        
         setWidgetselectors([...widgetselectors, type]);
-        // device?.addWidget(type)
         // console.log(device);
     }
 
@@ -55,7 +55,7 @@ const DeviceView = () => {
                         <div className="w-[78%]  flex justify-start pl-6 py-7  flex-wrap">
                             {widgetselectors?.map((widgetselector, key) => {
                                 // console.log(widgetselector);
-                                return <Widget type={widgetselector} datastream={datastream} setDatastream={setDatastream} />;
+                                return <Widget type={widgetselector} datastream={datastream} setDatastream={setDatastream} key={key}/>;
                             })}
                            
                         </div>

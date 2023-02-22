@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Datastream from "../Datastream";
 
-export default function SetRegulatorData({ onClose, datastream }) {
+export default function SetRegulatorData({ onClose, datastream, setDatastream }) {
   const [formData, setFormData] = useState(Datastream("switch"));
 
   const handleChange = (e) => {
@@ -11,8 +11,8 @@ export default function SetRegulatorData({ onClose, datastream }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    datastream = formData;
-    onClose(datastream);
+    setDatastream(formData);
+    onClose();
   };
 
   return (
