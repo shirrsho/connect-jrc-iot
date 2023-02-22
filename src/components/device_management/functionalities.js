@@ -20,9 +20,9 @@ async function addNewDevice(user_id, device_name, chip_name) {
     return device;
 }
 
-async function editDevice(device_id, user_id) {
+async function editDevice(device_id, user_id, device) {
     try {
-        await editSpecificDevice(device_id, user_id)
+        await editSpecificDevice(device_id, user_id, device)
     } catch (err) {
         alert(err.message)
         return false;
@@ -65,5 +65,9 @@ async function getADevice(user_id,device_id) {
     // });
     return dev;
 }
+
+// async function updateDevice(device_id,device){
+
+// }
 
 export { addNewDevice, editDevice, deleteDevice, getAllDevices, getADevice }

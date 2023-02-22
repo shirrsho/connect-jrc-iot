@@ -6,6 +6,7 @@ import { UsersIcon } from "@heroicons/react/24/solid";
 import { useLocation } from "react-router-dom";
 import { getADevice } from "./functionalities";
 import Widget from "../widget_management/Widget";
+import Datastream from "../widget_management/Datastream";
 
 const DeviceView = () => {
     const { id } = useParams();
@@ -19,7 +20,7 @@ const DeviceView = () => {
     const [datastream, setDatastream] = useState(null);
 
     function addWidget(type) {
-        
+        device.addWidget(type);
         setWidgetselectors([...widgetselectors, type]);
         // console.log(device);
     }
@@ -33,7 +34,7 @@ const DeviceView = () => {
             return;
         } else if (!user) navigate("/");
         else init_device()
-    }, [user, loading]);
+    }, [user, loading, datastream]);
 
     return (
         <div className="flex">
@@ -55,7 +56,8 @@ const DeviceView = () => {
                         <div className="w-[78%]  flex justify-start pl-6 py-7  flex-wrap">
                             {widgetselectors?.map((widgetselector, key) => {
                                 // console.log(widgetselector);
-                                return <Widget type={widgetselector} datastream={datastream} setDatastream={setDatastream} key={key}/>;
+                                // setDatastream(Datastream(widgetselector))
+                                return <Widget type={widgetselector} datastream={Datastream(widgetselector)} setDatastream={setDatastream} device key={key}/>;
                             })}
                            
                         </div>

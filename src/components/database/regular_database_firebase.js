@@ -49,9 +49,24 @@ const createNewDevice = async (device) => {
   return true;
 }
 
-const editSpecificDevice = async (device_id,user_id) => {
-
+const editSpecificDevice = async (device_id,user_id,device) => {
+  try {
+    // path: must be collection, document, collection, document ...
+    await updateDoc(doc(db, "devices", user_id, "owns",device_id), {
+      user_id : device.getUserID(),
+      name : device.getName(),
+      chip : device.getChip(),
+      widgets : device.getWidgets(),
+    });
+    console.log("fields updated");
+  } catch (err) {
+    // console.error(err);
+    alert(err.message);
+    return false;
+  }
+  return true;
 }
+
 const deleteSpecificDevice = async (device_id,user_id) => {
   try {
     // path: must be collection, document, collection, document ...

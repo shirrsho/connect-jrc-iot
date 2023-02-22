@@ -1,3 +1,5 @@
+import { editDevice } from "./functionalities";
+
 class Device {
     constructor(device_id = "", user_id, name = "Give a Name", chip = "ESP32", widgets=[]) {
         this.id = device_id;
@@ -33,7 +35,8 @@ class Device {
     addWidget(widget){
         console.log(this.widgets);
         this.widgets = [...this.getWidgets(), widget];
-        console.log(this.widgets)
+        // console.log(this)
+        editDevice(this.id, this.user_id, this)
     }
 
     getCodeforHardware() {
