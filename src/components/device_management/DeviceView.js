@@ -52,7 +52,7 @@ const DeviceView = () => {
                         </button>
                     </div>
                     <div className="bg-gray-200 flex  overflow-y-auto  opacity-85 ">
-                        <div className="w-[75%]  flex justify-start py-8 mx-[5%] flex-wrap">
+                        <div className="w-[78%]  flex justify-start pl-6 py-7  flex-wrap">
                             {widgetselectors?.map((widgetselector, key) => {
                                 // console.log(widgetselector);
                                 return <Widget type={widgetselector} datastream={datastream} setDatastream={setDatastream} />;
@@ -60,7 +60,7 @@ const DeviceView = () => {
                            
                         </div>
 
-                        <div className="w-[25%] bg-gray-400 flex-col items-center py-10 flex justify-center">
+                        <div className="w-[22%] bg-gray-400 flex-col z-10 items-center py-10 flex justify-center">
                             <div onClick={() => addWidget("switch")}>
                                 <img
                                     src="/Images/WIDGET/Frame 7.png"

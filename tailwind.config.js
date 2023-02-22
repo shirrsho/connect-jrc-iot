@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      digital: ["Digital Numbers", "sans-serif"],
+    },
   },
   plugins: [],
 }
