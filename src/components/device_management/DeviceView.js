@@ -1,16 +1,19 @@
 import React, { ReactDOM, useEffect, useState } from "react";
 import { auth } from "../database/auth_database_firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
 import { useLocation } from "react-router-dom";
+import { getADevice } from "./functionalities";
 import Widget from "../widget_management/Widget";
 
 const DeviceView = () => {
-
+    const { id } = useParams();
+    
+    // console.log(id);
     const location = useLocation();
-    let device = location.state?.device;
     const [user, loading, error] = useAuthState(auth);
+    const [device, setDevice] = useState(null);
     const navigate = useNavigate();
     const [widgetselectors, setWidgetselectors] = useState([]);
     const [datastream, setDatastream] = useState(null);
@@ -18,15 +21,19 @@ const DeviceView = () => {
     function addWidget(type) {
         setWidgetselectors([...widgetselectors, type]);
         // device?.addWidget(type)
-        console.log(device);
+        // console.log(device);
+    }
+
+    async function init_device(){
+        setDevice(await getADevice(user.uid,id))
     }
 
     useEffect(() => {
         if (loading) {
             return;
         } else if (!user) navigate("/");
-        else device = location.state?.device;
-    }, [user, loading, location.state]);
+        else init_device()
+    }, [user, loading]);
 
     return (
         <div className="flex">
@@ -39,7 +46,7 @@ const DeviceView = () => {
                 <div>
                     <img src="Images/Vector.png" className="py-" />
                     <div className="w-[75%] flex justify-between text-[40px] py-2">
-                        <h1>{device.name}</h1>
+                        <h1>{device?.name}</h1>
                         <button>
                             <p>Edit Layout</p>
                         </button>

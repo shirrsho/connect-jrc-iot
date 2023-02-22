@@ -3,6 +3,8 @@ import {
   getFirestore,
   collection,
   addDoc,
+  getCollection,
+  getDoc,
   getDocs,
   updateDoc,
   deleteDoc,
@@ -89,9 +91,30 @@ async function getDevices(user_id) {
   return devices
 }
 
+async function getDevice(user_id, device_id) {
+  // let q = query(collection(db, "devices"), where("user_id", "==", user_id));
+  let device = null;
+  try {
+    // console.log(user_id);
+    device = await getDoc(doc(db, "devices", user_id, "owns", device_id));
+    // console.log(device);
+    // console.log("get: "+devices);
+    // docSnaps.forEach(doc => {
+      // Object obj = new Object(doc.id,doc.data())
+      // device.push([docSnap.id, doc.data()])
+      // console.log(doc.id)
+    // })
+    // console.log(devices);
+  } catch (err) {
+    alert("In getdevice in database:"+err.message)
+  }
+  return device.data()
+}
+
 export {
   createNewUser,
   createNewDevice,
+  getDevice,
   getDevices,
   editSpecificDevice,
   deleteSpecificDevice

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { deleteDevice, editDevice } from "./functionalities";
 
 function DeviceLinks({ devicelist, setDevicelist, user_id }) {
@@ -27,10 +27,10 @@ function DeviceLinks({ devicelist, setDevicelist, user_id }) {
     }
 
 
-    function forwardTo(device) {
-        navigate("/deviceview/${" + device.id + "}",
-            { state: { device } });
-    }
+    // function forwardTo(device) {
+    //     navigate("/deviceview/${" + device.id + "}",
+    //         { state: { device } });
+    // }
     return (
         <>
             {devicelist.map((deviceinfo, i) => {
@@ -40,7 +40,8 @@ function DeviceLinks({ devicelist, setDevicelist, user_id }) {
                         key={i}
                         onMouseEnter={() => handleMouseEnter(i)} onMouseLeave={handleMouseLeave}
                     >
-                        <ul onClick={() => forwardTo(deviceinfo)} className="flex text-xl mx-3 p-5 text-center hover:text-2xl">
+                            <Link to={`/device/${deviceinfo.id}`}>
+                        <ul className="flex text-xl mx-3 p-5 text-center hover:text-2xl">
                             <li className="w-[8%]">{i + 1}</li>
                             <li className="w-[16%]">{deviceinfo.name}</li>
                             <li className="w-[16%]">JRC Board</li>
@@ -49,6 +50,8 @@ function DeviceLinks({ devicelist, setDevicelist, user_id }) {
                             <li className="w-[16%]">Offline</li>
                             <li className="w-[12%]">05/02/2023</li>
                         </ul>
+                        </Link>
+                            
                         {showPopup === i && (
                             <div>
                                 <button onClick={()=>edit_device(deviceinfo.id)}>Edit</button>

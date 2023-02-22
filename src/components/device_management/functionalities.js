@@ -1,5 +1,6 @@
 import { 
     createNewDevice,
+    getDevice,
     getDevices,
     editSpecificDevice,
     deleteSpecificDevice } from "../database/regular_database_firebase";
@@ -40,8 +41,8 @@ async function deleteDevice(device_id, user_id) {
     return true;
 }
 
-async function getAllDevices(uid) {
-    let devices = await getDevices(uid)
+async function getAllDevices(user_id) {
+    let devices = await getDevices(user_id)
     // console.log(devices);
     let deviceobjs = []
     devices.forEach(device => { // device[0]=device_id, device[1]=stored info in database
@@ -52,4 +53,17 @@ async function getAllDevices(uid) {
     return deviceobjs
 }
 
-export { addNewDevice, editDevice, deleteDevice, getAllDevices }
+async function getADevice(user_id,device_id) {
+    let device = await getDevice(user_id,device_id)
+    let dev = new Device(device_id, device.user_id, device.name, device.chip, device.widgets);
+    // console.log(devices);
+    // let deviceobj = []
+    // devices.forEach(device => { // device[0]=device_id, device[1]=stored info in database
+        
+    //     deviceobjs.push(dev)
+    //     // console.log(dev);
+    // });
+    return dev;
+}
+
+export { addNewDevice, editDevice, deleteDevice, getAllDevices, getADevice }

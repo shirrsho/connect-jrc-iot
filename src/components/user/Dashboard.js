@@ -4,7 +4,7 @@ import { auth } from "../database/auth_database_firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
-import DeviceLinks from "../device_management/DeviceList";
+import DeviceLinks from "../device_management/DeviceLinks";
 
 import {
   addNewDevice,
