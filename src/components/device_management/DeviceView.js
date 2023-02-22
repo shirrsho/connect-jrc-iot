@@ -27,6 +27,7 @@ const DeviceView = () => {
 
     async function init_device(){
         setDevice(await getADevice(user.uid,id))
+        // setWidgetselectors([...widgetselectors, ...device?.getWidgets()])
     }
 
     useEffect(() => {
