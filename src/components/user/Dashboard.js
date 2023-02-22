@@ -62,9 +62,10 @@ function Dashboard() {
       return false;
     }
     setIsSaveWindowOpen(false);
-    let devscopy = devices;
-    devscopy.push(device);
-    setDevices(devscopy);
+    // let devscopy = devices;
+    // devscopy.push(device);
+    // setDevices(devscopy);
+    await get_devices();
     return true;
   }
   async function get_devices() {

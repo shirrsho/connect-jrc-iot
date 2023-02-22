@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import SetSwitchData from "../widget-forms/SetSwitchData";
 
-const Switch = ({ datastream, show }) => {
+const Switch = ({ datastream, setDatastream }) => {
+
   const [isOn, setIsOn] = useState(false);
  
-  const [modal, setModal] = useState(show);
+  const [modal, setModal] = useState(true);
+
   const Modal = () => {
     if(modal)setModal(false);
     if(!modal) setModal(true);
@@ -21,7 +23,7 @@ const Switch = ({ datastream, show }) => {
     if (!datastream) return;
     if (isOn) datastream.state = 1;
     else datastream.state = 0;
-    // console.log("D: "+datastream);
+    // console.log(datastream);
   }, [isOn]);
 
   return (
@@ -99,6 +101,7 @@ const Switch = ({ datastream, show }) => {
               
               onClose={Modal}
               datastream={datastream}
+              setDatastream={setDatastream}
               
             />
           </div>

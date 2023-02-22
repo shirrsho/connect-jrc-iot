@@ -5,27 +5,28 @@ import { useNavigate } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
 import { useLocation } from "react-router-dom";
 import Widget from "../widget_management/Widget";
-import Datastream from "../widget_management/Datastream";
 
 const DeviceView = () => {
 
     const location = useLocation();
-    const device = location.state?.device;
+    let device = location.state?.device;
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
     const [widgetselectors, setWidgetselectors] = useState([]);
+    const [datastream, setDatastream] = useState(null);
 
     function addWidget(type) {
-        let datastream = null;
         setWidgetselectors([...widgetselectors, type]);
-        // console.log(datastream);
+        // device?.addWidget(type)
+        console.log(device);
     }
 
     useEffect(() => {
         if (loading) {
             return;
         } else if (!user) navigate("/");
-    }, [user, loading]);
+        else device = location.state?.device;
+    }, [user, loading, location.state]);
 
     return (
         <div className="flex">
@@ -47,7 +48,7 @@ const DeviceView = () => {
                         <div className="w-[78%]  flex justify-start pl-6 py-7  flex-wrap">
                             {widgetselectors?.map((widgetselector, key) => {
                                 // console.log(widgetselector);
-                                return <Widget type={widgetselector} datastream={null} key={key} />;
+                                return <Widget type={widgetselector} datastream={datastream} setDatastream={setDatastream} />;
                             })}
                            
                         </div>

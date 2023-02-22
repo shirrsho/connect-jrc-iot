@@ -33,9 +33,10 @@ const createNewDevice = async (device) => {
   try {
     // path: must be collection, document, collection, document ...
     await addDoc(collection(db, "devices", device.user_id, "owns"), {
-      user_id: device.user_id,
-      name: device.name,
-      chip: device.chip,
+      user_id : device.getUserID(),
+      name : device.getName(),
+      chip : device.getChip(),
+      widgets : device.getWidgets(),
     });
     console.log("device added");
   } catch (err) {
