@@ -23,7 +23,7 @@ const Switch = ({ datastream, setDatastream }) => {
     if (!datastream) return;
     if (isOn) datastream.state = 1;
     else datastream.state = 0;
-    console.log(datastream);
+    // console.log(datastream);
   }, [isOn]);
 
   return (

@@ -12,7 +12,7 @@ export default function SetMessageBoxData({ isOpen, onClose, datastream, setData
       e.preventDefault();
       console.log(formData);
       setDatastream(formData)
-      onClose(datastream);
+      onClose();
     };
   
     // Conditional rendering to show/hide the modal form

@@ -9,7 +9,7 @@ import Widget from "../widget_management/Widget";
 const DeviceView = () => {
 
     const location = useLocation();
-    const device = location.state?.device;
+    let device = location.state?.device;
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
     const [widgetselectors, setWidgetselectors] = useState([]);
@@ -17,14 +17,16 @@ const DeviceView = () => {
 
     function addWidget(type) {
         setWidgetselectors([...widgetselectors, type]);
-        // console.log(datastream);
+        // device?.addWidget(type)
+        console.log(device);
     }
 
     useEffect(() => {
         if (loading) {
             return;
         } else if (!user) navigate("/");
-    }, [user, loading]);
+        else device = location.state?.device;
+    }, [user, loading, location.state]);
 
     return (
         <div className="flex">
