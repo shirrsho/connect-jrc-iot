@@ -27,6 +27,7 @@ const Switch = ({ datastream, show }) => {
   return (
     <>
       <div className=" w-[100%] ">
+         {/*start */}
         <div className="flex justify-between pt-4 w-[100%]">
           <h5 className="font-bold capitalize">name</h5>
           <span>
@@ -52,6 +53,7 @@ const Switch = ({ datastream, show }) => {
             </svg>
           </span>
         </div>
+           {/*middle */}
         <div className="flex justify-center">
           <div className="relative inline-block w-16 mr-2 pt-4 align-middle select-none transition duration-200 ease-in">
             <input
@@ -72,6 +74,7 @@ const Switch = ({ datastream, show }) => {
             ></label>
           </div>
         </div>
+           {/*end */}
         <div className="flex justify-between pt-4 w-[100%]">
           <h5 className="font-semibold capitalize">Pin</h5>
           <svg
@@ -89,9 +92,9 @@ const Switch = ({ datastream, show }) => {
             />
           </svg>
         </div>
-
+         {/*on condition */}
         {modal && (
-            <div className="fixed top-0 left-0 h-screen w-screen flex items-center  justify-center bg-gray-900 bg-opacity-75">
+            <div className="fixed top-0 left-0 h-screen w-screen flex items-center z-20 justify-center bg-gray-900 bg-opacity-75">
             <SetSwitchData
               
               onClose={Modal}

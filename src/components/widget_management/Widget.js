@@ -8,26 +8,26 @@ import "./widget-styles/default.css";
 export default function Widget({ type, datastream }) {
   if (type === "switch") {
     return (
-      <div className="w-[300px] bg-white h-[150px] px-8 mx-3">
-        <Switch datastream={datastream} show="true"/>
+      <div className="w-[280px] bg-white h-[150px] px-4 rounded-sm mx-2">
+        <Switch datastream={datastream} show="true" />
       </div>
     );
   } else if (type === "regulator") {
     return (
-      <div className="w-[300px] bg-white h-[150px]  px-8 mx-3">
-        <Regulator datastream={datastream} />
+      <div className="w-[280px] bg-white h-[150px]  px-4 rounded-sm mx-2">
+        <Regulator datastream={datastream} show="true" />
       </div>
     );
   } else if (type === "display") {
     return (
-      <div className="w-[300px] bg-white h-[150px]  px-8 mx-3">
-        <Display datastream={datastream} />
+      <div className="w-[280px] bg-white h-[150px]  px-4 rounded-sm mx-2">
+        <Display datastream={datastream} show="true" />
       </div>
     );
   } else if (type === "messagebox") {
     return (
-      <div className="w-[300px] bg-white h-[150px]  px-8 mx-3">
-        <MessageBox datastream={datastream} />
+      <div className="w-[280px] bg-white h-[150px]  px-4 rounded-sm mx-2">
+        <MessageBox datastream={datastream} show="true" />
       </div>
     );
   }
