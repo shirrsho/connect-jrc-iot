@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SetMessageBoxData from "../widget-forms/setMessageBoxData";
 
-const MessageBox = ({ datastream, show, setDatastream }) => {
-  const [modal, setModal] = useState(show);
+const MessageBox = ({ datastream, setDatastream }) => {
+  const [modal, setModal] = useState(false);
   const Modal = () => {
     if (modal) setModal(false);
-    if (!modal) setModal(true);
+    else if (!modal) setModal(true);
   };
   const [isOpen, setIsOpen] = useState(true);
   
@@ -39,6 +39,13 @@ const MessageBox = ({ datastream, show, setDatastream }) => {
   const handleFormClose = () => {
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    if (datastream) setModal(false)
+    else setModal(true)
+    // console.log(datastream);
+  }, []);
+
   // if(datastream==null) <SetSwitchData isOpen={isOpen} onClose={handleClose} datastream={datastream} />
 
   return (

@@ -2,11 +2,11 @@
     import SetRegulatorData from "../widget-forms/SetRegulatorData";
     import "../widget-styles/Regulator.css";
 
-    const Regulator = ({ datastream, show, setDatastream }) => {
-    const [modal, setModal] = useState(show);
+    const Regulator = ({ datastream, setDatastream }) => {
+    const [modal, setModal] = useState(false);
     const Modal = () => {
         if (modal) setModal(false);
-        if (!modal) setModal(true);
+        else if (!modal) setModal(true);
     };
 
     const [value, setValue] = useState(50);
@@ -28,8 +28,14 @@
     useEffect(() => {
         if (!datastream) return;
         datastream.state = value;
-        console.log(datastream);
+        // console.log(datastream);
     }, [value]);
+    
+    useEffect(() => {
+        if (datastream) setModal(false)
+        else setModal(true)
+        // console.log(datastream);
+      }, []);
 
     return (
         <div className="w-[100%] flex-col items-center">

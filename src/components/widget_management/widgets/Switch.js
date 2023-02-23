@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import SetSwitchData from "../widget-forms/SetSwitchData";
+import { updateRTDB } from "../functionalities";
 
-const Switch = ({ datastream, show, setDatastream }) => {
+const Switch = ({ datastream, setDatastream }) => {
 
   const [isOn, setIsOn] = useState(false);
-  const [modal, setModal] = useState(show);
+  const [modal, setModal] = useState(false);
   // if(!show) setDatastream(datastream)
   const Modal = () => {
     if(modal)setModal(false);
-    if(!modal) setModal(true);
+    else if(!modal) setModal(true);
   };
 
 
@@ -19,11 +20,15 @@ const Switch = ({ datastream, show, setDatastream }) => {
     // console.log(isOn);
   };
   useEffect(() => {
-    if (!datastream) return;
-    if(!show) setDatastream(datastream)
-    if (isOn) datastream.state = 1;
-    else datastream.state = 0;
+    if (datastream) setModal(false)
+    else setModal(true)
     // console.log(datastream);
+  }, []);
+  useEffect(() => {
+    if(!datastream) return;
+    if (isOn) setDatastream(...datastream,datastream.state=1)
+    else setDatastream(...datastream,datastream.state=1)
+    updateRTDB(datastream)
   }, [isOn]);
 
   return (

@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SetDisplayData from "../widget-forms/SetDisplayData";
 
-const Display = ({ datastream, show, setDatastream}) => {
+const Display = ({ datastream, setDatastream}) => {
   // const [isOn, setIsOn] = useState(false);
 
-  const [modal, setModal] = useState(show);
+  const [modal, setModal] = useState(false);
   const Modal = () => {
     if (modal) setModal(false);
-    if (!modal) setModal(true);
+    else if (!modal) setModal(true);
   };
   const message = "Hello + 20+ello "
   const [isOpen, setIsOpen] = useState(true);
@@ -19,6 +19,12 @@ const Display = ({ datastream, show, setDatastream}) => {
   const handleFormClose = () => {
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    if (datastream) setModal(false)
+    else setModal(true)
+    // console.log(datastream);
+  }, []);
   // if(datastream==null) <SetSwitchData isOpen={isOpen} onClose={handleClose} datastream={datastream} />
 
   return (

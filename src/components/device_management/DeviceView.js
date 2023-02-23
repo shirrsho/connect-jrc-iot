@@ -68,9 +68,9 @@ const DeviceView = () => {
                     <div className="bg-gray-200 flex  overflow-y-auto  opacity-85 ">
                         <div className="w-[78%]  flex justify-start pl-6 py-7  flex-wrap">
                             {widgetselectors?.map((widgetselector, key) => {
-                                console.log(widgetselector);
+                                // console.log(widgetselector);
                                 // setDatastream(Datastream(widgetselector))
-                                return <Widget type={widgetselector} datastream={Datastream(widgetselector)} setDatastream={setDatastream} key={key}/>;
+                                return <Widget type={widgetselector} datastream={null} setDatastream={setDatastream} key={key}/>;
                             })}
                            
                         </div>

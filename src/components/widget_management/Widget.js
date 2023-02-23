@@ -9,28 +9,28 @@ export default function Widget({ type, datastream, setDatastream }) {
   if (type === "switch") {
     return (
       <div className="w-[280px] bg-white h-[150px] px-4 rounded-sm mx-2">
-        <Switch datastream={datastream} show={false} setDatastream={setDatastream}/>
+        <Switch datastream={datastream} setDatastream={setDatastream}/>
      
       </div>
     );
   } else if (type === "regulator") {
     return (
       <div className="w-[280px] bg-white h-[150px]  px-4 rounded-sm mx-2">
-        <Regulator datastream={datastream} show={false} setDatastream={setDatastream}/>
+        <Regulator datastream={datastream} setDatastream={setDatastream}/>
     
       </div>
     );
   } else if (type === "display") {
     return (
       <div className="w-[280px] bg-white h-[150px]  px-4 rounded-sm mx-2">
-        <Display datastream={datastream} show={false} setDatastream={setDatastream} />
+        <Display datastream={datastream} setDatastream={setDatastream} />
     
       </div>
     );
   } else if (type === "messagebox") {
     return (
       <div className="w-[280px] bg-white h-[150px]  px-4 rounded-sm mx-2">
-        <MessageBox datastream={datastream} show={false} setDatastream={setDatastream}/>
+        <MessageBox datastream={datastream} setDatastream={setDatastream}/>
     
       </div>
     );

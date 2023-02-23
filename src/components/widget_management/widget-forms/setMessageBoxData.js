@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Datastream from "../Datastream";
 
 export default function SetMessageBoxData({ onClose, datastream, setDatastream }) {
-  const [formData, setFormData] = useState(datastream);
+  const [formData, setFormData] = useState(Datastream("messagebox"));
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -10,13 +10,13 @@ export default function SetMessageBoxData({ onClose, datastream, setDatastream }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    // console.log(formData);
     setDatastream(formData);
     onClose();
   };
   const handleSkip = (e) => {
     e.preventDefault();
-    console.log(formData);
+    // console.log(formData);
     setDatastream(datastream);
     onClose();
   };
