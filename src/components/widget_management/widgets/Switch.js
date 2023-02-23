@@ -4,9 +4,8 @@ import SetSwitchData from "../widget-forms/SetSwitchData";
 const Switch = ({ datastream, show, setDatastream }) => {
 
   const [isOn, setIsOn] = useState(false);
- 
   const [modal, setModal] = useState(show);
-
+  // if(!show) setDatastream(datastream)
   const Modal = () => {
     if(modal)setModal(false);
     if(!modal) setModal(true);
@@ -21,6 +20,7 @@ const Switch = ({ datastream, show, setDatastream }) => {
   };
   useEffect(() => {
     if (!datastream) return;
+    if(!show) setDatastream(datastream)
     if (isOn) datastream.state = 1;
     else datastream.state = 0;
     // console.log(datastream);
