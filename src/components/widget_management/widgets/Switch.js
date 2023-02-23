@@ -2,33 +2,38 @@ import React, { useEffect, useState } from "react";
 import SetSwitchData from "../widget-forms/SetSwitchData";
 import { updateRTDB } from "../functionalities";
 
-const Switch = ({ device_id, datastream, setDatastream }) => {
+const Switch = ({ device_id, datastream_parent }) => {
 
   const [isOn, setIsOn] = useState(false);
   const [modal, setModal] = useState(false);
+  const [datastream,setDatastream] = useState(datastream_parent);
   // if(!show) setDatastream(datastream)
-  const Modal = () => {
+  const Modal = (data) => {
     if(modal)setModal(false);
     else if(!modal) setModal(true);
+    setDatastream(data)
   };
 
-
-  
+  const init_datastream = (datastream) => {
+    console.log(datastream);
+    setDatastream(datastream)
+  }
 
   const handleToggle = (event) => {
-    setIsOn(event.target.checked);
-    // console.log(isOn);
+    setIsOn(!isOn);
   };
   useEffect(() => {
     if (datastream) setModal(false)
     else setModal(true)
     // console.log(datastream);
-  }, []);
+  }, [datastream]);
+
   useEffect(() => {
+    console.log(datastream);
     if(!datastream) return;
-    if (isOn) setDatastream(...datastream,datastream.state=1)
-    else setDatastream(...datastream,datastream.state=1)
-    updateRTDB(datastream)
+    if (isOn) setDatastream({...datastream,state:1})
+    else setDatastream({...datastream,state:0})
+    updateRTDB(device_id, datastream)
   }, [isOn]);
 
   return (
@@ -63,11 +68,11 @@ const Switch = ({ device_id, datastream, setDatastream }) => {
         </div>
            {/*middle */}
         <div className="flex justify-center">
-          <div onChange={handleToggle} className="relative inline-block w-16 mr-2 pt-4 align-middle select-none transition duration-200 ease-in">
+          <div className="relative inline-block w-16 mr-2 pt-4 align-middle select-none transition duration-200 ease-in">
             <input
               type="checkbox"
               checked={isOn}
-              
+              onChange={handleToggle}
               className={`toggle-checkbox absolute block w-11 h-11 rounded-full bg-white border-4 border-gray-500 appearance-none cursor-pointer ${
                 isOn ? " transition-transform duration-500 ease-in-out  right-0" : ""
               }`}
@@ -107,7 +112,7 @@ const Switch = ({ device_id, datastream, setDatastream }) => {
               
               onClose={Modal}
               datastream={datastream}
-              setDatastream={setDatastream}
+              setDatastream={init_datastream}
               
             />
           </div>

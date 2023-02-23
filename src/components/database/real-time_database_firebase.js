@@ -7,8 +7,9 @@ const db = getDatabase(app);
 
 function updateDatastream (device_id,datastream) {
     console.log("up");
-    set(ref(db, 'users/' + device_id), {
-        ...datastream
+    set(ref(db, device_id, datastream.type), {
+        pin:datastream.pin,
+        state:datastream.state
       });
 }
 

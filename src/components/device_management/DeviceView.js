@@ -70,7 +70,7 @@ const DeviceView = () => {
                             {widgetselectors?.map((widgetselector, key) => {
                                 // console.log(widgetselector);
                                 // setDatastream(Datastream(widgetselector))
-                                return <Widget device_id={device.getDeviceID()} type={widgetselector} datastream={null} setDatastream={setDatastream} key={key}/>;
+                                return <Widget device_id={device.getDeviceID()} type={widgetselector} datastream={null} key={key}/>;
                             })}
                            
                         </div>
