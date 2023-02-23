@@ -2,7 +2,7 @@
     import SetRegulatorData from "../widget-forms/SetRegulatorData";
     import "../widget-styles/Regulator.css";
 
-    const Regulator = ({ datastream, setDatastream }) => {
+    const Regulator = ({ device_id, datastream, setDatastream }) => {
     const [modal, setModal] = useState(false);
     const Modal = () => {
         if (modal) setModal(false);
@@ -74,7 +74,6 @@
             value={value}
             onChange={handleChange}
             className="flex items-center justify-center mt-1 mr-2 regulator-input w-full h-8 bg-gray-300 opacity-70 transition-opacity rounded-full appearance-none focus:outline-none"
-            id="regulator"
             style={{
               '--tw-thumb-bg': '#fff',
             }}

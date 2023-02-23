@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SetMessageBoxData from "../widget-forms/setMessageBoxData";
 
-const MessageBox = ({ datastream, setDatastream }) => {
+const MessageBox = ({ device_id, datastream, setDatastream }) => {
   const [modal, setModal] = useState(false);
   const Modal = () => {
     if (modal) setModal(false);

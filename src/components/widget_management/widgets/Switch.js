@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import SetSwitchData from "../widget-forms/SetSwitchData";
 import { updateRTDB } from "../functionalities";
 
-const Switch = ({ datastream, setDatastream }) => {
+const Switch = ({ device_id, datastream, setDatastream }) => {
 
   const [isOn, setIsOn] = useState(false);
   const [modal, setModal] = useState(false);
@@ -59,16 +59,15 @@ const Switch = ({ datastream, setDatastream }) => {
               />
             </svg>
           </span>
+          
         </div>
            {/*middle */}
         <div className="flex justify-center">
-          <div className="relative inline-block w-16 mr-2 pt-4 align-middle select-none transition duration-200 ease-in">
+          <div onChange={handleToggle} className="relative inline-block w-16 mr-2 pt-4 align-middle select-none transition duration-200 ease-in">
             <input
               type="checkbox"
-              name="toggle"
-              id="toggle"
               checked={isOn}
-              onChange={handleToggle}
+              
               className={`toggle-checkbox absolute block w-11 h-11 rounded-full bg-white border-4 border-gray-500 appearance-none cursor-pointer ${
                 isOn ? " transition-transform duration-500 ease-in-out  right-0" : ""
               }`}
@@ -82,6 +81,7 @@ const Switch = ({ datastream, setDatastream }) => {
           </div>
         </div>
            {/*end */}
+
         <div className="flex justify-between pt-4 w-[100%]">
           <h5 className="font-semibold capitalize">Pin</h5>
           <svg
@@ -99,6 +99,7 @@ const Switch = ({ datastream, setDatastream }) => {
             />
           </svg>
         </div>
+
          {/*on condition */}
         {modal && (
             <div className="fixed top-0 left-0 h-screen w-screen flex items-center z-20 justify-center bg-gray-900 bg-opacity-75">

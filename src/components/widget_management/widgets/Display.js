@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SetDisplayData from "../widget-forms/SetDisplayData";
 
-const Display = ({ datastream, setDatastream}) => {
+const Display = ({ device_id, datastream, setDatastream}) => {
   // const [isOn, setIsOn] = useState(false);
 
   const [modal, setModal] = useState(false);
