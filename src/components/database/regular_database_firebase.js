@@ -145,12 +145,33 @@ const createNewWidget = async (widget) => {
   return true;
 }
 
+// returns a 2d array of devices' id and information
+async function getWidgets(device_id) {
+  // let q = query(collection(db, "devices"), where("user_id", "==", user_id));
+  let widgets = [];
+  try {
+    // console.log(user_id);
+    let docSnaps = await getDocs(collection(db, "widgets", device_id, "owns"));
+    // console.log("get: "+devices);
+    docSnaps.forEach(doc => {
+      // Object obj = new Object(doc.id,doc.data())
+      widgets.push(doc.data())
+      // console.log(doc.id)
+    })
+    // console.log(devices);
+  } catch (err) {
+    alert(err.message)
+  }
+  return widgets
+}
+
 export {
   createNewUser,
   createNewDevice,
   createNewWidget,
   getDevice,
   getDevices,
+  getWidgets,
   editSpecificDevice,
   deleteSpecificDevice
 }

@@ -1,4 +1,4 @@
-import { editDevice, addNewWidget } from "./functionalities";
+import { editDevice, addNewWidget, getAllWidgets } from "./functionalities";
 
 class Device {
     constructor(device_id = "", user_id, name = "Give a Name", chip = "ESP32", widgets=[]) {
@@ -39,7 +39,9 @@ class Device {
         // console.log(this)
         editDevice(this.id, this.user_id, this)
     }
-
+    async fetchWidgets(){
+        return await getAllWidgets(this.getDeviceID())
+    }
     getCodeforHardware() {
 
     }

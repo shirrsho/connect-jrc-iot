@@ -4,7 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
 import { useLocation } from "react-router-dom";
-import { getADevice } from "./functionalities";
+import { getADevice, getAllWidgets } from "./functionalities";
 import WidgetView from "../widget_management/WidgetView";
 import Datastream from "../widget_management/Datastream";
 
@@ -16,30 +16,30 @@ const DeviceView = () => {
     const [user, loading, error] = useAuthState(auth);
     const [device, setDevice] = useState(null);
     const navigate = useNavigate();
+    const [widgets, setWidgets] = useState([]);
     const [widgetselectors, setWidgetselectors] = useState([]);
     const [datastream, setDatastream] = useState(null);
 
     function addWidget(type) {
         device.addWidget(type);
-        setWidgetselectors([...widgetselectors, type]);
+        init_widgets()
+        // setWidgetselectors([...widgetselectors, type]);
         // console.log(device);
     }
 
     async function init_device(){
         setDevice(await getADevice(user.uid,id))
-        
+        // init_widgets()
         // setWidgetselectors([...widgetselectors, ...device?.getWidgets()])
     }
-    // async function init_widgets(){
-    //     await init_device()
-    //     console.log(device);
-    //     setWidgetselectors([device?.getWidgets()])
-    // }
+    async function init_widgets(){
+        device?setWidgets([... await getAllWidgets(id)]):console.log("widget updating...");
+    }
 
     useEffect(()=>{
-        // console.log(device);
-        // console.log(device?.getWidgets());
         device?setWidgetselectors([...device?.getWidgets()]):console.log("device updating...");
+        init_widgets()
+        // device?setTimeout(()=>{ let wids = await device?.fetchWidgets();console.log("wids:"+wids); setTimeout(()=>{setWidgets([...wids])},1000)},1000):console.log("widgets updating...");
     },[device])
 
     useEffect(() => {
@@ -67,10 +67,10 @@ const DeviceView = () => {
                     </div>
                     <div className="bg-gray-200 flex  overflow-y-auto  opacity-85 ">
                         <div className="w-[78%]  flex justify-start pl-6 py-7  flex-wrap">
-                            {widgetselectors?.map((widgetselector, key) => {
+                            {widgets?.map((widgetselector, key) => {
                                 // console.log(widgetselector);
-                                console.log("up",key);
-                                return <WidgetView device_id={device.getDeviceID()} type={widgetselector} datastream={null} index={key}/>;
+                                {/* console.log("up",widgets); */}
+                                return <WidgetView device_id={device.getDeviceID()} type={widgetselector.type} datastream={null} index={key} key={key}/>;
                             })}
                            
                         </div>

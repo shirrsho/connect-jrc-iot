@@ -28,7 +28,7 @@ const Switch = ({ device_id, datastream_parent, index }) => {
   }, []);
 
   useEffect(() => {
-    console.log(datastream);
+    // console.log(datastream);
     if(!datastream) return;
     if (isOn) setDatastream({...datastream,state:1})
     else setDatastream({...datastream,state:0})

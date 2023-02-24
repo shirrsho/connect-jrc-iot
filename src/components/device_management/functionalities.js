@@ -3,6 +3,7 @@ import {
     createNewWidget,
     getDevice,
     getDevices,
+    getWidgets,
     editSpecificDevice,
     deleteSpecificDevice } from "../database/regular_database_firebase";
 
@@ -79,8 +80,21 @@ async function addNewWidget(device_id, user_id, type, index) {
     }
     return widget;
 }
+
+async function getAllWidgets(device_id) {
+    let widgets = await getWidgets(device_id)
+    // console.log(devices);
+    let widgetobjs = []
+    widgets.forEach(widget => { // device[0]=device_id, device[1]=stored info in database
+        let wid = new Widget(widget.device_id,widget.user_id, widget.type,widget.index,widget.position);
+        widgetobjs.push(wid)
+        // console.log(dev);
+    });
+    console.log(widgetobjs);
+    return widgetobjs
+}
 // async function updateDevice(device_id,device){
 
 // }
 
-export { addNewDevice, addNewWidget, editDevice, deleteDevice, getAllDevices, getADevice }
+export { addNewDevice, addNewWidget, editDevice, deleteDevice, getAllDevices, getADevice, getAllWidgets }
