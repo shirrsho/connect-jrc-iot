@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import SetDisplayData from "../widget-forms/SetDisplayData";
 
-const Display = ({ device_id, datastream, setDatastream}) => {
+const Display = ({ device_id, datastream_parent, index }) => {
   // const [isOn, setIsOn] = useState(false);
 
   const [modal, setModal] = useState(false);
+  const [datastream,setDatastream] = useState(datastream_parent);
+
   const Modal = () => {
     if (modal) setModal(false);
     else if (!modal) setModal(true);
@@ -12,6 +14,11 @@ const Display = ({ device_id, datastream, setDatastream}) => {
   const message = "Hello + 20+ello "
   const [isOpen, setIsOpen] = useState(true);
 
+  const init_datastream = (datastream) => {
+    console.log(datastream);
+    setDatastream(datastream)
+  }
+  
   const handleOpen = () => {
     setIsOpen(true);
   };
@@ -85,7 +92,7 @@ const Display = ({ device_id, datastream, setDatastream}) => {
           // isOpen={isOpen}
           onClose={Modal}
           datastream={datastream}
-          setDatastream={setDatastream}
+          setDatastream={init_datastream}
         />
         </div>
       )}

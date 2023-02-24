@@ -1,4 +1,4 @@
-import { editDevice } from "./functionalities";
+import { editDevice, addNewWidget } from "./functionalities";
 
 class Device {
     constructor(device_id = "", user_id, name = "Give a Name", chip = "ESP32", widgets=[]) {
@@ -32,9 +32,10 @@ class Device {
     setChip(chip) {
         this.chip = chip;
     }
-    addWidget(widget){
+    addWidget(type){
         console.log(this.widgets);
-        this.widgets = [...this.getWidgets(), widget];
+        addNewWidget(this.id, this.user_id, type, this.widgets.length)
+        this.widgets=[...this.getWidgets(),type]
         // console.log(this)
         editDevice(this.id, this.user_id, this)
     }

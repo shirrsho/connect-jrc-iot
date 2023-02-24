@@ -126,9 +126,29 @@ async function getDevice(user_id, device_id) {
   return device.data()
 }
 
+const createNewWidget = async (widget) => {
+  try {
+    // path: must be collection, document, collection, document ...
+    await addDoc(collection(db, "widgets", widget.getDeviceID(), "owns"), {
+      user_id : widget.getUserID(),
+      device_id : widget.getDeviceID(),
+      index : widget.getIndex(),
+      type : widget.getType(),
+      position : widget.getPosition()
+    });
+    console.log("widget added");
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+    return false;
+  }
+  return true;
+}
+
 export {
   createNewUser,
   createNewDevice,
+  createNewWidget,
   getDevice,
   getDevices,
   editSpecificDevice,

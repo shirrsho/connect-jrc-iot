@@ -1,38 +1,31 @@
-import React from "react";
-import Switch from "./widgets/Switch";
-import Regulator from "./widgets/Regulator";
-import Display from "./widgets/Display";
-import MessageBox from "./widgets/MessageBox";
-import "./widget-styles/default.css";
 
-export default function Widget({ device_id, type, datastream }) {
-  if (type === "switch") {
-    return (
-      <div className="w-[280px] bg-white h-[150px] px-4 rounded-sm mx-2">
-        <Switch device_id={device_id} datastream_parent={datastream}/>
-     
-      </div>
-    );
-  } else if (type === "regulator") {
-    return (
-      <div className="w-[280px] bg-white h-[150px]  px-4 rounded-sm mx-2">
-        <Regulator device_id={device_id} datastream_parent={datastream}/>
-    
-      </div>
-    );
-  } else if (type === "display") {
-    return (
-      <div className="w-[280px] bg-white h-[150px]  px-4 rounded-sm mx-2">
-        <Display device_id={device_id} datastream_parent={datastream}/>
-    
-      </div>
-    );
-  } else if (type === "messagebox") {
-    return (
-      <div className="w-[280px] bg-white h-[150px]  px-4 rounded-sm mx-2">
-        <MessageBox device_id={device_id} datastream_parent={datastream}/>
-    
-      </div>
-    );
-  }
+class Widget {
+    constructor(device_id, user_id, type, index, position="") {
+        this.device_id = device_id;
+        this.user_id = user_id
+        this.index = index;
+        this.type = type;
+        this.position = position;
+    }
+    getDeviceID() {
+        return this.device_id;
+    }
+    getUserID(){
+        return this.user_id;
+    }
+    getIndex() {
+        return this.index;
+    }
+    getType() {
+        return this.type;
+    }
+    getPosition(){
+        return this.position;
+    }
+    setPosition(position) {
+        this.name = position;
+    }
+
 }
+
+export default Widget;

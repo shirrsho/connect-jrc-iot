@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
 import { useLocation } from "react-router-dom";
 import { getADevice } from "./functionalities";
-import Widget from "../widget_management/Widget";
+import WidgetView from "../widget_management/WidgetView";
 import Datastream from "../widget_management/Datastream";
 
 const DeviceView = () => {
@@ -69,8 +69,8 @@ const DeviceView = () => {
                         <div className="w-[78%]  flex justify-start pl-6 py-7  flex-wrap">
                             {widgetselectors?.map((widgetselector, key) => {
                                 // console.log(widgetselector);
-                                // setDatastream(Datastream(widgetselector))
-                                return <Widget device_id={device.getDeviceID()} type={widgetselector} datastream={null} key={key}/>;
+                                console.log("up",key);
+                                return <WidgetView device_id={device.getDeviceID()} type={widgetselector} datastream={null} index={key}/>;
                             })}
                            
                         </div>

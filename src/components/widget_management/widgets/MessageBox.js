@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import SetMessageBoxData from "../widget-forms/setMessageBoxData";
 
-const MessageBox = ({ device_id, datastream, setDatastream }) => {
+const MessageBox = ({ device_id, datastream_parent, index }) => {
   const [modal, setModal] = useState(false);
+  const [datastream, setDatastream] = useState(datastream_parent)
+
   const Modal = () => {
     if (modal) setModal(false);
     else if (!modal) setModal(true);
@@ -19,6 +21,11 @@ const MessageBox = ({ device_id, datastream, setDatastream }) => {
 
   };
 
+  const init_datastream = (datastream) => {
+    console.log(datastream);
+    setDatastream(datastream)
+  }
+
   const handleDecrease = () => {
     setValue(value - 1);
   };
@@ -30,14 +37,6 @@ const MessageBox = ({ device_id, datastream, setDatastream }) => {
     }
     setValue(newValue);
 
-  };
-
-  const handleOpen = () => {
-    setIsOpen(true);
-  };
-
-  const handleFormClose = () => {
-    setIsOpen(false);
   };
 
   useEffect(() => {
@@ -118,7 +117,12 @@ const MessageBox = ({ device_id, datastream, setDatastream }) => {
       {/*on condition */}
       {modal && (
         <div className="fixed top-0 left-0 h-screen w-screen flex items-center z-20 justify-center bg-gray-900 bg-opacity-75">
-          <SetMessageBoxData onClose={Modal} datastream={datastream} setDatastream={setDatastream} />
+          <SetMessageBoxData
+              onClose={Modal}
+              datastream={datastream}
+              setDatastream={init_datastream}
+              
+           />
         </div>
       )}
     </div>

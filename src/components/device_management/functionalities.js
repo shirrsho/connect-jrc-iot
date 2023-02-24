@@ -1,11 +1,13 @@
 import { 
     createNewDevice,
+    createNewWidget,
     getDevice,
     getDevices,
     editSpecificDevice,
     deleteSpecificDevice } from "../database/regular_database_firebase";
 
 import Device from "./Device";
+import Widget from '../widget_management/Widget'
 
 // To add a new device to the database,
 // A device object should be sent to the addNew method
@@ -66,8 +68,19 @@ async function getADevice(user_id,device_id) {
     return dev;
 }
 
+
+async function addNewWidget(device_id, user_id, type, index) {
+    let widget = new Widget(device_id, user_id, type, index)
+    try {
+        await createNewWidget(widget)
+    } catch (err) {
+        alert(err.message)
+        return null;
+    }
+    return widget;
+}
 // async function updateDevice(device_id,device){
 
 // }
 
-export { addNewDevice, editDevice, deleteDevice, getAllDevices, getADevice }
+export { addNewDevice, addNewWidget, editDevice, deleteDevice, getAllDevices, getADevice }

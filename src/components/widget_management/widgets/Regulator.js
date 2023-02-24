@@ -1,25 +1,32 @@
     import React, { useEffect, useState } from "react";
+import { updateRTDB } from "../functionalities";
     import SetRegulatorData from "../widget-forms/SetRegulatorData";
     import "../widget-styles/Regulator.css";
 
-    const Regulator = ({ device_id, datastream, setDatastream }) => {
+    const Regulator = ({ device_id, datastream_parent, index }) => {
     const [modal, setModal] = useState(false);
-    const Modal = () => {
+    const [datastream,setDatastream] = useState(datastream_parent);
+    const Modal = (data) => {
         if (modal) setModal(false);
         else if (!modal) setModal(true);
+        setDatastream(data)
     };
 
-    const [value, setValue] = useState(50);
-    const [isOpen, setIsOpen] = useState(true);
+    const [value, setValue] = useState(datastream?datastream.state:50);
+    // const [isOpen, setIsOpen] = useState(true);
 
-    const handleOpen = () => {
-        setIsOpen(true);
-    };
+    // const handleOpen = () => {
+    //     setIsOpen(true);
+    // };
 
-    const handleFormClose = () => {
-        setIsOpen(false);
-    };
+    // const handleFormClose = () => {
+    //     setIsOpen(false);
+    // };
     // if(datastream==null) <SetSwitchData isOpen={isOpen} onClose={handleClose} datastream={datastream} />
+    const init_datastream = (datastream) => {
+        console.log(datastream);
+        setDatastream(datastream)
+      }
 
     const handleChange = (e) => {
         setValue(e.target.value);
@@ -27,8 +34,8 @@
 
     useEffect(() => {
         if (!datastream) return;
-        datastream.state = value;
-        // console.log(datastream);
+        setDatastream({...datastream,state:value})
+        updateRTDB(device_id,index,datastream)
     }, [value]);
     
     useEffect(() => {
@@ -103,7 +110,13 @@
 
         {modal && (
             <div className="fixed top-0 left-0 h-screen w-screen flex items-center z-20 justify-center bg-gray-900 bg-opacity-75">
-            <SetRegulatorData onClose={Modal} datastream={datastream} setDatastream={setDatastream}/>
+            <SetRegulatorData
+
+              onClose={Modal}
+              datastream={datastream}
+              setDatastream={init_datastream}
+
+              />
             </div>
         )}
         </div>
