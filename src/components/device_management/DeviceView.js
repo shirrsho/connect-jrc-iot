@@ -37,7 +37,7 @@ const DeviceView = () => {
     }
 
     useEffect(()=>{
-        device?setWidgetselectors([...device?.getWidgets()]):console.log("device updating...");
+        // device?setWidgetselectors([...device?.getWidgets()]):console.log("device updating...");
         init_widgets()
         // device?setTimeout(()=>{ let wids = await device?.fetchWidgets();console.log("wids:"+wids); setTimeout(()=>{setWidgets([...wids])},1000)},1000):console.log("widgets updating...");
     },[device])

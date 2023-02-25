@@ -38,7 +38,7 @@ const createNewDevice = async (device) => {
       user_id : device.getUserID(),
       name : device.getName(),
       chip : device.getChip(),
-      widgets : device.getWidgets(),
+      n_widgets : device.getN_Widgets()
     });
     console.log("device added");
   } catch (err) {
@@ -53,10 +53,9 @@ const editSpecificDevice = async (device_id,user_id,device) => {
   try {
     // path: must be collection, document, collection, document ...
     await updateDoc(doc(db, "devices", user_id, "owns",device_id), {
-      user_id : device.getUserID(),
       name : device.getName(),
       chip : device.getChip(),
-      widgets : device.getWidgets(),
+      n_widgets : device.getN_Widgets()
     });
     console.log("fields updated");
   } catch (err) {

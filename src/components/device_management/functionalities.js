@@ -49,7 +49,7 @@ async function getAllDevices(user_id) {
     // console.log(devices);
     let deviceobjs = []
     devices.forEach(device => { // device[0]=device_id, device[1]=stored info in database
-        let dev = new Device(device[0], device[1].user_id, device[1].name, device[1].chip, device[1].widgets);
+        let dev = new Device(device[0], device[1].user_id, device[1].name, device[1].chip, device[1].n_widgets);
         deviceobjs.push(dev)
         // console.log(dev);
     });
@@ -58,7 +58,7 @@ async function getAllDevices(user_id) {
 
 async function getADevice(user_id,device_id) {
     let device = await getDevice(user_id,device_id)
-    let dev = new Device(device_id, device.user_id, device.name, device.chip, device.widgets);
+    let dev = new Device(device_id, device.user_id, device.name, device.chip, device.n_widgets);
     // console.log(devices);
     // let deviceobj = []
     // devices.forEach(device => { // device[0]=device_id, device[1]=stored info in database
