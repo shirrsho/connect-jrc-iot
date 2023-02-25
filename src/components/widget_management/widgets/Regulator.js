@@ -3,13 +3,13 @@ import { updateRTDB } from "../functionalities";
     import SetRegulatorData from "../widget-forms/SetRegulatorData";
     import "../widget-styles/Regulator.css";
 
-    const Regulator = ({ device_id, datastream_parent, index }) => {
+    const Regulator = ({ device_id, widget, index }) => {
     const [modal, setModal] = useState(false);
-    const [datastream,setDatastream] = useState(datastream_parent);
+    const [datastream,setDatastream] = useState(widget.getDatastream());
     const Modal = (data) => {
         if (modal) setModal(false);
         else if (!modal) setModal(true);
-        setDatastream(data)
+        // setDatastream(data)
     };
 
     const [value, setValue] = useState(datastream?datastream.state:50);
@@ -26,6 +26,7 @@ import { updateRTDB } from "../functionalities";
     const init_datastream = (datastream) => {
         console.log(datastream);
         setDatastream(datastream)
+        widget.setDatastream(datastream);
       }
 
     const handleChange = (e) => {

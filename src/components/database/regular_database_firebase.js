@@ -134,7 +134,8 @@ const createNewWidget = async (widget) => {
       device_id : widget.getDeviceID(),
       index : widget.getIndex(),
       type : widget.getType(),
-      position : widget.getPosition()
+      position : widget.getPosition(),
+      datastream : widget.getDatastream()
     });
     console.log("widget added");
   } catch (err) {
@@ -147,7 +148,6 @@ const createNewWidget = async (widget) => {
 
 // returns a 2d array of devices' id and information
 async function getWidgets(device_id) {
-  // let q = query(collection(db, "devices"), where("user_id", "==", user_id));
   let widgets = [];
   try {
     // console.log(user_id);
@@ -155,7 +155,7 @@ async function getWidgets(device_id) {
     // console.log("get: "+devices);
     docSnaps.forEach(doc => {
       // Object obj = new Object(doc.id,doc.data())
-      widgets.push(doc.data())
+      widgets.push([doc.id, doc.data()])
       // console.log(doc.id)
     })
     // console.log(devices);
@@ -163,6 +163,22 @@ async function getWidgets(device_id) {
     alert(err.message)
   }
   return widgets
+}
+
+const editSpecificWidget = async (widget_id, device_id, widget) => {
+  try {
+    // path: must be collection, document, collection, document ...
+    await updateDoc(doc(db, "widgets", device_id, "owns",widget_id), {
+      position : widget.getPosition(),
+      datastream : widget.getDatastream()
+    });
+    console.log("widget updated");
+  } catch (err) {
+    // console.error(err);
+    alert(err.message);
+    return false;
+  }
+  return true;
 }
 
 export {
@@ -173,5 +189,6 @@ export {
   getDevices,
   getWidgets,
   editSpecificDevice,
+  editSpecificWidget,
   deleteSpecificDevice
 }

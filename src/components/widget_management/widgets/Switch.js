@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import SetSwitchData from "../widget-forms/SetSwitchData";
 import { updateRTDB } from "../functionalities";
 
-const Switch = ({ device_id, datastream_parent, index }) => {
+const Switch = ({ device_id, widget, index }) => {
  
   const [isOn, setIsOn] = useState(false);
   const [modal, setModal] = useState(false);
-  const [datastream,setDatastream] = useState(datastream_parent);
+  const [datastream,setDatastream] = useState(widget.datastream);
   // if(!show) setDatastream(datastream)
   const Modal = () => {
     if(modal)setModal(false);
@@ -16,6 +16,7 @@ const Switch = ({ device_id, datastream_parent, index }) => {
   const init_datastream = (datastream) => {
     console.log(datastream);
     setDatastream(datastream)
+    widget.setDatastream(datastream)
   }
 
   const handleToggle = (event) => {

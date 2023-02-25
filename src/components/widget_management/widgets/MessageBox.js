@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import SetMessageBoxData from "../widget-forms/setMessageBoxData";
 
-const MessageBox = ({ device_id, datastream_parent, index }) => {
+const MessageBox = ({ device_id, widget, index }) => {
   const [modal, setModal] = useState(false);
-  const [datastream, setDatastream] = useState(datastream_parent)
+  const [datastream, setDatastream] = useState(widget.getDatastream())
 
   const Modal = () => {
     if (modal) setModal(false);
@@ -24,6 +24,7 @@ const MessageBox = ({ device_id, datastream_parent, index }) => {
   const init_datastream = (datastream) => {
     console.log(datastream);
     setDatastream(datastream)
+    widget.setDatastream(datastream)
   }
 
   const handleDecrease = () => {

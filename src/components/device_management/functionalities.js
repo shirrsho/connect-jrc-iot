@@ -69,9 +69,9 @@ async function getADevice(user_id,device_id) {
     return dev;
 }
 
-
+// widget_id="", device_id, user_id, type, index, position="", datastream=null
 async function addNewWidget(device_id, user_id, type, index) {
-    let widget = new Widget(device_id, user_id, type, index)
+    let widget = new Widget("",device_id, user_id, type, index, "",null)
     try {
         await createNewWidget(widget)
     } catch (err) {
@@ -83,14 +83,14 @@ async function addNewWidget(device_id, user_id, type, index) {
 
 async function getAllWidgets(device_id) {
     let widgets = await getWidgets(device_id)
-    // console.log(devices);
+    // console.log(widgets);
     let widgetobjs = []
-    widgets.forEach(widget => { // device[0]=device_id, device[1]=stored info in database
-        let wid = new Widget(widget.device_id,widget.user_id, widget.type,widget.index,widget.position);
+    widgets.forEach(widget => { // widget[0]=widget_id, widget[1]=stored info in database
+        let wid = new Widget(widget[0],widget[1].device_id,widget[1].user_id, widget[1].type,widget[1].index,widget[1].position,widget[1].datastream);
         widgetobjs.push(wid)
-        // console.log(dev);
+        console.log(wid);
     });
-    console.log(widgetobjs);
+    // console.log(widgetobjs);
     return widgetobjs
 }
 // async function updateDevice(device_id,device){

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import SetDisplayData from "../widget-forms/SetDisplayData";
 
-const Display = ({ device_id, datastream_parent, index }) => {
+const Display = ({ device_id, widget, index }) => {
   // const [isOn, setIsOn] = useState(false);
 
   const [modal, setModal] = useState(false);
-  const [datastream,setDatastream] = useState(datastream_parent);
+  const [datastream,setDatastream] = useState(widget.getDatastream());
 
   const Modal = () => {
     if (modal) setModal(false);
@@ -17,6 +17,7 @@ const Display = ({ device_id, datastream_parent, index }) => {
   const init_datastream = (datastream) => {
     console.log(datastream);
     setDatastream(datastream)
+    widget.setDatastream(datastream)
   }
   
   const handleOpen = () => {
