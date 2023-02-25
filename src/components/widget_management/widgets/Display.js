@@ -6,12 +6,12 @@ const Display = ({ device_id, widget, index }) => {
 
   const [modal, setModal] = useState(false);
   const [datastream,setDatastream] = useState(widget.getDatastream());
-
+  const [message, setMessage] = useState()
   const Modal = () => {
     if (modal) setModal(false);
     else if (!modal) setModal(true);
   };
-  const message = "Hello + 20+ello "
+  
   const [isOpen, setIsOpen] = useState(true);
 
   const init_datastream = (datastream) => {
@@ -19,14 +19,6 @@ const Display = ({ device_id, widget, index }) => {
     setDatastream(datastream)
     widget.setDatastream(datastream)
   }
-  
-  const handleOpen = () => {
-    setIsOpen(true);
-  };
-
-  const handleFormClose = () => {
-    setIsOpen(false);
-  };
 
   useEffect(() => {
     if (datastream) setModal(false)
@@ -69,7 +61,7 @@ const Display = ({ device_id, widget, index }) => {
       </div>
       {/*end */}
       <div className="flex justify-between pt-4 w-[100%]">
-        <h5 className="font-semibold capitalize">Pin</h5>
+        <h5 className="font-semibold capitalize">Pin: {widget.getDatastream()?.pin}</h5>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

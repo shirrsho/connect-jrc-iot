@@ -99,7 +99,7 @@ const MessageBox = ({ device_id, widget, index }) => {
     </div>
       {/*end */}
       <div className="flex justify-between pt-3 w-[100%]">
-        <h5 className="font-semibold capitalize">Pin</h5>
+        <h5 className="font-semibold capitalize">Pin: {widget.getDatastream()?.pin}</h5>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

@@ -36,7 +36,7 @@ import { updateRTDB } from "../functionalities";
     useEffect(() => {
         if (!datastream) return;
         setDatastream({...datastream,state:value})
-        updateRTDB(device_id,index,datastream)
+        updateRTDB(device_id,index,datastream.pin,value)
     }, [value]);
     
     useEffect(() => {
@@ -92,7 +92,7 @@ import { updateRTDB } from "../functionalities";
         </div>
         {/*end */}
         <div className="flex justify-between pt-4 w-[100%]">
-            <h5 className="font-semibold capitalize">Pin</h5>
+            <h5 className="font-semibold capitalize">Pin: {widget.getDatastream()?.pin}</h5>
             <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

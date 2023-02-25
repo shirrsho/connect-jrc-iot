@@ -31,9 +31,11 @@ const Switch = ({ device_id, widget, index }) => {
   useEffect(() => {
     // console.log(datastream);
     if(!datastream) return;
-    if (isOn) setDatastream({...datastream,state:1})
-    else setDatastream({...datastream,state:0})
-    updateRTDB(device_id, index, datastream)
+    if(isOn) updateRTDB(device_id, index, datastream.pin, 1)
+    else updateRTDB(device_id, index, datastream.pin, 0)
+    // if (isOn) setDatastream({...datastream,state:1})
+    // else setDatastream({...datastream,state:0})
+    // updateRTDB(device_id, index, datastream)
   }, [isOn]);
 
   return (
@@ -88,7 +90,7 @@ const Switch = ({ device_id, widget, index }) => {
            {/*end */}
 
         <div className="flex justify-between pt-4 w-[100%]">
-          <h5 className="font-semibold capitalize">Pin</h5>
+          <h5 className="font-semibold capitalize">Pin: {widget.getDatastream()?.pin}</h5>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
