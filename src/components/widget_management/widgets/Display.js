@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { receieveRTDB } from "../functionalities";
 import SetDisplayData from "../widget-forms/SetDisplayData";
 
 const Display = ({ device_id, widget, index }) => {
@@ -6,7 +7,9 @@ const Display = ({ device_id, widget, index }) => {
 
   const [modal, setModal] = useState(false);
   const [datastream,setDatastream] = useState(widget.getDatastream());
-  const [message, setMessage] = useState()
+  const [message, setMessage] = useState("")
+  const pin = widget.datastream?.pin
+
   const Modal = () => {
     if (modal) setModal(false);
     else if (!modal) setModal(true);
@@ -19,6 +22,15 @@ const Display = ({ device_id, widget, index }) => {
     setDatastream(datastream)
     widget.setDatastream(datastream)
   }
+
+  function updateMessage(msg){
+    setMessage(msg)
+  }
+  
+  useEffect(() => {
+    if(!widget.datastream) return
+    receieveRTDB(device_id, index, pin, message, updateMessage);
+  }, [datastream]);
 
   useEffect(() => {
     if (datastream) setModal(false)

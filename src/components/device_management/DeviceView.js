@@ -20,8 +20,8 @@ const DeviceView = () => {
     const [widgetselectors, setWidgetselectors] = useState([]);
     const [datastream, setDatastream] = useState(null);
 
-    function addWidget(type) {
-        device.addWidget(type);
+    async function addWidget(type) {
+        await device.addWidget(type);
         init_widgets()
         // setWidgetselectors([...widgetselectors, type]);
         // console.log(device);
@@ -33,7 +33,7 @@ const DeviceView = () => {
         // setWidgetselectors([...widgetselectors, ...device?.getWidgets()])
     }
     async function init_widgets(){
-        device?setWidgets([... await getAllWidgets(id)]):console.log("widget updating...");
+        device?setWidgets([... await device.fetchWidgets(id)]):console.log("widget updating...");
     }
 
     useEffect(()=>{

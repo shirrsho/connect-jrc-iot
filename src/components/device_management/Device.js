@@ -47,7 +47,9 @@ class Device {
         editDevice(this.id, this.user_id, this)
     }
     async fetchWidgets(){
-        return await getAllWidgets(this.getDeviceID())
+        let wids = await getAllWidgets(this.getDeviceID())
+        this.n_widgets = wids.length
+        return wids
     }
     getCodeforHardware() {
 

@@ -6,7 +6,8 @@ const Switch = ({ device_id, widget, index }) => {
  
   const [isOn, setIsOn] = useState(false);
   const [modal, setModal] = useState(false);
-  const [datastream,setDatastream] = useState(widget.datastream);
+  // const [datastream,setDatastream] = useState(widget.datastream);
+  const pin = widget.datastream?.pin
   // if(!show) setDatastream(datastream)
   const Modal = () => {
     if(modal)setModal(false);
@@ -14,8 +15,8 @@ const Switch = ({ device_id, widget, index }) => {
   };
 
   const init_datastream = (datastream) => {
-    console.log(datastream);
-    setDatastream(datastream)
+    // console.log(datastream);
+    // setDatastream(datastream)
     widget.setDatastream(datastream)
   }
 
@@ -23,16 +24,16 @@ const Switch = ({ device_id, widget, index }) => {
     setIsOn(!isOn);
   };
   useEffect(() => {
-    if (datastream) setModal(false)
+    if (widget.datastream) setModal(false)
     else setModal(true)
     // console.log(datastream);
   }, []);
 
   useEffect(() => {
     // console.log(datastream);
-    if(!datastream) return;
-    if(isOn) updateRTDB(device_id, index, datastream.pin, 1)
-    else updateRTDB(device_id, index, datastream.pin, 0)
+    if(!widget.datastream) return;
+    if(isOn) updateRTDB(device_id, index, pin, 1)
+    else updateRTDB(device_id, index, pin, 0)
     // if (isOn) setDatastream({...datastream,state:1})
     // else setDatastream({...datastream,state:0})
     // updateRTDB(device_id, index, datastream)
@@ -113,7 +114,7 @@ const Switch = ({ device_id, widget, index }) => {
             <SetSwitchData
               
               onClose={Modal}
-              datastream={datastream}
+              datastream={widget.datastream}
               setDatastream={init_datastream}
               
             />
