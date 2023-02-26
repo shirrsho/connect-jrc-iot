@@ -1,4 +1,4 @@
-import { editDevice, addNewWidget, getAllWidgets } from "./functionalities";
+import { editDevice, addNewWidget, getAllWidgets, deleteDevice, deleteWidget } from "./functionalities";
 
 class Device {
     constructor(device_id = "", user_id, name = "Give a Name", chip = "ESP32", n_widgets=0) {
@@ -38,13 +38,25 @@ class Device {
     setChip(chip) {
         this.chip = chip;
     }
-    addWidget(type){
+    async addWidget(type){
         // console.log(this.widgets);
-        addNewWidget(this.getDeviceID(), this.getUserID(), type, this.getN_Widgets())
-        this.incN_Widgets()
+        if(await addNewWidget(this.getDeviceID(), this.getUserID(), type, this.getN_Widgets()))
+            this.incN_Widgets()
+        else return false;
         // this.widgets=[...this.getWidgets(),type]
         // console.log(this)
         editDevice(this.id, this.user_id, this)
+        return true;
+    }
+    async removeWidget(widget_id){
+        // console.log(this.widgets);
+        if(await deleteWidget(widget_id,this.getDeviceID())){
+            this.decN_Widgets()
+        } else return false;
+        // this.widgets=[...this.getWidgets(),type]
+        // console.log(this)
+        editDevice(this.id, this.user_id, this)
+        return true
     }
     async fetchWidgets(){
         let wids = await getAllWidgets(this.getDeviceID())

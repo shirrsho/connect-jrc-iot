@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SetMessageBoxData from "../widget-forms/setMessageBoxData";
 
-const MessageBox = ({ device_id, widget, index }) => {
+const MessageBox = ({ device_id, widget, index, delete_widget }) => {
   const [modal, setModal] = useState(false);
   const [datastream, setDatastream] = useState(widget.getDatastream())
 
@@ -106,7 +106,8 @@ const MessageBox = ({ device_id, widget, index }) => {
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
-          className="w-6 h-6 text-red-600"
+          className="w-6 h-6 text-red-600 cursor-pointer"
+          onClick={()=>delete_widget(widget.widget_id)}
         >
           <path
             strokeLinecap="round"

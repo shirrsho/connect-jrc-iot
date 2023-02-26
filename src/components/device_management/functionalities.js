@@ -5,7 +5,8 @@ import {
     getDevices,
     getWidgets,
     editSpecificDevice,
-    deleteSpecificDevice } from "../database/regular_database_firebase";
+    deleteSpecificDevice, 
+    deleteSpecificWidget} from "../database/regular_database_firebase";
 
 import Device from "./Device";
 import Widget from '../widget_management/Widget'
@@ -93,8 +94,21 @@ async function getAllWidgets(device_id) {
     // console.log(widgetobjs);
     return widgetobjs
 }
+
+async function deleteWidget(widget_id,device_id) {
+    try {
+        // console.log("in delete");
+        await deleteSpecificWidget(widget_id,device_id)
+    } catch (err) {
+        alert(err.message)
+        return false;
+    }
+    return true;
+}
+
+
 // async function updateDevice(device_id,device){
 
 // }
 
-export { addNewDevice, addNewWidget, editDevice, deleteDevice, getAllDevices, getADevice, getAllWidgets }
+export { addNewDevice, addNewWidget, editDevice, deleteDevice, getAllDevices, getADevice, getAllWidgets, deleteWidget }

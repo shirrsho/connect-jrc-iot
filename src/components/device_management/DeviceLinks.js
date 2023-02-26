@@ -46,7 +46,7 @@ function DeviceLinks({ devicelist, setDevicelist, user_id }) {
                             <li className="w-[16%]">{deviceinfo.name}</li>
                             <li className="w-[16%]">JRC Board</li>
                             <li className="w-[16%]">{deviceinfo.chip}</li>
-                            <li className="w-[16%]">5</li>
+                            <li className="w-[16%]">{deviceinfo.n_widgets}</li>
                             <li className="w-[16%]">Offline</li>
                             <li className="w-[12%]">05/02/2023</li>
                         </ul>

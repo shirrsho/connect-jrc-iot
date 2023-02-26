@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { receieveRTDB } from "../functionalities";
 import SetDisplayData from "../widget-forms/SetDisplayData";
 
-const Display = ({ device_id, widget, index }) => {
+const Display = ({ device_id, widget, index, delete_widget }) => {
   // const [isOn, setIsOn] = useState(false);
 
   const [modal, setModal] = useState(false);
@@ -80,7 +80,8 @@ const Display = ({ device_id, widget, index }) => {
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
-          className="w-6 h-6 text-red-600"
+          className="w-6 h-6 text-red-600 cursor-pointer"
+          onClick={()=>delete_widget(widget.widget_id)}
         >
           <path
             strokeLinecap="round"

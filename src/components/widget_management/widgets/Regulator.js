@@ -3,7 +3,7 @@ import { updateRTDB } from "../functionalities";
     import SetRegulatorData from "../widget-forms/SetRegulatorData";
     import "../widget-styles/Regulator.css";
 
-    const Regulator = ({ device_id, widget, index }) => {
+    const Regulator = ({ device_id, widget, index, delete_widget }) => {
     const [modal, setModal] = useState(false);
     const [datastream,setDatastream] = useState(widget.getDatastream());
     const Modal = (data) => {
@@ -87,7 +87,7 @@ import { updateRTDB } from "../functionalities";
             }}
           />
           
-            <label className="text-lg ">{value}%</label>
+            <input className="text-lg w-[15%]" value={value} onChange={(e)=>setValue(e.target.value)}/>%
             </div>
         </div>
         {/*end */}
@@ -99,7 +99,8 @@ import { updateRTDB } from "../functionalities";
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            className="w-6 h-6 text-red-600"
+            className="w-6 h-6 text-red-600 cursor-pointer"
+            onClick={()=>delete_widget(widget.widget_id)}
             >
             <path
                 strokeLinecap="round"

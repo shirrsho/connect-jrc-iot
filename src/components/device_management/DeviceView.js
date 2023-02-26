@@ -4,7 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
 import { useLocation } from "react-router-dom";
-import { getADevice, getAllWidgets } from "./functionalities";
+import { deleteWidget, getADevice, getAllWidgets } from "./functionalities";
 import WidgetView from "../widget_management/WidgetView";
 import Datastream from "../widget_management/Datastream";
 
@@ -21,10 +21,18 @@ const DeviceView = () => {
     const [datastream, setDatastream] = useState(null);
 
     async function addWidget(type) {
-        await device.addWidget(type);
-        init_widgets()
+        if(await device.addWidget(type))
+            init_widgets()
+        else alert("widget adding failed")
         // setWidgetselectors([...widgetselectors, type]);
         // console.log(device);
+    }
+    async function delete_widget(widget_id){
+        if(await device.removeWidget(widget_id)){
+            setWidgets(widgets.filter(item => item.widget_id !== widget_id))
+            // setShowingDevices(showingdevices.filter(item => item.id !== device_id))
+        }
+        else alert("widget deletion failed")
     }
 
     async function init_device(){
@@ -70,7 +78,7 @@ const DeviceView = () => {
                             {widgets?.map((widgetselector, key) => {
                                 // console.log(widgetselector);
                                 {/* console.log("up",widgets); */}
-                                return <WidgetView device_id={device.getDeviceID()} widget={widgetselector} index={key} key={key}/>;
+                                return <WidgetView device_id={device.getDeviceID()} widget={widgetselector} index={widgetselector.widget_id} delete_widget={delete_widget} key={key}/>;
                             })}
                            
                         </div>

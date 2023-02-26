@@ -180,6 +180,28 @@ const editSpecificWidget = async (widget_id, device_id, widget) => {
   return true;
 }
 
+const deleteSpecificWidget = async (widget_id, device_id) => {
+  try {
+    // path: must be collection, document, collection, document ...
+    await updateDoc(doc(db, "widgets", device_id, "owns",widget_id), {
+      user_id : deleteField(),
+      device_id : deleteField(),
+      index : deleteField(),
+      type : deleteField(),
+      position : deleteField(),
+      datastream : deleteField()
+    });
+    console.log("fields deleted");
+    await deleteDoc(doc(db, "widgets", device_id, "owns",widget_id));
+    console.log("widget deleted");
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+    return false;
+  }
+  return true;
+}
+
 export {
   createNewUser,
   createNewDevice,
@@ -189,5 +211,6 @@ export {
   getWidgets,
   editSpecificDevice,
   editSpecificWidget,
-  deleteSpecificDevice
+  deleteSpecificDevice,
+  deleteSpecificWidget
 }

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import SetSwitchData from "../widget-forms/SetSwitchData";
 import { updateRTDB } from "../functionalities";
+import { deleteWidget } from "../../device_management/functionalities";
 
-const Switch = ({ device_id, widget, index }) => {
+const Switch = ({ device_id, widget, index, delete_widget }) => {
  
   const [isOn, setIsOn] = useState(false);
   const [modal, setModal] = useState(false);
@@ -23,6 +24,7 @@ const Switch = ({ device_id, widget, index }) => {
   const handleToggle = (event) => {
     setIsOn(!isOn);
   };
+
   useEffect(() => {
     if (widget.datastream) setModal(false)
     else setModal(true)
@@ -98,7 +100,8 @@ const Switch = ({ device_id, widget, index }) => {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
-            className="w-6 h-6 text-red-600"
+            className="w-6 h-6 text-red-600 cursor-pointer"
+            onClick={()=>delete_widget(widget.widget_id)}
           >
             <path
               strokeLinecap="round"
