@@ -3,7 +3,7 @@ import SetSwitchData from "../widget-forms/SetSwitchData";
 import { updateRTDB } from "../functionalities";
 import { deleteWidget } from "../../device_management/functionalities";
 
-const Switch = ({ device_id, widget, index, delete_widget }) => {
+const Switch = ({ device_id, widget, delete_widget }) => {
  
   const [isOn, setIsOn] = useState(false);
   const [modal, setModal] = useState(false);
@@ -25,17 +25,17 @@ const Switch = ({ device_id, widget, index, delete_widget }) => {
     setIsOn(!isOn);
   };
 
-  useEffect(() => {
-    if (widget.datastream) setModal(false)
-    else setModal(true)
-    // console.log(datastream);
-  }, []);
+  // useEffect(() => {
+  //   if (widget.datastream) setModal(false)
+  //   else setModal(true)
+  //   // console.log(datastream);
+  // }, []);
 
   useEffect(() => {
     // console.log(datastream);
     if(!widget.datastream) return;
-    if(isOn) updateRTDB(device_id, index, pin, 1)
-    else updateRTDB(device_id, index, pin, 0)
+    if(isOn) updateRTDB(device_id, widget.datastream.pin, 1)
+    else updateRTDB(device_id, widget.datastream.pin, 0)
     // if (isOn) setDatastream({...datastream,state:1})
     // else setDatastream({...datastream,state:0})
     // updateRTDB(device_id, index, datastream)

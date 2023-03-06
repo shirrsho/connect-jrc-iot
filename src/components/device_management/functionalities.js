@@ -10,6 +10,7 @@ import {
 
 import Device from "./Device";
 import Widget from '../widget_management/Widget'
+import Datastream from "../widget_management/Datastream";
 
 // To add a new device to the database,
 // A device object should be sent to the addNew method
@@ -72,7 +73,7 @@ async function getADevice(user_id,device_id) {
 
 // widget_id="", device_id, user_id, type, index, position="", datastream=null
 async function addNewWidget(device_id, user_id, type, index) {
-    let widget = new Widget("",device_id, user_id, type, index, "",null)
+    let widget = new Widget("",device_id, user_id, type, index, "",Datastream(type))
     try {
         await createNewWidget(widget)
     } catch (err) {
@@ -89,7 +90,7 @@ async function getAllWidgets(device_id) {
     widgets.forEach(widget => { // widget[0]=widget_id, widget[1]=stored info in database
         let wid = new Widget(widget[0],widget[1].device_id,widget[1].user_id, widget[1].type,widget[1].index,widget[1].position,widget[1].datastream);
         widgetobjs.push(wid)
-        console.log(wid);
+        // console.log(wid);
     });
     // console.log(widgetobjs);
     return widgetobjs

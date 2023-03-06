@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { receieveRTDB } from "../functionalities";
 import SetDisplayData from "../widget-forms/SetDisplayData";
 
-const Display = ({ device_id, widget, index, delete_widget }) => {
+const Display = ({ device_id, widget, delete_widget }) => {
   // const [isOn, setIsOn] = useState(false);
 
   const [modal, setModal] = useState(false);
@@ -29,14 +29,14 @@ const Display = ({ device_id, widget, index, delete_widget }) => {
   
   useEffect(() => {
     if(!widget.datastream) return
-    receieveRTDB(device_id, index, pin, message, updateMessage);
+    receieveRTDB(device_id, widget.datastream.pin, message, updateMessage);
   }, [datastream]);
 
-  useEffect(() => {
-    if (datastream) setModal(false)
-    else setModal(true)
-    // console.log(datastream);
-  }, []);
+  // useEffect(() => {
+  //   if (datastream) setModal(false)
+  //   else setModal(true)
+  //   // console.log(datastream);
+  // }, []);
   // if(datastream==null) <SetSwitchData isOpen={isOpen} onClose={handleClose} datastream={datastream} />
 
   return (

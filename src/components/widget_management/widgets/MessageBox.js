@@ -40,11 +40,11 @@ const MessageBox = ({ device_id, widget, index, delete_widget }) => {
 
   };
 
-  useEffect(() => {
-    if (datastream) setModal(false)
-    else setModal(true)
-    // console.log(datastream);
-  }, []);
+  // useEffect(() => {
+  //   if (datastream) setModal(false)
+  //   else setModal(true)
+  //   // console.log(datastream);
+  // }, []);
 
   // if(datastream==null) <SetSwitchData isOpen={isOpen} onClose={handleClose} datastream={datastream} />
 
