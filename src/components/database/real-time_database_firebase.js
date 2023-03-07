@@ -5,8 +5,9 @@ import { app } from "./database_firebase";
 // Initialize Realtime Database and get a reference to the service
 const db = getDatabase(app);
 
-function updateDatastream (device_id,pin,state) {
+function updateDatastream (device_id,pin,datatype,state) {
     set(ref(db, device_id +'/'+ pin), {
+        datatype:datatype,
         state:state
       });
 }

@@ -36,7 +36,7 @@ import { updateRTDB } from "../functionalities";
     useEffect(() => {
         if (!datastream) return;
         setDatastream({...datastream,state:value})
-        updateRTDB(device_id,widget.datastream.pin,value)
+        updateRTDB(device_id,widget.datastream.pin,widget.datastream.datatype,value)
     }, [value]);
     
     // useEffect(() => {

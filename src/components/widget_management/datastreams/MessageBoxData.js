@@ -1,7 +1,8 @@
 const MessageBoxData = {
   widget_type:"messagebox",
   pin: -1,
-  pinMode: "output",
+  mode: "output",
+  datatype:"string",
   signal: "digital",
   state: ""
 }

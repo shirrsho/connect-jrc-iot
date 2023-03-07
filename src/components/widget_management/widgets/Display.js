@@ -29,7 +29,7 @@ const Display = ({ device_id, widget, delete_widget }) => {
   
   useEffect(() => {
     if(!widget.datastream) return
-    receieveRTDB(device_id, widget.datastream.pin, message, updateMessage);
+    receieveRTDB(device_id, widget.datastream.pin, widget.datastream.datatype, message, updateMessage);
   }, [datastream]);
 
   // useEffect(() => {

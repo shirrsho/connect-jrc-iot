@@ -35,8 +35,8 @@ const Switch = ({ device_id, widget, delete_widget }) => {
   useEffect(() => {
     // console.log(datastream);
     if(!widget.datastream) return;
-    if(isOn) updateRTDB(device_id, widget.datastream.pin, 1)
-    else updateRTDB(device_id, widget.datastream.pin, 0)
+    if(isOn) updateRTDB(device_id, widget.datastream.pin, widget.datastream.datatype, 1)
+    else updateRTDB(device_id, widget.datastream.pin, widget.datastream.datatype, 0)
     // if (isOn) setDatastream({...datastream,state:1})
     // else setDatastream({...datastream,state:0})
     // updateRTDB(device_id, index, datastream)

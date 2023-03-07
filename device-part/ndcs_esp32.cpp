@@ -13,7 +13,7 @@
  #define FIREBASE_HOST "your_project_id.firebaseio.com"
  #define API_KEY "AIzaSyBKK46Pt3QXzfecY-g10NlxYOTAZ_zXE5k"
  #define RTDBURL "https://connect-jrc-iot-default-rtdb.asia-southeast1.firebasedatabase.app/"
- // #define DEVICE_ID ""
+ // #define DEVICE_ID ""  
 
  // Define a Firebase data object.
  FirebaseData firebaseData;
@@ -31,33 +31,12 @@
    Serial.println(data.stringData());
  }
 
- void begin() {
-   if (Firebase.ready() && signupOK) { // && (millis() - sendDataPrevMillis > 15000 || sendDataPrevMillis == 0)) {
-       sendDataPrevMillis = millis();
-       if (Firebase.RTDB.getInt(&firebaseData, "/hpp3oZKQUVB3iqOTDFi5/XXOfKLv5rdnI7tSbyDhH/state")) {
-         // if (firebaseData.dataType() == "int") {
-           intValue = firebaseData.intData();
-           digitalWrite(ledpin, intValue);
-           // Serial.print(firebaseData.stringData());
-         // }
-       }
-       else {
-         Serial.println(firebaseData.errorReason());
-       }
-     }
- }
+ // Firebase
 
- void wificonnection_init() {
-   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-   while (WiFi.status() != WL_CONNECTED) {
-     delay(1000);
-     Serial.println("Connecting to Wi-Fi...");
-   }
- }
-
- void firebase_init() {
+void firebase_init() {
    config.api_key = API_KEY;
    config.database_url = RTDBURL;
+   
    // Enable WiFi reconnection
    Firebase.reconnectWiFi(true);
 
@@ -72,4 +51,35 @@
 
    Firebase.begin(&config, &auth);
    Firebase.reconnectWiFi(true);
+ }
+
+
+// Wifi Module
+
+void wificonnection_init() {
+   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+   while (WiFi.status() != WL_CONNECTED) {
+     delay(1000);
+     Serial.println("Connecting to Wi-Fi...");
+   }
+ }
+
+
+ void NDCS::begin() {
+   wificonnection_init();
+   firebase_init();
+ }
+
+ void NDCS::loop() {
+   if (Firebase.ready() && signupOK) {
+       sendDataPrevMillis = millis();
+       if (Firebase.RTDB.getJSON(&firebaseData, "/hpp3oZKQUVB3iqOTDFi5/")) {
+         Serial.println(firebaseData.jsonString());
+          // intValue = firebaseData.intData();
+          // digitalWrite(ledpin, intValue);
+       }
+       else {
+         Serial.println(firebaseData.errorReason());
+       }
+     }
  }
