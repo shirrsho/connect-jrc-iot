@@ -7,6 +7,7 @@
  // Set your Wi-Fi network credentials.
  #define WIFI_SSID "NAF Tech_WiFi"
  #define WIFI_PASSWORD "N@f Tech"
+ #define DEVICE_ID ""
 
  // Set your Firebase project credentials.
  #define FIREBASE_HOST "your_project_id.firebaseio.com"

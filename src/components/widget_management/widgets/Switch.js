@@ -18,6 +18,7 @@ const Switch = ({ device_id, widget, delete_widget }) => {
   const init_datastream = (datastream) => {
     // console.log(datastream);
     // setDatastream(datastream)
+    updateRTDB(device_id,datastream.pin,datastream.state)
     widget.setDatastream(datastream)
   }
 
