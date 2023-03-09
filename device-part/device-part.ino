@@ -19,5 +19,5 @@ void setup() {
 
 void loop() {
   Ndcs.loop();
-  Serial.println(WIFI_SSID);
+  // Serial.println(WIFI_SSID);
 }
