@@ -30,6 +30,7 @@ using namespace std;
  bool signupOK = false;
  int ledpin = 13;
  vector<int> pins;
+ vector<string> paths;
 
  // Define a callback function to handle changes in the Firebase data.
  void onDataChangeCallback(FirebaseData data) {
@@ -60,17 +61,13 @@ void firebase_init() {
 
 void init_types(){
   string typecatcher = "/state";
-  for(int i = 0 ; i <11 ; i++){
+  for(int i = 1 ; i <15 ; i++){
   string address = DEVICE_ID + to_string(i) + typecatcher;
-  
   if(Firebase.get(firebaseData,address)){
-  // if (Firebase.RTDB.getFloat(&firebaseData, address)) {
-      // Serial.println("suss");
       pins.push_back(i);
+      paths.push_back((address));
       if (firebaseData.dataType() == "int") {
-          Serial.print(i);
-          pins.push_back(i);
-          Serial.println("int");
+          digitalWrite(i,firebaseData.intData());
       } else if (firebaseData.dataType() == "float") {
           Serial.print(i);
           Serial.println("float");
@@ -79,14 +76,13 @@ void init_types(){
           Serial.println("str");
       } else {
           Serial.print(i);
-          Serial.println("unk");
+          Serial.println(firebaseData.dataType());
       }
   }
   else {
       Serial.println(firebaseData.errorReason());
   }
   }
-  for(int i = 0 ; i < 4 ; i++) Serial.print(pins[i]);
 }
 // Wifi Module
 
@@ -107,21 +103,48 @@ void wificonnection_init() {
 
  void NDCS::loop() {
    if (Firebase.ready() && signupOK) {
-// init_types();
-/*
-       sendDataPrevMillis = millis();
-      //  Serial.println("/%s/-1/datatype",DEVICE_ID);
-      string last = "/-1/datatype";
-      string address = DEVICE_ID+last;
-       if (Firebase.RTDB.getString(&firebaseData, address)) {
-        //  Firebase.RTDB.getInt();
-         Serial.println(firebaseData.stringData());
-          // intValue = firebaseData.intData();
-          // digitalWrite(ledpin, intValue);
-       }
-       else {
-         Serial.println(firebaseData.errorReason());
-       }
-       */
+// // init_types();
+// /*
+//        sendDataPrevMillis = millis();
+//       //  Serial.println("/%s/-1/datatype",DEVICE_ID);
+//       string last = "/-1/datatype";
+//       string address = DEVICE_ID+last;
+//        if (Firebase.RTDB.getString(&firebaseData, address)) {
+//         //  Firebase.RTDB.getInt();
+//          Serial.println(firebaseData.stringData());
+//           // intValue = firebaseData.intData();
+//           // digitalWrite(ledpin, intValue);
+//        }
+//        else {
+//          Serial.println(firebaseData.errorReason());
+//        }
+//        */
+
+        for(int i=0 ; i<pins.size() ; i++){
+          if(Firebase.get(firebaseData,paths[i])){
+            Serial.println(firebaseData.dataType());
+            if (firebaseData.dataType() == "boolean") {
+                digitalWrite(pins[i],firebaseData.boolData());
+                // Serial.print(pins[i]);
+                // Serial.println(firebaseData.boolData());
+            } 
+            // else {
+            //     analogWrite(pins[i],firebaseData.floatData());
+            //     Serial.print(pins[i]);
+            //     Serial.println("float");
+            // }
+            // } else if (firebaseData.dataType() == "string") {
+            //     Serial.print(pins[i]);
+            //     Serial.println("str");
+            // } else {
+            //     Serial.print(pins[i]);
+            //     Serial.println("unk");
+            // }
+        }
+        else {
+            Serial.println(firebaseData.errorReason());
+        }
+        }
+        }
      }
- }
+ //}

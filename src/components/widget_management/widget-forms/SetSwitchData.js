@@ -12,13 +12,13 @@ export default function SetSwitchData({ onClose, datastream, setDatastream }) {
     e.preventDefault();
     // console.log(formData);
     setDatastream(formData);
-    onClose(formData);
+    onClose();
   };
   const handleSkip = (e) => {
     e.preventDefault();
     // console.log(formData);
     setDatastream(datastream);
-    onClose(formData);
+    onClose();
   };
 
   // widget_type:"switch",
