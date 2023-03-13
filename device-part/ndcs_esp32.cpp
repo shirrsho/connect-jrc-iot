@@ -7,9 +7,9 @@
 
 using namespace std;
  // Set your Wi-Fi network credentials.
- #define WIFI_SSID "NAF Tech_WiFi"
- #define WIFI_PASSWORD "N@f Tech"
- #define DEVICE_ID "/hpp3oZKQUVB3iqOTDFi5/"
+char* WIFI_SSID;
+char* WIFI_PASSWORD;
+char* DEVICE_ID;
 
  // Set your Firebase project credentials.
  #define FIREBASE_HOST "your_project_id.firebaseio.com"
@@ -61,23 +61,26 @@ void firebase_init() {
 
 void init_types(){
   string typecatcher = "/state";
+  string dev_id = DEVICE_ID;
   for(int i = 1 ; i <15 ; i++){
-  string address = DEVICE_ID + to_string(i) + typecatcher;
+  string address =  "/" + dev_id + "/" + to_string(i) + typecatcher;
   if(Firebase.get(firebaseData,address)){
       pins.push_back(i);
       paths.push_back((address));
-      if (firebaseData.dataType() == "int") {
-          digitalWrite(i,firebaseData.intData());
-      } else if (firebaseData.dataType() == "float") {
+      if (firebaseData.dataType() == "boolean") {
+          digitalWrite(i,firebaseData.boolData());
+      } else if (firebaseData.dataType() == "int" || firebaseData.dataType() == "float") {
+          digitalWrite(i,firebaseData.floatData());
           Serial.print(i);
-          Serial.println("float");
-      } else if (firebaseData.dataType() == "string") {
-          Serial.print(i);
-          Serial.println("str");
-      } else {
-          Serial.print(i);
-          Serial.println(firebaseData.dataType());
-      }
+          Serial.println("int/float");
+      } 
+      // else if (firebaseData.dataType() == "string") {
+      //     Serial.print(i);
+      //     Serial.println("str");
+      // } else {
+      //     Serial.print(i);
+      //     Serial.println(firebaseData.dataType());
+      // }
   }
   else {
       Serial.println(firebaseData.errorReason());
@@ -95,7 +98,11 @@ void wificonnection_init() {
  }
 
 
- void NDCS::begin() {
+ void NDCS::begin(char* ssid, char* pass, char* device_id) {
+   WIFI_SSID = ssid;
+   WIFI_PASSWORD = pass;
+   DEVICE_ID = device_id;   
+  //  DEVICE_ID = "/"+DEVICE_ID+"/";   
    wificonnection_init();
    firebase_init();
    init_types();
@@ -128,11 +135,11 @@ void wificonnection_init() {
                 // Serial.print(pins[i]);
                 // Serial.println(firebaseData.boolData());
             } 
-            // else {
-            //     analogWrite(pins[i],firebaseData.floatData());
-            //     Serial.print(pins[i]);
-            //     Serial.println("float");
-            // }
+            else {
+                analogWrite(pins[i],firebaseData.floatData());
+                // Serial.print(pins[i]);
+                // Serial.println("float");
+            }
             // } else if (firebaseData.dataType() == "string") {
             //     Serial.print(pins[i]);
             //     Serial.println("str");

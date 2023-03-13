@@ -1,11 +1,10 @@
 #include "ndcs_esp32.h"
 
- // Set your Wi-Fi network credentials.
- #define WIFI_SSID "NAF Tech_WiFi"
- #define WIFI_PASSWORD "N@f Tech"
- #define DEVICE_ID ""
+char* wifi_ssid = "NAF Tech_WiFi";
+char* wifi_password = "N@f Tech";
+char* device_id = "hpp3oZKQUVB3iqOTDFi5";
 
- NDCS Ndcs;
+NDCS Ndcs;
 
 void setup() {
   
@@ -14,7 +13,7 @@ void setup() {
   pinMode(13, OUTPUT);
   // analogWrite()
   // Initialize Wi-Fi.
-  Ndcs.begin();
+  Ndcs.begin(wifi_ssid,wifi_password,device_id);
 }
 
 void loop() {

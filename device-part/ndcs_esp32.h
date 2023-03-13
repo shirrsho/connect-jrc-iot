@@ -3,7 +3,7 @@
 #include <Arduino.h>
 class NDCS {
   public:
-    void begin();
+    void begin(char*,char*,char*);
     void loop();
 };
 
