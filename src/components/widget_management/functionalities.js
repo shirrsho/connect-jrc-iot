@@ -1,15 +1,15 @@
-import { getDatastream, updateDatastream, updateWidget } from "../database/real-time_database_firebase"
+import { readState, initRTDBpath, writeState } from "../database/real-time_database_firebase"
 import { editSpecificWidget } from "../database/regular_database_firebase";
 
 function updateRTDB(device_id, pin, datatype, state){
     // console.log(state);
-    updateDatastream(device_id, pin, datatype, state)
+    writeState(device_id, pin, datatype, state)
 }
 
 function receieveRTDB(device_id, pin, datatype, state, updateMessage ){
     // console.log(pin,state);
-    updateRTDB(device_id, pin, datatype, state)
-    getDatastream(device_id, pin, updateMessage)
+    initRTDBpath(device_id, pin, datatype, state)
+    readState(device_id, pin, updateMessage)
 }
 
 function editWidget(widget_id, device_id, widget){

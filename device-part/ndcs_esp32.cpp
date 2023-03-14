@@ -59,7 +59,7 @@ void init_o_pins(){
   string typecatcher = "/state";
   string dev_id = DEVICE_ID;
   for(int i = 1 ; i <15 ; i++){
-    string address =  "/" + dev_id + "/" + to_string(i) + typecatcher;
+    string address =  "/" + dev_id + "/output/" + to_string(i) + typecatcher;
     if(Firebase.get(firebaseData,address)){
         o_pins.push_back(i);
         o_paths.push_back((address));
@@ -79,10 +79,10 @@ void init_o_pins(){
 }
 
 void init_i_pins(){
-  string typecatcher = "input/state";
+  string typecatcher = "/state";
   string dev_id = DEVICE_ID;
   for(int i = 1 ; i <15 ; i++){
-    string address =  "/" + dev_id + "/" + to_string(i) + typecatcher;
+    string address =  "/" + dev_id + "/input/" + "/" + to_string(i) + typecatcher;
     if(Firebase.get(firebaseData,address)){
         i_pins.push_back(i);
         i_paths.push_back((address));
@@ -113,11 +113,11 @@ void getOutputs(){
 }
 
 void getInputs(){
-  // for(int i=0 ; i<i_pins.size() ; i++)
-    // Firebase.RTDB.setString(&fdbo,i_paths[i],digitalRead(i_pins[i]).to_string());
-    string dev_id = DEVICE_ID;
-    string address =  "/" + dev_id + "/" + to_string(13) + "/state";
-    Firebase.RTDB.setString(&firebaseData,address,to_string(digitalRead(13)));
+  for(int i=0 ; i<i_pins.size() ; i++)
+    Firebase.RTDB.setString(&firebaseData,i_paths[i],to_string(digitalRead(i_pins[i])));
+    // string dev_id = DEVICE_ID;
+    // string address =  "/" + dev_id + "/" + to_string(13) + "/state";
+    // Firebase.RTDB.setString(&firebaseData,address,to_string(digitalRead(13)));
     Serial.println("ding");
 }
 
@@ -143,13 +143,13 @@ void wificonnection_init() {
    wificonnection_init();
    init_firebase();
    init_o_pins();
-  //  init_i_pins();
+   init_i_pins();
  }
 
  void NDCS::loop() {
    if (Firebase.ready()) {
         getOutputs();
-        // getInputs();
+        getInputs();
     } else{
       Serial.println("Firebase is'nt ready yet");
     }
