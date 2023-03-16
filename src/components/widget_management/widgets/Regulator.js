@@ -3,7 +3,7 @@ import { updateRTDB } from "../functionalities";
     import SetRegulatorData from "../widget-forms/SetRegulatorData";
     import "../widget-styles/Regulator.css";
 
-    const Regulator = ({ device_id, widget, index, delete_widget }) => {
+    const Regulator = ({ device_id, widget, delete_widget }) => {
     const [modal, setModal] = useState(false);
     const [datastream,setDatastream] = useState(widget.getDatastream());
     const Modal = (data) => {
@@ -36,14 +36,14 @@ import { updateRTDB } from "../functionalities";
     useEffect(() => {
         if (!datastream) return;
         setDatastream({...datastream,state:value})
-        updateRTDB(device_id,index,datastream.pin,value)
+        updateRTDB(device_id,widget.datastream.pin,widget.datastream.datatype,value)
     }, [value]);
     
-    useEffect(() => {
-        if (datastream) setModal(false)
-        else setModal(true)
-        // console.log(datastream);
-      }, []);
+    // useEffect(() => {
+    //     if (datastream) setModal(false)
+    //     else setModal(true)
+    //     // console.log(datastream);
+    //   }, []);
 
     return (
         <div className="w-[100%] flex-col items-center">

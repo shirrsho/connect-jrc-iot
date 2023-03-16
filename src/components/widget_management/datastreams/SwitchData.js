@@ -1,7 +1,8 @@
 const SwitchData = {
   widget_type:"switch",
   pin:-1,
-  pinMode:"output",
+  mode:"output",
+  datatype:"bool",
   signal:"digital",
   state:0
 }

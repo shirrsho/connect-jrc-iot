@@ -78,7 +78,7 @@ const DeviceView = () => {
                             {widgets?.map((widgetselector, key) => {
                                 // console.log(widgetselector);
                                 {/* console.log("up",widgets); */}
-                                return <WidgetView device_id={device.getDeviceID()} widget={widgetselector} index={widgetselector.widget_id} delete_widget={delete_widget} key={key}/>;
+                                return <WidgetView device_id={device.getDeviceID()} widget={widgetselector} delete_widget={delete_widget} key={key}/>;
                             })}
                            
                         </div>

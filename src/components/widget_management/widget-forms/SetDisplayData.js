@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Datastream from "../Datastream";
 
 export default function SetDisplayData({ onClose, datastream, setDatastream }) {
-  const [formData, setFormData] = useState(Datastream("display"));
+  const [formData, setFormData] = useState(datastream);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -34,7 +34,7 @@ export default function SetDisplayData({ onClose, datastream, setDatastream }) {
           type="text"
           className="py-3 w-[70%] text-center border-b border-gray-400"
           name="pin"
-          value={formData.pin}
+          value={formData?.pin}
           onChange={handleChange}
         />
         <input
@@ -42,7 +42,7 @@ export default function SetDisplayData({ onClose, datastream, setDatastream }) {
           className="py-3 w-[70%] my-2 text-center border-b border-gray-400"
           type="text"
           name="state"
-          value={formData.state}
+          value={formData?.state}
           onChange={handleChange}
         />
         <button
