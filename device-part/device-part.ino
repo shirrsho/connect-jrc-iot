@@ -13,13 +13,21 @@ void setup() {
   // Initialize Serial communication.
   Serial.begin(9600);
   pinMode(13, OUTPUT);
+  pinMode(26, OUTPUT);
+  pinMode(15, OUTPUT);
   // analogWrite()
   // Initialize Wi-Fi.
   Ndcs.begin(wifi_ssid,wifi_password,email,password,device_id);
 }
 
 void loop() {
-  Ndcs.loop();
+  // Ndcs.loop();
+  if(digitalRead(13)){
+    digitalWrite(26,0);
+  } else{
+    digitalWrite(26,1);
+  }
+  Serial.println("main loop");
   // digitalWrite(13,1);
   // delay(1000);
   // digitalWrite(13,0);
