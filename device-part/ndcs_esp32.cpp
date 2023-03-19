@@ -4,6 +4,7 @@
 #include <WiFi.h>
 #include <FirebaseESP32.h>
 #include "addons/TokenHelper.h"
+TaskHandle_t task1Handle = NULL;
 
 using namespace std;
  // Set your Wi-Fi network credentials.
@@ -35,6 +36,8 @@ char* DEVICE_ID;
  vector<string> o_paths;
  vector<int> i_pins;
  vector<string> i_paths;
+
+
 
  // Define a callback function to handle changes in the Firebase data.
  void onDataChangeCallback(FirebaseData data) {
@@ -81,7 +84,7 @@ void init_o_pins(){
 void init_i_pins(){
   string typecatcher = "/state";
   string dev_id = DEVICE_ID;
-  for(int i = 1 ; i <15 ; i++){
+  for(int i = 1 ; i <30 ; i++){
     string address =  "/" + dev_id + "/input/" + "/" + to_string(i) + typecatcher;
     if(Firebase.get(firebaseData,address)){
         i_pins.push_back(i);
@@ -96,7 +99,7 @@ void init_i_pins(){
 void getOutputs(){
   for(int i=0 ; i<o_pins.size() ; i++){
           if(Firebase.get(firebaseData,o_paths[i])){
-            Serial.println(firebaseData.dataType());
+            
             if (firebaseData.dataType() == "boolean") {
                 digitalWrite(o_pins[i],firebaseData.boolData());
                 // Serial.print(o_pins[i]);
@@ -110,6 +113,7 @@ void getOutputs(){
               Serial.println(firebaseData.errorReason());
           }
         }
+        Serial.println("output");
 }
 
 void getInputs(){
@@ -132,7 +136,17 @@ void wificonnection_init() {
    Serial.println("Connected");
  }
 
-
+void task1(void *parameter) {
+  while (1) {
+    if (Firebase.ready()) {
+        getOutputs();
+        getInputs();
+    } else{
+      Serial.println("Firebase is'nt ready yet");
+    }
+    delay(10);
+  }
+}
  void NDCS::begin(char* ssid, char* w_pass, char* email, char* u_pass, char* device_id) {
    WIFI_SSID = ssid;
    WIFI_PASSWORD = w_pass;
@@ -144,6 +158,7 @@ void wificonnection_init() {
    init_firebase();
    init_o_pins();
    init_i_pins();
+   xTaskCreatePinnedToCore(task1, "Task 1", 10000, NULL, 1, &task1Handle, 0);
  }
 
  void NDCS::loop() {
