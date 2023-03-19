@@ -6,8 +6,10 @@ function HomePage() {
     const color="bg-[#052C39]";
   return (
     <>
+ 
     <Navbar color={color}/>
     <HeroArea/>
+   
     </>
   )
 }

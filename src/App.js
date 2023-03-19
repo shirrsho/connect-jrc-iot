@@ -5,7 +5,7 @@ import Register from "./components/authentication/Register";
 import Dashboard from "./components/user/Dashboard";
 import DeviceView from "./components/device_management/DeviceView";
 import HomePage from "./components/revised_component/homepage/HomePage";
-
+import Dashboard1 from "./components/revised_component/dashboard/Dashboard"
 function App() {
   return (
     <>
@@ -17,6 +17,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/device/:id" element={<DeviceView/>}/>
           <Route path="/homepage" element={<HomePage/>}/>
+          <Route path="/dashboard1" element={<Dashboard1/>}/>
         </Routes>
       </BrowserRouter>
     </>

@@ -4,7 +4,7 @@ const SwitchData = {
   mode:"output",
   datatype:"bool",
   signal:"digital",
-  state:0
+  state:false
 }
 
 export default SwitchData;

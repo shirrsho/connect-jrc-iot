@@ -4,7 +4,7 @@ function Navbar({ color }) {
   console.log(color);
   return (
     <div
-      className={`${color} flex justify-between px-[100px] text-[#C9E4CA]  min-w-[688px]`}
+      className={`${color} flex justify-between px-[100px] py-2 text-[#C9E4CA]  min-w-[688px]`}
     >
       <div className=" flex">
         <div>

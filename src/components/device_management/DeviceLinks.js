@@ -36,7 +36,7 @@ function DeviceLinks({ devicelist, setDevicelist, user_id }) {
             {devicelist.map((deviceinfo, i) => {
                 return (
                     <div
-                        className="w-[100%] bg-gray-100 my-3 hover:cursor-pointer hover:shadow-lg  "
+                        className="w-[100%] bg-gray-100 py-1 hover:cursor-pointer hover:shadow-lg  "
                         key={i}
                         onMouseEnter={() => handleMouseEnter(i)} onMouseLeave={handleMouseLeave}
                     >

@@ -7,9 +7,11 @@
 
 using namespace std;
  // Set your Wi-Fi network credentials.
- #define WIFI_SSID "NAF Tech_WiFi"
- #define WIFI_PASSWORD "N@f Tech"
- #define DEVICE_ID "/hpp3oZKQUVB3iqOTDFi5/"
+char* WIFI_SSID;
+char* WIFI_PASSWORD;
+char* USER_EMAIL;
+char* USER_PASSWORD;
+char* DEVICE_ID;
 
  // Set your Firebase project credentials.
  #define FIREBASE_HOST "your_project_id.firebaseio.com"
@@ -29,7 +31,10 @@ using namespace std;
  float floatValue;
  bool signupOK = false;
  int ledpin = 13;
- vector<int> pins;
+ vector<int> o_pins;
+ vector<string> o_paths;
+ vector<int> i_pins;
+ vector<string> i_paths;
 
  // Define a callback function to handle changes in the Firebase data.
  void onDataChangeCallback(FirebaseData data) {
@@ -38,56 +43,84 @@ using namespace std;
 
  // Firebase
 
-void firebase_init() {
+void init_firebase() {
    config.api_key = API_KEY;
    config.database_url = RTDBURL;
-   
+   auth.user.email = USER_EMAIL;
+   auth.user.password = USER_PASSWORD;
+
    // Enable WiFi reconnection
    Firebase.reconnectWiFi(true);
 
-   if (Firebase.signUp(&config, &auth, "", "")){
-     Serial.println("Auth Success");
-     config.token_status_callback = tokenStatusCallback;
-     signupOK = true;
-   }
-   else{
-     Serial.printf("Auth Failed, %s\n", config.signer.signupError.message.c_str());
-   }
-
    Firebase.begin(&config, &auth);
-   Firebase.reconnectWiFi(true);
  }
 
-void init_types(){
+void init_o_pins(){
   string typecatcher = "/state";
-  for(int i = 0 ; i <11 ; i++){
-  string address = DEVICE_ID + to_string(i) + typecatcher;
-  
-  if(Firebase.get(firebaseData,address)){
-  // if (Firebase.RTDB.getFloat(&firebaseData, address)) {
-      // Serial.println("suss");
-      pins.push_back(i);
-      if (firebaseData.dataType() == "int") {
-          Serial.print(i);
-          pins.push_back(i);
-          Serial.println("int");
-      } else if (firebaseData.dataType() == "float") {
-          Serial.print(i);
-          Serial.println("float");
-      } else if (firebaseData.dataType() == "string") {
-          Serial.print(i);
-          Serial.println("str");
-      } else {
-          Serial.print(i);
-          Serial.println("unk");
-      }
+  string dev_id = DEVICE_ID;
+  for(int i = 1 ; i <15 ; i++){
+    string address =  "/" + dev_id + "/output/" + to_string(i) + typecatcher;
+    if(Firebase.get(firebaseData,address)){
+        o_pins.push_back(i);
+        o_paths.push_back((address));
+        // Serial.print(firebaseData.dataType());
+        if (firebaseData.dataType() == "boolean") {
+            digitalWrite(i,firebaseData.boolData());
+        } else if (firebaseData.dataType() == "int" || firebaseData.dataType() == "float") {
+            digitalWrite(i,firebaseData.floatData());
+            Serial.print(i);
+            Serial.println("int/float");
+        }
+    }
+    else {
+        Serial.println(firebaseData.errorReason());
+    }
   }
-  else {
-      Serial.println(firebaseData.errorReason());
-  }
-  }
-  for(int i = 0 ; i < 4 ; i++) Serial.print(pins[i]);
 }
+
+void init_i_pins(){
+  string typecatcher = "/state";
+  string dev_id = DEVICE_ID;
+  for(int i = 1 ; i <15 ; i++){
+    string address =  "/" + dev_id + "/input/" + "/" + to_string(i) + typecatcher;
+    if(Firebase.get(firebaseData,address)){
+        i_pins.push_back(i);
+        i_paths.push_back((address));
+    }
+    else {
+        Serial.println(firebaseData.errorReason());
+    }
+  }
+}
+
+void getOutputs(){
+  for(int i=0 ; i<o_pins.size() ; i++){
+          if(Firebase.get(firebaseData,o_paths[i])){
+            Serial.println(firebaseData.dataType());
+            if (firebaseData.dataType() == "boolean") {
+                digitalWrite(o_pins[i],firebaseData.boolData());
+                // Serial.print(o_pins[i]);
+                // Serial.println(firebaseData.boolData());
+            } 
+            else {
+                analogWrite(o_pins[i],firebaseData.floatData());
+            }
+          }
+          else {
+              Serial.println(firebaseData.errorReason());
+          }
+        }
+}
+
+void getInputs(){
+  for(int i=0 ; i<i_pins.size() ; i++)
+    Firebase.RTDB.setString(&firebaseData,i_paths[i],to_string(digitalRead(i_pins[i])));
+    // string dev_id = DEVICE_ID;
+    // string address =  "/" + dev_id + "/" + to_string(13) + "/state";
+    // Firebase.RTDB.setString(&firebaseData,address,to_string(digitalRead(13)));
+    Serial.println("ding");
+}
+
 // Wifi Module
 
 void wificonnection_init() {
@@ -96,32 +129,29 @@ void wificonnection_init() {
      delay(1000);
      Serial.println("Connecting to Wi-Fi...");
    }
+   Serial.println("Connected");
  }
 
 
- void NDCS::begin() {
+ void NDCS::begin(char* ssid, char* w_pass, char* email, char* u_pass, char* device_id) {
+   WIFI_SSID = ssid;
+   WIFI_PASSWORD = w_pass;
+   USER_EMAIL = email;
+   USER_PASSWORD = u_pass;
+   DEVICE_ID = device_id;
+  //  DEVICE_ID = "/"+DEVICE_ID+"/";
    wificonnection_init();
-   firebase_init();
-   init_types();
+   init_firebase();
+   init_o_pins();
+   init_i_pins();
  }
 
  void NDCS::loop() {
-   if (Firebase.ready() && signupOK) {
-// init_types();
-/*
-       sendDataPrevMillis = millis();
-      //  Serial.println("/%s/-1/datatype",DEVICE_ID);
-      string last = "/-1/datatype";
-      string address = DEVICE_ID+last;
-       if (Firebase.RTDB.getString(&firebaseData, address)) {
-        //  Firebase.RTDB.getInt();
-         Serial.println(firebaseData.stringData());
-          // intValue = firebaseData.intData();
-          // digitalWrite(ledpin, intValue);
-       }
-       else {
-         Serial.println(firebaseData.errorReason());
-       }
-       */
-     }
- }
+   if (Firebase.ready()) {
+        getOutputs();
+        getInputs();
+    } else{
+      Serial.println("Firebase is'nt ready yet");
+    }
+}
+ //}
