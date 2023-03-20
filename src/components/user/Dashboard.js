@@ -185,7 +185,7 @@ function Dashboard() {
           </div>
           {/*second segement */}
           <div>
-            <div className="w-[100%] bg-gray-600 my-3">
+            <div className="w-[100%] bg-gray-600 py-1 ">
               <ul className="flex  text-white text-center text-sm sm:text-md md:text-xl mx-3 p-5">
                 <li className="w-[8%]">SL</li>
                 <li className="w-[16%]">Device Name</li>
@@ -198,7 +198,7 @@ function Dashboard() {
             </div>
             {devices && (
               <div>
-                <DeviceLinks devicelist={devices} setDevicelist={setDevices} user_id={user?.uid} />
+              <DeviceLinks devicelist={devices} setDevicelist={setDevices} user_id={user?.uid} />
               </div>
             )}
           </div>

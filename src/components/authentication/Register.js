@@ -16,12 +16,15 @@ const Register = () => {
 
     async function register(event) {
         if (!name) alert("Please enter name");
-        try {
-            await registerWithEmailAndPassword(name, email, password)
-        } catch (error) {
-            alert(error.message);
+        else{
+
+            try {
+                await registerWithEmailAndPassword(name, email, password)
+            } catch (error) {
+                alert(error.message);
+            }
+            event.preventDefault()
         }
-        event.preventDefault()
     };
 
     useEffect(() => {
