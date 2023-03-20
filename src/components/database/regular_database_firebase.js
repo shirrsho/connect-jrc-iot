@@ -32,9 +32,10 @@ const createNewUser = async (uid, name, email) => {
 };
 
 const createNewDevice = async (device) => {
+  let docref = null;
   try {
     // path: must be collection, document, collection, document ...
-    await addDoc(collection(db, "devices", device.user_id, "owns"), {
+    docref = await addDoc(collection(db, "devices", device.user_id, "owns"), {
       user_id : device.getUserID(),
       name : device.getName(),
       chip : device.getChip(),
@@ -46,7 +47,7 @@ const createNewDevice = async (device) => {
     alert(err.message);
     return false;
   }
-  return true;
+  return docref.id;
 }
 
 const editSpecificDevice = async (device_id,user_id,device) => {

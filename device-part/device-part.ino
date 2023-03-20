@@ -27,7 +27,7 @@ void loop() {
   } else{
     digitalWrite(26,1);
   }
-  Serial.println("main loop");
+  // Serial.println("main loop");
   // digitalWrite(13,1);
   // delay(1000);
   // digitalWrite(13,0);

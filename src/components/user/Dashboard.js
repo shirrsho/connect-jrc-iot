@@ -9,6 +9,7 @@ import DeviceLinks from "../device_management/DeviceLinks";
 import {
   addNewDevice,
   getAllDevices,
+  initPins,
 } from "../device_management/functionalities";
 
 function Dashboard() {
@@ -54,15 +55,15 @@ function Dashboard() {
   const [chip_name, setChip_name] = useState("");
 
   async function add_device() {
-    let device = null;
+    let device_id = null;
     try {
-      device = await addNewDevice(user.uid, device_name, chip_name);
+      device_id = await addNewDevice(user.uid, device_name, chip_name);
     } catch (err) {
       alert(err.message);
       return false;
     }
     setIsSaveWindowOpen(false);
-    // let devscopy = devices;
+    initPins(device_id);
     // devscopy.push(device);
     // setDevices(devscopy);
     await get_devices();

@@ -61,7 +61,7 @@ void init_firebase() {
 void init_o_pins(){
   string typecatcher = "/state";
   string dev_id = DEVICE_ID;
-  for(int i = 1 ; i <15 ; i++){
+  for(int i = 1 ; i <36 ; i++){
     string address =  "/" + dev_id + "/output/" + to_string(i) + typecatcher;
     if(Firebase.get(firebaseData,address)){
         o_pins.push_back(i);
@@ -84,7 +84,7 @@ void init_o_pins(){
 void init_i_pins(){
   string typecatcher = "/state";
   string dev_id = DEVICE_ID;
-  for(int i = 1 ; i <30 ; i++){
+  for(int i = 1 ; i <36 ; i++){
     string address =  "/" + dev_id + "/input/" + "/" + to_string(i) + typecatcher;
     if(Firebase.get(firebaseData,address)){
         i_pins.push_back(i);
@@ -97,9 +97,9 @@ void init_i_pins(){
 }
 
 void getOutputs(){
-  for(int i=0 ; i<o_pins.size() ; i++){
+  for(int i=0 ; i<35 ; i++){
+    Serial.println(i);
           if(Firebase.get(firebaseData,o_paths[i])){
-            
             if (firebaseData.dataType() == "boolean") {
                 digitalWrite(o_pins[i],firebaseData.boolData());
                 // Serial.print(o_pins[i]);
@@ -140,11 +140,13 @@ void task1(void *parameter) {
   while (1) {
     if (Firebase.ready()) {
         getOutputs();
-        getInputs();
+        Serial.println("getoutput");
+        // getInputs();
+        Serial.println("getinput");
     } else{
       Serial.println("Firebase is'nt ready yet");
     }
-    delay(20);
+    delay(50);
   }
 }
  void NDCS::begin(char* ssid, char* w_pass, char* email, char* u_pass, char* device_id) {
@@ -156,8 +158,8 @@ void task1(void *parameter) {
   //  DEVICE_ID = "/"+DEVICE_ID+"/";
    wificonnection_init();
    init_firebase();
-   init_o_pins();
-   init_i_pins();
+  //  init_o_pins();
+  //  init_i_pins();
    xTaskCreatePinnedToCore(task1, "Task 1", 10000, NULL, 1, &task1Handle, 0);
  }
 

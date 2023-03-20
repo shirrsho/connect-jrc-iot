@@ -11,18 +11,31 @@ import {
 import Device from "./Device";
 import Widget from '../widget_management/Widget'
 import Datastream from "../widget_management/Datastream";
+import { initDevicePins } from "../database/real-time_database_firebase";
 
 // To add a new device to the database,
 // A device object should be sent to the addNew method
 async function addNewDevice(user_id, device_name, chip_name) {
     let device = new Device("", user_id, device_name, chip_name)
+    let device_id = "";
     try {
-        await createNewDevice(device)
+        device_id = await createNewDevice(device)
     } catch (err) {
         alert(err.message)
         return null;
     }
-    return device;
+    return device_id;
+}
+
+function initPins(device_id) {
+    console.log(device_id);
+    try {
+        initDevicePins(device_id);
+    } catch (err) {
+        alert(err.message)
+        return false;
+    }
+    return true;
 }
 
 async function editDevice(device_id, user_id, device) {
@@ -112,4 +125,4 @@ async function deleteWidget(widget_id,device_id) {
 
 // }
 
-export { addNewDevice, addNewWidget, editDevice, deleteDevice, getAllDevices, getADevice, getAllWidgets, deleteWidget }
+export { addNewDevice, addNewWidget, editDevice, deleteDevice, getAllDevices, getADevice, getAllWidgets, deleteWidget, initPins }

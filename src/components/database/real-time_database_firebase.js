@@ -12,6 +12,19 @@ function initRTDBpath(device_id, pin, datatype, state){
     });
 }
 
+function initDevicePins(device_id){
+  for(let i = 1 ; i < 36 ; i++){
+    set(ref(db, device_id +'/input/'+ i), {
+        datatype:"unk",
+        state:0
+      });
+    set(ref(db, device_id +'/output/'+ i), {
+        datatype:"unk",
+        state:0
+      });
+  }
+}
+
 function writeState (device_id,pin,datatype,state) {
     set(ref(db, device_id +'/output/'+ pin), {
         datatype:datatype,
@@ -26,4 +39,4 @@ onValue(ref(db, device_id +'/input/'+ pin), (snapshot) => {
 });
 }
 
-export {initRTDBpath, writeState, readState}
+export {initRTDBpath, writeState, readState, initDevicePins}
