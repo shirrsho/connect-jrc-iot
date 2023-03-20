@@ -144,7 +144,7 @@ void task1(void *parameter) {
     } else{
       Serial.println("Firebase is'nt ready yet");
     }
-    delay(10);
+    delay(20);
   }
 }
  void NDCS::begin(char* ssid, char* w_pass, char* email, char* u_pass, char* device_id) {
