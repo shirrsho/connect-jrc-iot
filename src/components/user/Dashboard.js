@@ -63,7 +63,7 @@ function Dashboard() {
       return false;
     }
     setIsSaveWindowOpen(false);
-    initPins(device_id);
+    // initPins(device_id);
     // devscopy.push(device);
     // setDevices(devscopy);
     await get_devices();
