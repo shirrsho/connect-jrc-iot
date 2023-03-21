@@ -28,7 +28,7 @@ char* DEVICE_ID;
  FirebaseAuth auth;
  FirebaseConfig config;
 
- vector<int> gpio_pins = {18, 19, 23, 5, 13, 14, 15, 16, 17, 4, 2, 0};
+ vector<int> gpio_pins = {18, 19, 23,26, 5, 13, 14, 15, 16, 17, 4, 2, 0};
 //  vector<string> o_paths;
 //  vector<int> i_pins;
 //  vector<string> i_paths;
@@ -175,15 +175,59 @@ void getOutputData(){
     }
 }
 
+void getInputData(){
+    FirebaseJson json;
+    
+    string path = "";
+    string dev_id = DEVICE_ID;
+    
+    path = "/"+ dev_id +"/input/";
+
+    if(Firebase.getJSON(firebaseData, path, &json)){
+      // Serial.println("Json Data Received");
+    }
+    else {
+      Serial.println("Failed to retrieve data from Firebase:");
+      // Serial.println(Firebase.error());
+      return;
+    }
+    // 01601497623
+    // Serial.println(json.valueAt(0).value.c_str());
+
+    FirebaseJsonData result;
+
+    for(int i : gpio_pins){
+      // path = to_string(i);
+
+      // json.get(result, path);
+      // Serial.println(result.success);
+      // if (result.success)
+      // {
+        string setat = "/"+ dev_id +"/input/" + to_string(i) + "/state";
+        Firebase.RTDB.setString(&firebaseData,setat,to_string(digitalRead(i)));
+        // Print type of parsed data e.g string, int, double, bool, object, array, null and undefined
+        // Serial.println(result.type);
+        // Print its content e.g.string, int, double, bool whereas object, array and null also can access as string
+        // Serial.println(digitalRead(i));
+        // Serial.println(result.to<int>());
+        // Serial.println(result.to<bool>());
+        // Serial.println(result.to<float>());
+        // Serial.println(result.to<double>());
+      // }
+    }
+}
+
 void task1(void *parameter) {
   while (1) {
     if (Firebase.ready()) {
         getOutputData();
-        // getInputData();
+        delay(100);
+        getInputData();
+        delay(100);
     } else{
       Serial.println("Firebase is'nt ready yet");
     }
-    delay(100);
+    delay(200);
   }
 }
  void NDCS::begin(char* ssid, char* w_pass, char* email, char* u_pass, char* device_id) {
