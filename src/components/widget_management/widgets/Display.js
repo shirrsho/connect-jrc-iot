@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { receieveRTDB } from "../functionalities";
+import { getInitialMessage, receieveRTDB } from "../functionalities";
 import SetDisplayData from "../widget-forms/SetDisplayData";
 
 const Display = ({ device_id, widget, delete_widget }) => {
@@ -30,6 +30,12 @@ const Display = ({ device_id, widget, delete_widget }) => {
   useEffect(() => {
     if(!widget.datastream) return
     receieveRTDB(device_id, widget.datastream.pin, widget.datastream.datatype, message, updateMessage);
+  }, [datastream]);
+
+  useEffect(() => {
+    if(!widget.datastream) return
+    getInitialMessage(device_id, widget.datastream.pin,updateMessage);
+    // receieveRTDB(device_id, widget.datastream.pin, widget.datastream.datatype, message, updateMessage);
   }, [datastream]);
 
   // useEffect(() => {

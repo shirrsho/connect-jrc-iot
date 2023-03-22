@@ -5,6 +5,7 @@
 #include <FirebaseESP32.h>
 #include "addons/TokenHelper.h"
 TaskHandle_t task1Handle = NULL;
+TaskHandle_t task2Handle = NULL;
 
 using namespace std;
  // Set your Wi-Fi network credentials.
@@ -22,7 +23,7 @@ char* DEVICE_ID;
  // #define DEVICE_ID ""  
 
  // Define a Firebase data object.
- FirebaseData firebaseData;
+
 //  FirebaseJson json;
 //  using json = nlohmann::json;
  FirebaseAuth auth;
@@ -126,6 +127,7 @@ void wificonnection_init() {
  }
 
 void getOutputData(){
+   FirebaseData firebaseData;
     FirebaseJson json;
     
     string path = "";
@@ -176,6 +178,7 @@ void getOutputData(){
 }
 
 void getInputData(){
+   FirebaseData firebaseData;
     FirebaseJson json;
     
     string path = "";
@@ -183,28 +186,28 @@ void getInputData(){
     
     path = "/"+ dev_id +"/input/";
 
-    if(Firebase.getJSON(firebaseData, path, &json)){
-      // Serial.println("Json Data Received");
-    }
-    else {
-      Serial.println("Failed to retrieve data from Firebase:");
-      // Serial.println(Firebase.error());
-      return;
-    }
-    // 01601497623
-    // Serial.println(json.valueAt(0).value.c_str());
-
-    FirebaseJsonData result;
 
     for(int i : gpio_pins){
-      // path = to_string(i);
+      string pinpath = to_string(i);
+      pinpath += "/state";
 
       // json.get(result, path);
       // Serial.println(result.success);
       // if (result.success)
       // {
-        string setat = "/"+ dev_id +"/input/" + to_string(i) + "/state";
-        Firebase.RTDB.setString(&firebaseData,setat,to_string(digitalRead(i)));
+
+  // Add data to the FirebaseJson object
+        json.set(pinpath, to_string(digitalRead(i)));
+    }
+        String jsonData;
+        json.toString(jsonData);
+
+        // Send the JSON data to Firebase
+        if(Firebase.updateNode(firebaseData, path, json)) Serial.println("pushed");
+        else Serial.println(firebaseData.errorReason());
+        Serial.println(jsonData);        
+        // string setat = "/"+ dev_id +"/input/" + to_string(i) + "/state";
+        // Firebase.RTDB.setString(&firebaseData,setat,to_string(digitalRead(i)));
         // Print type of parsed data e.g string, int, double, bool, object, array, null and undefined
         // Serial.println(result.type);
         // Print its content e.g.string, int, double, bool whereas object, array and null also can access as string
@@ -214,20 +217,32 @@ void getInputData(){
         // Serial.println(result.to<float>());
         // Serial.println(result.to<double>());
       // }
-    }
+    // }
 }
 
 void task1(void *parameter) {
   while (1) {
     if (Firebase.ready()) {
         getOutputData();
-        delay(100);
-        getInputData();
-        delay(100);
+        // delay(100);
+        // getInputData();
+        // delay(100);
     } else{
       Serial.println("Firebase is'nt ready yet");
     }
-    delay(200);
+    delay(10);
+  }
+}
+
+void task2(void *parameter) {
+  while (1) {
+    if (Firebase.ready()) {
+        getInputData();
+        // delay(100);
+    } else{
+      Serial.println("Firebase is'nt ready yet");
+    }
+    delay(10);
   }
 }
  void NDCS::begin(char* ssid, char* w_pass, char* email, char* u_pass, char* device_id) {
@@ -240,6 +255,7 @@ void task1(void *parameter) {
    wificonnection_init();
    init_firebase();
    xTaskCreatePinnedToCore(task1, "Task 1", 10000, NULL, 1, &task1Handle, 0);
+   xTaskCreatePinnedToCore(task2, "Task 2", 10000, NULL, 1, &task2Handle, 1);
  }
 
 //  void NDCS::loop() {
