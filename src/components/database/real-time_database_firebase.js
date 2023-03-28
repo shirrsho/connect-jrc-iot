@@ -1,4 +1,4 @@
-import { getDatabase, ref, set, onValue } from "firebase/database";
+import { getDatabase, ref, set, onValue, get, child } from "firebase/database";
 import { app } from "./database_firebase";
 
 
@@ -10,6 +10,23 @@ function initRTDBpath(device_id, pin, datatype, state){
       datatype:datatype,
       state:state
     });
+}
+
+async function getDataOnce(device_id,pin){
+  let snap = null;
+  try{
+    snap = await get(ref(db, device_id+'/input/'+pin))
+  } catch(error) {
+    console.error(error);
+    return false;
+  };
+  // console.log(snap.val().datatype);
+  return snap.val().state
+  // snap.forEach(doc => {
+  //   // Object obj = new Object(doc.id,doc.data())
+  //   // devices.push([doc.id, doc.data()])
+  //   console.log(doc.val().datatype)
+  // })
 }
 
 function writeState (device_id,pin,datatype,state) {
@@ -26,4 +43,4 @@ onValue(ref(db, device_id +'/input/'+ pin), (snapshot) => {
 });
 }
 
-export {initRTDBpath, writeState, readState}
+export {initRTDBpath, writeState, readState, getDataOnce}

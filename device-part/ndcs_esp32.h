@@ -4,7 +4,7 @@
 class NDCS {
   public:
     void begin(char*,char*,char*,char*,char*);
-    void loop();
+    // void loop();
 };
 
 #endif

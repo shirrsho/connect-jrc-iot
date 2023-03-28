@@ -4,7 +4,7 @@ char* wifi_ssid = "NAF Tech_WiFi";
 char* wifi_password = "N@f Tech";
     char* email = "shirsho@iit.com";
     char* password = "000000";                // put your account's password in between the quotes
-    char* device_id = "d3tnjeA7JSAKVHNuOmRg";
+    char* device_id = "9uoTy3s1YOmJOFKyqySG";
 
 NDCS Ndcs;
 
@@ -27,7 +27,7 @@ void loop() {
   } else{
     digitalWrite(26,1);
   }
-  Serial.println("main loop");
+  // Serial.println("main loop");
   // digitalWrite(13,1);
   // delay(1000);
   // digitalWrite(13,0);
