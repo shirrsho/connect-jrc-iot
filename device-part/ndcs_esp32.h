@@ -4,6 +4,10 @@
 class NDCS {
   public:
     void begin(char*,char*,char*,char*,char*);
+    void send(int,char*);
+    void send(int,int);
+    void send(int,float);
+    const char* receive(int);
     // void loop();
 };
 

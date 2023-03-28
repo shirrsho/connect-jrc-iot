@@ -7,6 +7,7 @@ char* wifi_password = "N@f Tech";
     char* device_id = "9uoTy3s1YOmJOFKyqySG";
 
 NDCS Ndcs;
+int i = 0, j=0;
 
 void setup() {
   
@@ -15,6 +16,7 @@ void setup() {
   pinMode(13, OUTPUT);
   pinMode(26, OUTPUT);
   pinMode(15, OUTPUT);
+
   // analogWrite()
   // Initialize Wi-Fi.
   Ndcs.begin(wifi_ssid,wifi_password,email,password,device_id);
@@ -27,7 +29,9 @@ void loop() {
   } else{
     digitalWrite(26,1);
   }
-  // Serial.println("main loop");
+  const char* l = Ndcs.receive(0);
+  Serial.println(l);
+  delay(1000);
   // digitalWrite(13,1);
   // delay(1000);
   // digitalWrite(13,0);
