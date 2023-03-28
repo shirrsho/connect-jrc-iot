@@ -1,6 +1,18 @@
     import React from 'react'
+    import { useState } from 'react';
     import DeviceLinks from '../../device_management/DeviceLinks'
     function Dashbody() {
+      const [isSaveWindowOpen, setIsSaveWindowOpen] = useState(false);
+
+      const handleOpen = () => {
+        setIsSaveWindowOpen(true);
+      };
+      const handleClose = () => {
+        setIsSaveWindowOpen(false);
+      };
+      const [devices, setDevices] = useState([]);
+      const [device_name, setDevice_name] = useState("");
+      const [chip_name, setChip_name] = useState("");
     return (
         <>
        
@@ -30,7 +42,7 @@
                 </button>
                 </div>
                 <div className=" w-[50%] relative flex-col items-center">
-                <div className="flex absolute right-0 text-white text-lg bg-[#052C39] px-4 py-3  mt-[9px] rounded-sm hover:cursor-pointer hover:text-[#FEFF01] hover:bg-[#083763] hover:text-xl">
+                <div className="flex absolute right-0 text-white text-lg bg-[#052C39] px-4 py-3  mt-[9px] rounded-sm hover:cursor-pointer hover:text-[#FEFF01] hover:bg-[#083763] ">
                     <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -44,11 +56,44 @@
                     />
                     </svg>
 
-                    <button className="pl-3 text-lg" >
+                    <button className="pl-3 text-lg" onClick={handleOpen}>
                     {" "}
                     Add Device
                     </button>
-                
+                    <div>
+                    {isSaveWindowOpen && (
+                      <div className="fixed top-0 left-0 h-screen w-screen flex items-center  justify-center bg-gray-900 bg-opacity-75">
+                        <div className="bg-white px-[75px] py-[100px] rounded-sm">
+                          <div className="mt-2 p-10 text-black  flex flex-col justify-center">
+                            <input
+                              className=" p-3  placeholder-gray-600 bg-[#D9D9D9] hover:border-b rounded-sm mt-4 text-center"
+                              type="text"
+                              placeholder="Device Name"
+                              value={device_name}
+                              onChange={(e) => setDevice_name(e.target.value)}
+                            />
+                            <input
+                              className=" p-3  placeholder-gray-600 bg-[#D9D9D9]  hover:border-b rounded-sm mt-4 text-center"
+                              type="text"
+                              placeholder="Microcontroller"
+                              value={chip_name}
+                              onChange={(e) => setChip_name(e.target.value)}
+                            />
+                            <div className="flex justify-center">
+                            <button
+                              className="bg-[#5791A1] hover:border-b text-white py-3 mt-4 px-[90px] rounded-sm "
+                              onClick={handleClose}
+                            >
+                              Create
+                            </button>
+                          </div>
+                         
+                           
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
                 </div>
             </div>
