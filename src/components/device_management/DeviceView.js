@@ -38,7 +38,6 @@ void setup() {
 }
 
 void loop() {
-    Ndcs.loop();
     // Your code here
 }
     `;

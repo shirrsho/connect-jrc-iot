@@ -1,7 +1,7 @@
-    import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { updateRTDB } from "../functionalities";
-    import SetRegulatorData from "../widget-forms/SetRegulatorData";
-    import "../widget-styles/Regulator.css";
+import SetRegulatorData from "../widget-forms/SetRegulatorData";
+import "../widget-styles/Regulator.css";
 
     const Regulator = ({ device_id, widget, delete_widget }) => {
     const [modal, setModal] = useState(false);

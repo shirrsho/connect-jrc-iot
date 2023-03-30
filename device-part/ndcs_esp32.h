@@ -7,7 +7,7 @@ class NDCS {
     void send(int,char*);
     void send(int,int);
     void send(int,float);
-    const char* receive(int);
+    int receive(int);
     // void loop();
 };
 

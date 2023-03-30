@@ -140,12 +140,9 @@ void task1(void *parameter) {
     string path = "";
     string dev_id = DEVICE_ID;
     
-    path = "/"+ dev_id +"/vpins/";
+    path = "/"+ dev_id +"/vpins/V" + to_string(pin);
 
-
-    string pinpath = to_string(pin);
-    pinpath += "/state";
-    json.set(pinpath, data);
+    json.set("/state", data);
     if(Firebase.updateNode(firebaseData, path, json)) Serial.println("data pushed");
     else Serial.println(firebaseData.errorReason());
  }
@@ -156,7 +153,7 @@ void task1(void *parameter) {
     string path = "";
     string dev_id = DEVICE_ID;
     
-    path = "/"+ dev_id +"/vpins/";
+    path = "/"+ dev_id +"/vpins/V";
 
 
     string pinpath = to_string(pin);
@@ -172,7 +169,7 @@ void task1(void *parameter) {
     string path = "";
     string dev_id = DEVICE_ID;
     
-    path = "/"+ dev_id +"/vpins/";
+    path = "/"+ dev_id +"/vpins/V";
 
 
     string pinpath = to_string(pin);
@@ -182,20 +179,20 @@ void task1(void *parameter) {
     else Serial.println(firebaseData.errorReason());
  }
 
-const char* NDCS::receive(int pin) {
+int NDCS::receive(int pin) {
   FirebaseData firebaseData;
   FirebaseJson json;
   
   string path = "";
   string dev_id = DEVICE_ID;
   
-  path = "/"+ dev_id +"/vpins/" + to_string(pin);
+  path = "/"+ dev_id +"/vpins/V" + to_string(pin);
 
   if(Firebase.getJSON(firebaseData, path, &json)){
     FirebaseJsonData result;
 
-    json.get(result, path+"/state");
-    return result.to<String>().c_str();
+    json.get(result, "/state");
+    return result.to<int>();
   }
   else {
     Serial.println(firebaseData.errorReason());

@@ -25,7 +25,7 @@ export default function SetRegulatorData({ onClose, datastream, setDatastream })
     <div className="modal z-10 bg-white">
       <div className="h-[400px] w-[600px] rounded-2xl flex justify-center flex-col items-center py-10">
         <input
-          placeholder="PIN"
+          placeholder="Virtual PIN"
           type="text"
           className="py-3 w-[70%] text-center border-b border-gray-400"
           name="pin"
