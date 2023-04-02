@@ -6,7 +6,7 @@ import { app } from "./database_firebase";
 const db = getDatabase(app);
 
 function initRTDBpath(device_id, pin, datatype, state){
-  set(ref(db, device_id +'/input/'+ pin), {
+  set(ref(db, device_id +'/vpins/V'+ pin), {
       datatype:datatype,
       state:state
     });
@@ -15,7 +15,7 @@ function initRTDBpath(device_id, pin, datatype, state){
 async function getDataOnce(device_id,pin){
   let snap = null;
   try{
-    snap = await get(ref(db, device_id+'/input/'+pin))
+    snap = await get(ref(db, device_id+'/vpins/V'+pin))
   } catch(error) {
     console.error(error);
     return false;
@@ -36,11 +36,18 @@ function writeState (device_id,pin,datatype,state) {
       });
 }
 
+function writeVpin (device_id,pin,datatype,state) {
+  set(ref(db, device_id +'/vpins/V'+ pin), {
+      datatype:datatype,
+      state:state
+    });
+}
+
 function readState (device_id,pin,updateMessage){
-onValue(ref(db, device_id +'/input/'+ pin), (snapshot) => {
+onValue(ref(db, device_id +'/vpins/V'+ pin), (snapshot) => {
   const data = snapshot.val();
   updateMessage(data.state);
 });
 }
 
-export {initRTDBpath, writeState, readState, getDataOnce}
+export {initRTDBpath, writeState, readState, getDataOnce, writeVpin}

@@ -1,8 +1,9 @@
-import { readState, initRTDBpath, writeState, getDataOnce } from "../database/real-time_database_firebase"
+import { readState, initRTDBpath, writeState, getDataOnce, writeVpin } from "../database/real-time_database_firebase"
 import { editSpecificWidget } from "../database/regular_database_firebase";
 
 function updateRTDB(device_id, pin, datatype, state){
     // console.log(state);
+    if(datatype=="int"||datatype=="float") writeVpin(device_id, pin, datatype, state)
     writeState(device_id, pin, datatype, state)
 }
 
