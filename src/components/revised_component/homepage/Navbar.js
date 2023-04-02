@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 function Navbar({ color }) {
   console.log(color);
   return (
@@ -25,8 +25,12 @@ function Navbar({ color }) {
       <div>
         <div className="mt-2">
           <ul className="flex justify-center cursor-pointer">
-            <li className="p-3">Sign Up</li>
-            <li className="p-3">Sign In</li>
+            <li className="p-3">
+              <Link to="/register">Sign Up</Link>
+            </li>
+            <li className="p-3">
+              <Link to="/login">Sign In</Link>
+            </li>
           </ul>
         </div>
       </div>

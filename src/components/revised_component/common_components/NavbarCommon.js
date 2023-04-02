@@ -1,6 +1,12 @@
-import React from "react";
-
+import React,{useState} from "react";
+import {logout,auth} from "../../database//auth_database_firebase"
+import { useAuthState } from "react-firebase-hooks/auth";
 function NavbarCommon({ color }) {
+  const [user, loading, error] = useAuthState(auth);
+  const [userstate, setUserstate] = useState(true);
+  function logsout() {
+    if (logout()) setUserstate(!userstate);
+  }
   console.log(color);
   return (
     <div
@@ -24,7 +30,7 @@ function NavbarCommon({ color }) {
       <div>
         <div className="mt-2">
           <ul className="flex justify-center cursor-pointer">
-            <li className="p-3">Logout</li>
+            <li className="p-3" onClick={logsout}>Logout</li>
             <li className="p-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"

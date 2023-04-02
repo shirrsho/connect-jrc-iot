@@ -30,7 +30,7 @@ const Login = () => {
     }, [user, loading]);
 
     const load = () => {
-        return <div><h1>MARAKHAO Dashboard</h1></div>;
+        return <div><h1>Mmmm Dashboard</h1></div>;
     }
 
     return (

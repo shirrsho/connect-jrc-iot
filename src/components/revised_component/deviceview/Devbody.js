@@ -1,6 +1,85 @@
-    import React from "react";
-
+    import React, { ReactDOM, useEffect, useState } from "react";
+    import { auth } from "../../database/auth_database_firebase";
+    import { useAuthState } from "react-firebase-hooks/auth";
+    import { useNavigate, useParams } from "react-router-dom";
+    import { UsersIcon } from "@heroicons/react/24/solid";
+    import { useLocation } from "react-router-dom";
+    import WidgetView from "../../widget_management/WidgetView";
+    import {
+    deleteWidget,
+    getADevice,
+    getAllWidgets,
+    } from "../../device_management/functionalities";
+    
     function Devbody() {
+    const { id } = useParams();
+    const [showCode, setShowCode] = useState(false);
+    // console.log(id);
+    const location = useLocation();
+    const [user, loading, error] = useAuthState(auth);
+    const [device, setDevice] = useState(null);
+    const navigate = useNavigate();
+    const [widgets, setWidgets] = useState([]);
+    const [widgetselectors, setWidgetselectors] = useState([]);
+    const [datastream, setDatastream] = useState(null);
+    const code = `
+        #include "ndcs_esp32.h"
+        
+        char* wifi_ssid = "";               // put your wifi ssid in between the quotes
+        char* wifi_password = "";           // put your wifi password in between the quotes
+        char* email = "${user?.email}";
+        char* password = "";                // put your account's password in between the quotes
+        char* device_id = "${device?.getDeviceID()}";
+        
+        NDCS Ndcs;
+        
+        void setup() {
+            Ndcs.begin(wifi_ssid,wifi_password,email,password,device_id);
+            //Your code here
+        }
+        
+        void loop() {
+            Ndcs.loop();
+            // Your code here
+        }
+            `;
+    async function addWidget(type) {
+        if (await device.addWidget(type)) init_widgets();
+        else alert("widget adding failed");
+        // setWidgetselectors([...widgetselectors, type]);
+        // console.log(device);
+    }
+    async function delete_widget(widget_id) {
+        if (await device.removeWidget(widget_id)) {
+        setWidgets(widgets.filter((item) => item.widget_id !== widget_id));
+        // setShowingDevices(showingdevices.filter(item => item.id !== device_id))
+        } else alert("widget deletion failed");
+    }
+
+    async function init_device() {
+        setDevice(await getADevice(user.uid, id));
+        // init_widgets()
+        // setWidgetselectors([...widgetselectors, ...device?.getWidgets()])
+    }
+    async function init_widgets() {
+        device
+        ? setWidgets([...(await device.fetchWidgets(id))])
+        : console.log("widget updating...");
+    }
+
+    useEffect(() => {
+        // device?setWidgetselectors([...device?.getWidgets()]):console.log("device updating...");
+        init_widgets();
+        // device?setTimeout(()=>{ let wids = await device?.fetchWidgets();console.log("wids:"+wids); setTimeout(()=>{setWidgets([...wids])},1000)},1000):console.log("widgets updating...");
+    }, [device]);
+
+    useEffect(() => {
+        if (loading) {
+        return;
+        } else if (!user) navigate("/");
+        else init_device();
+    }, [user, loading, datastream]);
+
     return (
         <>
         {/*First Segment*/}
@@ -54,26 +133,46 @@
             </div>
         </div>
         {/*second segement*/}
-        <div className="mx-[15%] h-[200px] flex  bg-gray-300">
-            <div className="w-1/4 border-r h-[200px] flex justify-center flex-col items-center text-center border-[#5791A1]">
-            <h1 className="text-2xl font-semibold  ">
-                Click on a widget to add it to the device
+        <div className="mx-[15%] h-[200px] flex  border-b border-[#22ffaa] bg-gray-300">
+            <div className="w-1/5 border-r h-[200px] flex justify-center flex-col items-center text-center border-[#5791A1]">
+            <h1 className="text-2xl  mx-3 ">
+                Click on a widget
             </h1>
             </div>
-            <div className="w-3/4 bg-red-500 overflow-hidden  flex  pt-[22px]">
+            <div className="w-4/5    overflow-x-auto   flex  pt-[22px]">
             <img
-                src="/Images/WIDGET/Frame 10.png"
+                src="/Images/WIDGET/Display.png"
+                onClick={() => addWidget("display")}
                 className="px-8  py-3 cursor-pointer hover:scale-105 h-[160px] w-[300px] transform transition duration-500 ease-in-out rounded-lg"
             />
             <img
-            src="/Images/WIDGET/Frame 10.png"
-            className="px-8  py-3 cursor-pointer hover:scale-105 h-[160px] w-[300px] transform transition duration-500 ease-in-out rounded-lg"
-        />
-        <img
-        src="/Images/WIDGET/Frame 10.png"
-        className="px-8  py-3 cursor-pointer hover:scale-105 h-[160px] w-[300px] transform transition duration-500 ease-in-out rounded-lg"
-    />
+                src="/Images/WIDGET/Switch.png"
+                onClick={() => addWidget("switch")}
+                className="px-8  py-3 cursor-pointer hover:scale-105 h-[160px] w-[300px] transform transition duration-500 ease-in-out rounded-lg"
+            />
+            <img
+                src="/Images/WIDGET/Regulator.png"
+                onClick={() => addWidget("regulator")}
+                className="px-8  py-3 cursor-pointer hover:scale-105 h-[160px] w-[300px] transform transition duration-500 ease-in-out rounded-lg"
+            />
             </div>
+        </div>
+        {/**Third section */}
+        <div className=" mx-[15%] bg-gray-300 h-screen p-2 flex justify-start flex-wrap my-1 overflow-y-auto ">
+            {widgets?.map((widgetselector, key) => {
+            // console.log(widgetselector);
+            {
+                /* console.log("up",widgets); */
+            }
+            return (
+                <WidgetView
+                device_id={device.getDeviceID()}
+                widget={widgetselector}
+                delete_widget={delete_widget}
+                key={key}
+                />
+            );
+            })}
         </div>
         </>
     );
