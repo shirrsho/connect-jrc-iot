@@ -84,7 +84,7 @@ function Devbody() {
   }, [user, loading, datastream]);
 
   //code syntax add section
-  const [showPopup, setShowPopup] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
   // const [showingdevices, setShowingDevices] = useState(devicelist)
 
   const handleMouseEnter = () => {
