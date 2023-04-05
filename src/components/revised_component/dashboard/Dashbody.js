@@ -141,7 +141,7 @@ function Dashbody() {
             </button>
             <div>
               {isSaveWindowOpen && (
-                <div className="fixed top-0 left-0 h-screen w-screen flex items-center  justify-center bg-gray-900 bg-opacity-75">
+                <div className="fixed z-30 top-0 left-0 h-screen w-screen flex items-center  justify-center bg-gray-900 bg-opacity-75">
                   <div className="bg-white px-[75px] py-[100px] rounded-sm">
                     <div className="mt-2 p-10 text-black  flex flex-col justify-center">
                       <input
