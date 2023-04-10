@@ -1,28 +1,25 @@
-import React, { ReactDOM, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { auth } from "../database/auth_database_firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
-import { UsersIcon } from "@heroicons/react/24/solid";
 import { useLocation } from "react-router-dom";
 import WidgetView from "../widget_management/WidgetView";
 import {
-  deleteWidget,
   getADevice,
-  getAllWidgets,
 } from "./functionalities";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 function Devbody() {
   const { id } = useParams();
-  const [showCode, setShowCode] = useState(false);
+  // const [showCode, setShowCode] = useState(false);
   // console.log(id);
-  const location = useLocation();
+  // const location = useLocation();
   const [user, loading, error] = useAuthState(auth);
   const [device, setDevice] = useState(null);
   const navigate = useNavigate();
   const [widgets, setWidgets] = useState([]);
-  const [widgetselectors, setWidgetselectors] = useState([]);
-  const [datastream, setDatastream] = useState(null);
+  // const [widgetselectors, setWidgetselectors] = useState([]);
+  // const [datastream, setDatastream] = useState(null);
   const code = `
 
     #include "ndcs_esp32.h"
@@ -81,7 +78,8 @@ function Devbody() {
       return;
     } else if (!user) navigate("/");
     else init_device();
-  }, [user, loading, datastream]);
+    if(error){}
+  }, [user, loading, error]);
 
   //code syntax add section
   const [showPopup, setShowPopup] = useState(false);

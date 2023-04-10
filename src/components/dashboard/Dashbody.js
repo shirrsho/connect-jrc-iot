@@ -1,22 +1,20 @@
 import DeviceLinks from "../device_management/DeviceLinks";
 import React, { useEffect, useState } from "react";
-import { logout,auth } from "../database/auth_database_firebase"
+import { auth } from "../database/auth_database_firebase"
 
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
-import { UsersIcon } from "@heroicons/react/24/solid";
 import {
   addNewDevice,
   getAllDevices,
-  initPins,
 } from "../device_management/functionalities";
 
 function Dashbody() {
   // <-- User Management ...
   const [user, loading, error] = useAuthState(auth);
-  function logsout() {
-    if (logout()) setUserstate(!userstate);
-  }
+  // function logsout() {
+  //   if (logout()) setUserstate(!userstate);
+  // }
   // ... User Management -->
 
   // <-- UI functionalities ...
@@ -28,7 +26,8 @@ function Dashbody() {
       load();
     } else if (!user) navigate("/homepage");
     else get_devices();
-  }, [user, loading, userstate]);
+    if(error){}
+  }, [user, loading, userstate,error]);
 
   const load = () => {
     return (

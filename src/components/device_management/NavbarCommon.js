@@ -1,8 +1,6 @@
 import React,{useState} from "react";
-import {logout,auth} from "../database//auth_database_firebase"
-import { useAuthState } from "react-firebase-hooks/auth";
+import {logout} from "../database//auth_database_firebase"
 function NavbarCommon({ color }) {
-  const [user, loading, error] = useAuthState(auth);
   const [userstate, setUserstate] = useState(true);
   function logsout() {
     if (logout()) setUserstate(!userstate);

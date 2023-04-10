@@ -30,7 +30,8 @@ const Register = () => {
     useEffect(() => {
         if (loading) return;
         else if (user) navigate('/')
-    }, [user, loading]);
+        if(error){}
+    }, [user, loading, error]);
 
     return (
         <div className="flex items-center justify-center h-screen bg-gray-200 ">

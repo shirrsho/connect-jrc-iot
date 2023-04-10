@@ -1,4 +1,4 @@
-import { readState, initRTDBpath, writeState, getDataOnce, writeVpin } from "../database/real-time_database_firebase"
+import { readState, writeState, getDataOnce, writeVpin } from "../database/real-time_database_firebase"
 import { editSpecificWidget } from "../database/regular_database_firebase";
 
 function updateRTDB(device_id, pin, datatype, state){
@@ -10,6 +10,7 @@ function updateRTDB(device_id, pin, datatype, state){
 function receieveRTDB(device_id, pin, datatype, state, updateMessage ){
     // console.log(pin,state);
     // initRTDBpath(device_id, pin, datatype, state)
+    if(datatype||state){}
     readState(device_id, pin, updateMessage)
 }
 

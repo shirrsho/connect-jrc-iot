@@ -8,14 +8,14 @@ const Display = ({ device_id, widget, delete_widget }) => {
   const [modal, setModal] = useState(false);
   const [datastream,setDatastream] = useState(widget.getDatastream());
   const [message, setMessage] = useState("")
-  const pin = widget.datastream?.pin
+  // const pin = widget.datastream?.pin
 
   const Modal = () => {
     if (modal) setModal(false);
     else if (!modal) setModal(true);
   };
   
-  const [isOpen, setIsOpen] = useState(true);
+  // const [isOpen, setIsOpen] = useState(true);
 
   const init_datastream = (datastream) => {
     console.log(datastream);

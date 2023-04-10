@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { deleteDevice, editDevice } from "./functionalities";
 
 function DeviceLinks({ devicelist, setDevicelist, user_id }) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(-1);
   // const [showingdevices, setShowingDevices] = useState(devicelist)
 

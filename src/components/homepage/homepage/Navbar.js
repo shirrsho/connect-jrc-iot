@@ -10,6 +10,7 @@ function Navbar({ color }) {
         <div>
           <img
             src="/Images/icon/Logo.png"
+            alt="logo"
             width="168px"
             className="cursor-pointer"
             height="60px"

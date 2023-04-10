@@ -27,7 +27,8 @@ const Login = () => {
             load()
         }
         if (user) navigate('/')
-    }, [user, loading]);
+        if(error){}
+    }, [user, loading, error]);
 
     const load = () => {
         return <div><h1>Mmmm Dashboard</h1></div>;

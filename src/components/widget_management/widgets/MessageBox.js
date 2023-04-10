@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SetMessageBoxData from "../widget-forms/setMessageBoxData";
 
 const MessageBox = ({ device_id, widget, index, delete_widget }) => {
+  if(device_id){}
+  if(index){}
   const [modal, setModal] = useState(false);
   const [datastream, setDatastream] = useState(widget.getDatastream())
 
@@ -9,7 +11,7 @@ const MessageBox = ({ device_id, widget, index, delete_widget }) => {
     if (modal) setModal(false);
     else if (!modal) setModal(true);
   };
-  const [isOpen, setIsOpen] = useState(true);
+  // const [isOpen, setIsOpen] = useState(true);
   
 
   const [value, setValue] = useState(0);

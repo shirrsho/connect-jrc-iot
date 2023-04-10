@@ -1,4 +1,4 @@
-import { editDevice, addNewWidget, getAllWidgets, deleteDevice, deleteWidget } from "./functionalities";
+import { editDevice, addNewWidget, getAllWidgets, deleteWidget } from "./functionalities";
 
 class Device {
     constructor(device_id = "", user_id, name = "Give a Name", chip = "ESP32", n_widgets=0) {

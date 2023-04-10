@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SetSwitchData from "../widget-forms/SetSwitchData";
 import { updateRTDB } from "../functionalities";
-import { deleteWidget } from "../../device_management/functionalities";
+// import { deleteWidget } from "../../device_management/functionalities";
 
 const Switch = ({ device_id, widget, delete_widget }) => {
   
@@ -22,7 +22,7 @@ const Switch = ({ device_id, widget, delete_widget }) => {
     widget.setDatastream(datastream)
   }
 
-  const handleToggle = (event) => {
+  const handleToggle = () => {
     setIsOn(!isOn);
   };
 
