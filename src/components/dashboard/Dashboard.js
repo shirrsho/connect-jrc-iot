@@ -1,5 +1,5 @@
 import React from 'react'
-import NavbarCommon from '../common_components/NavbarCommon'
+import NavbarCommon from '../device_management/NavbarCommon'
 import Dashbody from './Dashbody'
 
 function Dashboard() {

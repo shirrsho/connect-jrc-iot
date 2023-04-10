@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import {logout,auth} from "../../database//auth_database_firebase"
+import {logout,auth} from "../database//auth_database_firebase"
 import { useAuthState } from "react-firebase-hooks/auth";
 function NavbarCommon({ color }) {
   const [user, loading, error] = useAuthState(auth);

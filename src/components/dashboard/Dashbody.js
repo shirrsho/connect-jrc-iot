@@ -1,7 +1,7 @@
-import DeviceLinks from "../../device_management/DeviceLinks";
+import DeviceLinks from "../device_management/DeviceLinks";
 import React, { useEffect, useState } from "react";
-import { logout } from "../../database/auth_database_firebase";
-import { auth } from "../../database/auth_database_firebase";
+import { logout,auth } from "../database/auth_database_firebase"
+
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
@@ -9,7 +9,7 @@ import {
   addNewDevice,
   getAllDevices,
   initPins,
-} from "../../device_management/functionalities";
+} from "../device_management/functionalities";
 
 function Dashbody() {
   // <-- User Management ...

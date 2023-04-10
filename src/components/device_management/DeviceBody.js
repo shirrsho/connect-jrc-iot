@@ -1,15 +1,15 @@
 import React, { ReactDOM, useEffect, useState } from "react";
-import { auth } from "../../database/auth_database_firebase";
+import { auth } from "../database/auth_database_firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import { UsersIcon } from "@heroicons/react/24/solid";
 import { useLocation } from "react-router-dom";
-import WidgetView from "../../widget_management/WidgetView";
+import WidgetView from "../widget_management/WidgetView";
 import {
   deleteWidget,
   getADevice,
   getAllWidgets,
-} from "../../device_management/functionalities";
+} from "./functionalities";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 function Devbody() {
