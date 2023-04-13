@@ -3,7 +3,7 @@ import HeroArea from './HeroArea'
 import Navbar from './Navbar'
 
 function HomePage() {
-    const color="bg-[#052C39]";
+    const color="bg-[black]";
   return (
     <>
  

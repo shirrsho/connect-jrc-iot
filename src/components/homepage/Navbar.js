@@ -4,9 +4,9 @@ function Navbar({ color }) {
   console.log(color);
   return (
     <div
-      className={`${color} flex justify-between px-[100px] py-2 text-[#C9E4CA]  min-w-[688px]`}
+      className={`${color} w-full flex justify-between px-[200px] py-2 text-[#C9E4CA]  min-w-[688px] fixed`}
     >
-      <div className=" flex">
+      <div className=" flex w-70%">
         <div>
           <img
             src="/Images/icon/Logo.png"

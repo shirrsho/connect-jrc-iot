@@ -4,7 +4,7 @@ import Login from "./components/authentication/Login";
 import Register from "./components/authentication/Register";
 import Dashboard from "./components/dashboard/Dashboard";
 import DeviceView from "./components/device_management/DeviceView";
-import HomePage from "./components/homepage/homepage/HomePage";
+import HomePage from "./components/homepage/HomePage";
 import Dashboard1 from "./components/dashboard/Dashboard"
 function App() {
   return (

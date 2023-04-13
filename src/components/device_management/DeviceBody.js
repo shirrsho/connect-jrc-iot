@@ -110,7 +110,7 @@ function Devbody() {
     <>
       {/*First Segment*/}
       <div className="mx-[15%] flex text-2xl justify-between relative">
-        <h1 className="py-5 ">Device Name</h1>
+        <h1 className="py-5 ">{device?.name}</h1>
         <div>
           <ul className="flex  cursor-pointer">
             <li

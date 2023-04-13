@@ -92,12 +92,12 @@ function Dashbody() {
   return (
     <>
       {/*first segement */}
-      <div className="flex mx-[15%] my-[100px] relative">
+      <div className="flex mx-[15%] my-[20px] relative">
         <div className="w-[50%] flex">
           <input
             type="text"
             placeholder="Search"
-            className="px-4 py-2 border-b border-gray-400 min-w-[180px] bg-[#A3A3A3] text-white rounded-sm mt-3  w-[40%] text-2xl "
+            className="px-4 py-2 border-b border-gray-400 min-w-[400px] bg-white text-gray mt-3  w-[40%] text-2xl "
           />
           <button className="ml-[-40px] mt-4 text-lg text-white ">
             <svg

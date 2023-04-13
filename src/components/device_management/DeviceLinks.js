@@ -46,7 +46,7 @@ function DeviceLinks({ devicelist, setDevicelist, user_id }) {
                 <Link to={`/device/${deviceinfo.id}`}>{deviceinfo.name}</Link>
               </li>
               <li className="w-[16%]">
-                <Link to={`/device/${deviceinfo.id}`}>JRC Board</Link>
+                <Link to={`/device/${deviceinfo.id}`}>{deviceinfo.chip}</Link>
               </li>
               <li className="w-[16%]">
                 <Link to={`/device/${deviceinfo.id}`}>

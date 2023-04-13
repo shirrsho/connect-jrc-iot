@@ -9,6 +9,7 @@ function NavbarCommon({ color }) {
   return (
     <div
       className={`${color} flex justify-between px-[15%] text-[#C9E4CA] py-2 min-w-[688px]`}
+      
     >
       <div className=" flex">
         <div>
