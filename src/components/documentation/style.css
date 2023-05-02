@@ -1,0 +1,104 @@
+
+  
+  .nlink {
+    color: #2e75d3;
+    text-decoration: none;
+  }
+  
+  .nlink:hover {
+    text-decoration: underline;
+  }
+  
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+    /* margin-top: 4rem; */
+  }
+  
+  .dmain {
+    flex: 1;
+    margin-left: 25%;
+    padding: 2rem;
+  }
+  
+  /* Styles for the sidebar */
+  nav {
+    background-color: #f0f0f0;
+    box-sizing: border-box;
+    height: 100%;
+    overflow-y: auto;
+    padding: 2rem;
+    position: fixed;
+    top: 0;
+    width: 20%;
+    padding-top: 6.5%;
+    padding-left: 10%;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul li {
+    margin-bottom: 1rem;
+  }
+  
+  nav ul li a {
+    color: #333;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  nav ul li a:hover {
+    color: #666;
+  }
+  
+  /* Styles for the sections */
+  section {
+    margin-top: 4rem;
+  }
+  
+  section h2 {
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }
+  section h3 {
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  section p {
+    line-height: 1.5;
+  }
+  
+  section pre {
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    font-family: "Courier New", Courier, monospace;
+    padding: 1rem;
+    overflow-x: auto;
+  }
+  
+  section code {
+    font-family: "Courier New", Courier, monospace;
+  }
+  
+  /* Media queries */
+  @media (max-width: 768px) {
+    .wrapper {
+      flex-direction: column;
+    }
+  
+    .dmain {
+      margin-left: 0;
+    }
+  
+    nav {
+      height: auto;
+      width: 100%;
+    }
+  }
+  

@@ -1,11 +1,17 @@
 import React,{useState} from "react";
+import { useNavigate } from "react-router-dom"
 import {logout} from "../database//auth_database_firebase"
+
 function NavbarCommon({ color }) {
   const [userstate, setUserstate] = useState(true);
+  const navigate = useNavigate();
   function logsout() {
     if (logout()) setUserstate(!userstate);
   }
-  console.log(color);
+  function documentation() {
+    navigate('/documentation')
+  }
+  // console.log(color);
   return (
     <div
       className={`${color} flex justify-between px-[15%] text-[#C9E4CA] py-2 min-w-[688px]`}
@@ -21,7 +27,7 @@ function NavbarCommon({ color }) {
           />
         </div>
         <div className="mt-2">
-          <ul className="flex justify-center cursor-pointer">
+          <ul className="flex justify-center cursor-pointer" onClick={documentation}>
             <li className="p-3">How to Use?</li>
           </ul>
         </div>
