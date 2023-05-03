@@ -38,7 +38,6 @@ function Devbody() {
     }
     
     void loop() {
-        Ndcs.loop();
         // Your code here
     }
 
