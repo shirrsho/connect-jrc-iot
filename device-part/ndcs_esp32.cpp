@@ -153,12 +153,9 @@ void task1(void *parameter) {
     string path = "";
     string dev_id = DEVICE_ID;
     
-    path = "/"+ dev_id +"/vpins/V";
+    path = "/"+ dev_id +"/vpins/V" + to_string(pin);
 
-
-    string pinpath = to_string(pin);
-    pinpath += "/state";
-    json.set(pinpath, strdata);
+    json.set("/state", strdata);
     if(Firebase.updateNode(firebaseData, path, json)) Serial.println("data pushed");
     else Serial.println(firebaseData.errorReason());
  }
@@ -169,12 +166,9 @@ void task1(void *parameter) {
     string path = "";
     string dev_id = DEVICE_ID;
     
-    path = "/"+ dev_id +"/vpins/V";
+    path = "/"+ dev_id +"/vpins/V" + to_string(pin);
 
-
-    string pinpath = to_string(pin);
-    pinpath += "/state";
-    json.set(pinpath, strdata);
+    json.set("/state", strdata);
     if(Firebase.updateNode(firebaseData, path, json)) Serial.println("data pushed");
     else Serial.println(firebaseData.errorReason());
  }

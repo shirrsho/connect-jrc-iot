@@ -92,33 +92,33 @@ function Documentation() {
   <tbody>
     <tr>
       <td>begin</td>
-      <td>$10</td>
-      <td></td>
-      <td>A basic widget for everyday use.</td>
+      <td>wifi_ssid(char*), wifi_password(char*),<br/>email(char*), password(char*), device_id(char*)</td>
+      <td>void</td>
+      <td>To start the NDCS library.</td>
     </tr>
     <tr>
       <td>send</td>
-      <td>$15</td>
-      <td></td>
-      <td>A more advanced widget with additional features.</td>
+      <td>virtual_pin(int),data(int)</td>
+      <td>void</td>
+      <td>To send integer data to the display widget through a virtual pin.</td>
     </tr>
     <tr>
       <td>send</td>
-      <td>$20</td>
-      <td></td>
-      <td>The ultimate widget for power users.</td>
+      <td>virtual_pin(int),data(float)</td>
+      <td>void</td>
+      <td>To send float data to the display widget through a virtual pin.</td>
     </tr>
     <tr>
       <td>send</td>
-      <td>$20</td>
-      <td></td>
-      <td>The ultimate widget for power users.</td>
+      <td>virtual_pin(int),data(char*)</td>
+      <td>void</td>
+      <td>To send string(char*) data to the display widget through a virtual pin.</td>
     </tr>
     <tr>
       <td>receieve</td>
-      <td>$20</td>
-      <td></td>
-      <td>The ultimate widget for power users.</td>
+      <td>virtual_pin(int)</td>
+      <td>integer</td>
+      <td>To receieve the percentile data coming from the regulator widget through a virtual pin.</td>
     </tr>
   </tbody>
 </table>
