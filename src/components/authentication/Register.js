@@ -17,9 +17,9 @@ const Register = () => {
     async function register(event) {
         if (!name) alert("Please enter name");
         else{
-
             try {
                 await registerWithEmailAndPassword(name, email, password)
+                navigate('/verification')
             } catch (error) {
                 alert(error.message);
             }
@@ -27,9 +27,13 @@ const Register = () => {
         }
     };
 
+
+
     useEffect(() => {
         if (loading) return;
-        else if (user) navigate('/')
+        else if (user){
+            if(user.emailVerified) navigate('/')
+        }
         if(error){}
     }, [user, loading, error]);
 

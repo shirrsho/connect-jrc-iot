@@ -49,8 +49,8 @@ function Documentation() {
           <h2>2. Library Installation</h2>
           <p>The library provided with the software is an open source program. This library is operated using Google's 'Firebase'. So, Firebase Client for ESP32 is needed to be installed in the machine.<br/>
           Install firebase in your ESP32 based device using this documentation.<br/>
-          Once you have firebase client installed, then you need to add the ndcs library to your project folder.<br/>
-          <a>Download Library</a><br/>
+          Once you have firebase client installed, then you need to add the ndcs library to your project folder.<br/><br/>
+          <a target='_blank' href='https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/shirsho1106/connect-jrc-iot/tree/main/device-part' download={"ndcs_esp32.cpp"}><u style={{"color":"red"}}>Download Library</u></a><br/><br/>
           Download the library zip file from the above link and extract it into your source code's folder. Now you are ready to go!</p>
         </section>
         <section id="usage">

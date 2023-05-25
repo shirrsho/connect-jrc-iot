@@ -1,6 +1,6 @@
 import React,{useState} from "react";
-import { useNavigate } from "react-router-dom"
-import {logout} from "../database//auth_database_firebase"
+import { useNavigate, Link } from "react-router-dom"
+import { logout } from "../database/auth_database_firebase";
 
 function NavbarCommon({ color }) {
   const [userstate, setUserstate] = useState(true);
@@ -19,16 +19,18 @@ function NavbarCommon({ color }) {
     >
       <div className=" flex">
         <div>
-          <img
-            src="/Images/icon/Logo.png"
-            width="168px"
-            className="cursor-pointer"
-            height="60px"
-          />
+          <Link to={'/'}>
+            <img
+              src="/Images/icon/Logo.png"
+              width="168px"
+              className="cursor-pointer"
+              height="60px"
+            />
+          </Link>
         </div>
         <div className="mt-2">
-          <ul className="flex justify-center cursor-pointer" onClick={documentation}>
-            <li className="p-3">How to Use?</li>
+          <ul className="flex justify-center cursor-pointer">
+            <li className="p-3"><a target='_blank' href="/#/documentation">How to Use?</a></li>
           </ul>
         </div>
       </div>

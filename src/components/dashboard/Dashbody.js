@@ -24,8 +24,9 @@ function Dashbody() {
   useEffect(() => {
     if (loading) {
       load();
-    } else if (!user) navigate("/homepage");
-    else get_devices();
+    } 
+    else if(user?.emailVerified) get_devices();
+    else navigate("/homepage");
     if(error){}
   }, [user, loading, userstate,error]);
 

@@ -7,6 +7,7 @@ import DeviceView from "./components/device_management/DeviceView";
 import HomePage from "./components/homepage/HomePage";
 import Dashboard1 from "./components/dashboard/Dashboard"
 import Documentation from "./components/documentation/Documentation";
+import EmailVerification from "./components/authentication/EmailVerification";
 function App() {
   return (
     <>
@@ -20,6 +21,7 @@ function App() {
           <Route path="/homepage" element={<HomePage/>}/>
           <Route path="/dashboard1" element={<Dashboard1/>}/>
           <Route path="/documentation" element={<Documentation/>}/>
+          <Route path="/verification" element={<EmailVerification/>}/>
         </Routes>
       </HashRouter>
     </>
